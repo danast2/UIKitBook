@@ -15,6 +15,11 @@ class ViewController: UIViewController {
         
             super.viewDidLoad()
              print("viewDidLoad")
+        
+        // генерируем случайное число
+         self.number = Int.random(in: 1...50)
+         // устанавливаем загаданное число в метку
+         self.label.text = String(self.number)
     }
     @IBOutlet var slider: UISlider!
     @IBOutlet var label: UILabel!
