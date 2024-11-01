@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     // загаданное число
     var number: Int = 0
     // раунд
-    var round: Int = 0
+    var round: Int = 1
     // сумма очков за раунд
     var points: Int = 0
     @IBAction func checkNumber() {
