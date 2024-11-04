@@ -8,6 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet var slider: UISlider!
+    @IBOutlet var label: UILabel!
+    // загаданное число
+    var number: Int = 0
+    // раунд
+    var round: Int = 1
+    // сумма очков за раунд
+    var points: Int = 0
     
     override func viewDidLoad() {
             super.viewDidLoad()
@@ -21,14 +29,8 @@ class ViewController: UIViewController {
          // устанавливаем загаданное число в метку
          self.label.text = String(self.number)
     }
-    @IBOutlet var slider: UISlider!
-    @IBOutlet var label: UILabel!
-    // загаданное число
-    var number: Int = 0
-    // раунд
-    var round: Int = 1
-    // сумма очков за раунд
-    var points: Int = 0
+    
+    
     @IBAction func checkNumber() {
      // если игра только начинается
      if self.round == 0 {
