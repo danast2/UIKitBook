@@ -28,6 +28,9 @@
                                 <buttonConfiguration key="configuration" style="plain" title="проверить">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="checkNumber" destination="BYZ-38-t0r" eventType="touchUpInside" id="ISN-wT-Q8a"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bnl-Wr-t1Y">
                                 <rect key="frame" x="405" y="321.66666666666669" width="42" height="20.333333333333314"/>
