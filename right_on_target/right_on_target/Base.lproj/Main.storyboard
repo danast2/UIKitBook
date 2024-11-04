@@ -50,6 +50,10 @@
                             <constraint firstItem="eq9-iz-INN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="oEC-yt-qUH"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="label" destination="Bnl-Wr-t1Y" id="lOo-SM-8a0"/>
+                        <outlet property="slider" destination="eq9-iz-INN" id="AQU-n9-8Pp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
