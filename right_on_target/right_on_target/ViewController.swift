@@ -17,19 +17,10 @@ class ViewController: UIViewController {
     // сумма очков за раунд
     var points: Int = 0
     
-    override func viewDidLoad() {
-            super.viewDidLoad()
-            // Do any additional setup after loading the view.
-        
-            super.viewDidLoad()
-             print("viewDidLoad")
-        
-        // генерируем случайное число
-         self.number = Int.random(in: 1...50)
-         // устанавливаем загаданное число в метку
-         self.label.text = String(self.number)
-    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
     @IBAction func checkNumber() {
      // если игра только начинается
