@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     // сумма очков за раунд
     var points: Int = 0
     
-    
+    //updates
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
