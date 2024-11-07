@@ -17,6 +17,10 @@ class ViewController: UIViewController {
     // сумма очков за раунд
     var points: Int = 0
     
+    override func viewWillAppear(_ animated: Bool) {
+         super.viewWillAppear(animated)
+         print("viewWillAppear")
+    }
     
     override func loadView() {
         super.loadView()
