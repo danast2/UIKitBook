@@ -17,6 +17,18 @@ class ViewController: UIViewController {
     // сумма очков за раунд
     var points: Int = 0
     
+    
+    override func loadView() {
+        super.loadView()
+        print("load view")
+        
+        //метка для вывода номера версии
+        let versionLabel = UILabel(frame: CGRect(x: 20, y: 10, width: 200, height: 20))
+        //текст метки
+        versionLabel.text = "version 1.1"
+        //добавляем метку в родительский view
+        self.view.addSubview(versionLabel)
+    }
     //updates
     override func viewDidLoad() {
         super.viewDidLoad()
