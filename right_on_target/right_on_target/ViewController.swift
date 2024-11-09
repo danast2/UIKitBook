@@ -92,6 +92,7 @@ class ViewController: UIViewController {
           // передаем значение случайного числа в label
           self.label.text = String(self.number)
       }
+    //review 09.11.24
      }
 
 
