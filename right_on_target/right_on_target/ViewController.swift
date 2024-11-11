@@ -93,6 +93,7 @@ class ViewController: UIViewController {
           self.label.text = String(self.number)
       }
     //review 09.11.24
+    //review 11.11.24
      }
 
 
