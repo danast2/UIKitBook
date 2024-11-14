@@ -17,6 +17,10 @@ class ViewController: UIViewController {
     // сумма очков за раунд
     var points: Int = 0
     
+    @IBAction func ShowNextScreen(){
+        let viewController = SecondViewController()
+        self.present(viewController, animated: true, completion: nil)
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
          super.viewWillDisappear(animated)
@@ -92,6 +96,7 @@ class ViewController: UIViewController {
           // передаем значение случайного числа в label
           self.label.text = String(self.number)
       }
+    
     //review 09.11.24
     //review 11.11.24
     //review 12.11.24
