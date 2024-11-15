@@ -17,9 +17,14 @@ class ViewController: UIViewController {
     // сумма очков за раунд
     var points: Int = 0
     
-    @IBAction func ShowNextScreen(){
-        let viewController = SecondViewController()
-        self.present(viewController, animated: true, completion: nil)
+    @IBAction func showNextScreen(){
+        // загрузка Storyboard
+         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+         // загрузка View Controller и его сцены со Storyboard
+         let viewController = storyboard.instantiateViewController(identifier:
+        "SecondViewController")
+         // отображение сцены на экране
+         self.present(viewController, animated: true, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
