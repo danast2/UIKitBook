@@ -75,7 +75,7 @@
         <!--Second View Controller-->
         <scene sceneID="2aU-Jh-c86">
             <objects>
-                <viewController id="hDu-46-0c5" customClass="SecondViewController" customModule="right_on_target" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SecondViewController" id="hDu-46-0c5" customClass="SecondViewController" customModule="right_on_target" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QWk-RD-5Z9">
                         <rect key="frame" x="0.0" y="0.0" width="852" height="393"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
