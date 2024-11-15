@@ -84,6 +84,9 @@
                                 <rect key="frame" x="390.66666666666669" y="179" width="70.666666666666686" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="назад"/>
+                                <connections>
+                                    <action selector="hideCurrentScene" destination="hDu-46-0c5" eventType="touchUpInside" id="UTO-Tb-sPB"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ueA-vp-raP"/>

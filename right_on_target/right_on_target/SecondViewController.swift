@@ -9,7 +9,7 @@ import UIKit
 
 class SecondViewController: UIViewController {
     
-    @IBAction func hideCurrentScene{
+    @IBAction func hideCurrentScene(){
         self.dismiss(animated: true, completion: nil)
     }
     
