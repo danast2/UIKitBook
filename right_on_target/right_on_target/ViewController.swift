@@ -17,14 +17,21 @@ class ViewController: UIViewController {
     // сумма очков за раунд
     var points: Int = 0
     
+    
+    //приватный метод загружающий viewController
+    private func getSecondViewController() -> SecondViewController{
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        let viewController = storyboard.instantiateViewController(identifier: "SecondViewController")
+            
+        return viewController as! SecondViewController
+    }
+    
+    //ленивое свойство для хранения viewController
+    lazy var secondViewController: SecondViewController = getSecondViewController()
+    
     @IBAction func showNextScreen(){
-        // загрузка Storyboard
-         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-         // загрузка View Controller и его сцены со Storyboard
-         let viewController = storyboard.instantiateViewController(identifier:
-        "SecondViewController")
-         // отображение сцены на экране
-         self.present(viewController, animated: true, completion: nil)
+        self.present(secondViewController, animated: true, completion: nil)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
