@@ -54,7 +54,7 @@ class Game: GameProtocol{
          }
         // Загадать и вернуть новое случайное значение
          private func getNewSecretValue() -> Int {
-         (minSecretValue...maxSecretValue).randomElement()!
+             (minSecretValue...maxSecretValue).randomElement()!
          }
 
          // Подсчитывает количество очков
