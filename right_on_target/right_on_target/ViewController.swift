@@ -10,9 +10,18 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet var slider: UISlider!
     @IBOutlet var label: UILabel!
-
-    var game = Game(startValue: 1, endValue: 50, rounds: 5)!
-
+    var gen: Generator
+    var rou: GameRound
+    var game: Game
+    //var game = Game(startValue: 1, endValue: 50, rounds: 5, generator: gen, round: rou)!
+    // Используем инициализатор `init(coder:)`
+        required init?(coder: NSCoder) {
+            // Инициализируем свойства перед вызовом `super.init`
+            self.gen = Generator()
+            self.rou = GameRound()
+            self.game = Game(startValue: 1, endValue: 50, rounds: 5, generator: gen, round: rou)!
+            super.init(coder: coder)  // Вызов инициализатора суперкласса
+        }
     
     override func viewWillDisappear(_ animated: Bool) {
          super.viewWillDisappear(animated)
@@ -35,7 +44,7 @@ class ViewController: UIViewController {
         //метка для вывода номера версии
         let versionLabel = UILabel(frame: CGRect(x: 20, y: 10, width: 200, height: 20))
         //текст метки
-        versionLabel.text = "version 1.1"
+        versionLabel.text = "version 1.3"
         //добавляем метку в родительский view
         self.view.addSubview(versionLabel)
     }
@@ -43,15 +52,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
-            //создаем новую игру
-            game.restartGame()
-            self.label.text = String(game.currentSecretValue)
+        //создаем новую игру
+        game.restartGame()
+        self.label.text = String(game.currentRound.currentSecretValue)
         }
     
     @IBAction func checkNumber() {
         // получаем значение на слайдере
-         let numSlider = Int(self.slider.value)
-        game.calculateScore(with: numSlider)
+        let numSlider = Int(self.slider.value)
+        game.currentRound.calculateScore(with: numSlider)
+        
+        // Update the total game score and reset the round score
+            game.score += game.currentRound.score
+            game.currentRound.score = 0
+        
         if game.isGameEnded {
             let alert = UIAlertController(title: "Игра окончена", message: "Вы заработали \(game.score) очков", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Начать заново", style: .default, handler: nil))
@@ -60,9 +74,7 @@ class ViewController: UIViewController {
         }else{
             game.startNewRound()
         }
-        self.label.text = String(game.currentSecretValue)
-        
-        
+        self.label.text = String(game.currentRound.currentSecretValue)
    }
     
 }
