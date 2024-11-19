@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30001CBB2CE89B8300F7C39F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30001CBA2CE89B8300F7C39F /* Game.swift */; };
+		30001CBD2CEC67E600F7C39F /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30001CBC2CEC67E600F7C39F /* MainViewController.swift */; };
 		30A91BEA2CD2A4310024E1BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A91BE92CD2A4310024E1BC /* AppDelegate.swift */; };
 		30A91BEC2CD2A4310024E1BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A91BEB2CD2A4310024E1BC /* SceneDelegate.swift */; };
 		30A91BEE2CD2A4310024E1BC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A91BED2CD2A4310024E1BC /* ViewController.swift */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		30001CBA2CE89B8300F7C39F /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		30001CBC2CEC67E600F7C39F /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		30A91BE62CD2A4310024E1BC /* right_on_target.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = right_on_target.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A91BE92CD2A4310024E1BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30A91BEB2CD2A4310024E1BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +118,7 @@
 				30A91BEB2CD2A4310024E1BC /* SceneDelegate.swift */,
 				30A91BED2CD2A4310024E1BC /* ViewController.swift */,
 				30A91C192CDCD25F0024E1BC /* SecondViewController.swift */,
+				30001CBC2CEC67E600F7C39F /* MainViewController.swift */,
 				30A91BEF2CD2A4310024E1BC /* Main.storyboard */,
 				30A91BF22CD2A4320024E1BC /* Assets.xcassets */,
 				30A91BF42CD2A4320024E1BC /* LaunchScreen.storyboard */,
@@ -275,6 +278,7 @@
 				30A91C1A2CDCD25F0024E1BC /* SecondViewController.swift in Sources */,
 				30001CBB2CE89B8300F7C39F /* Game.swift in Sources */,
 				30A91BEE2CD2A4310024E1BC /* ViewController.swift in Sources */,
+				30001CBD2CEC67E600F7C39F /* MainViewController.swift in Sources */,
 				30A91BEA2CD2A4310024E1BC /* AppDelegate.swift in Sources */,
 				30A91BEC2CD2A4310024E1BC /* SceneDelegate.swift in Sources */,
 			);
