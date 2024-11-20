@@ -19,6 +19,7 @@
 		30A91C0B2CD2A4320024E1BC /* right_on_targetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A91C0A2CD2A4320024E1BC /* right_on_targetUITests.swift */; };
 		30A91C0D2CD2A4320024E1BC /* right_on_targetUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A91C0C2CD2A4320024E1BC /* right_on_targetUITestsLaunchTests.swift */; };
 		30A91C1A2CDCD25F0024E1BC /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A91C192CDCD25F0024E1BC /* SecondViewController.swift */; };
+		30BDC70F2CEE605700A0F0C9 /* UIColor_Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC70E2CEE605700A0F0C9 /* UIColor_Hex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		30A91C0A2CD2A4320024E1BC /* right_on_targetUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = right_on_targetUITests.swift; sourceTree = "<group>"; };
 		30A91C0C2CD2A4320024E1BC /* right_on_targetUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = right_on_targetUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		30A91C192CDCD25F0024E1BC /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		30BDC70E2CEE605700A0F0C9 /* UIColor_Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor_Hex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			children = (
 				30001CB72CE89B2100F7C39F /* Model */,
 				30A91BE92CD2A4310024E1BC /* AppDelegate.swift */,
+				30BDC70E2CEE605700A0F0C9 /* UIColor_Hex.swift */,
 				30A91BEB2CD2A4310024E1BC /* SceneDelegate.swift */,
 				30A91BED2CD2A4310024E1BC /* ViewController.swift */,
 				30A91C192CDCD25F0024E1BC /* SecondViewController.swift */,
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30A91C1A2CDCD25F0024E1BC /* SecondViewController.swift in Sources */,
+				30BDC70F2CEE605700A0F0C9 /* UIColor_Hex.swift in Sources */,
 				30001CBB2CE89B8300F7C39F /* Game.swift in Sources */,
 				30A91BEE2CD2A4310024E1BC /* ViewController.swift in Sources */,
 				30001CBD2CEC67E600F7C39F /* MainViewController.swift in Sources */,

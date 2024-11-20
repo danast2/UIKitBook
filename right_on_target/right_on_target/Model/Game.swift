@@ -87,6 +87,10 @@ class Game: GameProtocol{
 }
 
 // MARK new realisation
+enum GeneratorType {
+    case int(range: ClosedRange<Int>)
+    case hexColor
+}
 
 protocol NewGeneratorProtocol{
     associatedtype Value
@@ -111,21 +115,18 @@ protocol NewGameProtocol {
     func startNewRound()
 }
 
-
-class NewGenerator<T>: NewGeneratorProtocol{
+class NewGenerator<T>: NewGeneratorProtocol {
     typealias Value = T
     private let generateBlock: () -> T
-    
+
     init(generateBlock: @escaping () -> T) {
         self.generateBlock = generateBlock
     }
-    
+
     func newGenerateRandomValue() -> T {
         return generateBlock()
     }
-    
 }
-
 
 class NewGameRound<T: Equatable>: NewGameRoundProtocol{
     typealias Value = T
