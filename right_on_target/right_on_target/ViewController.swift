@@ -10,16 +10,13 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet var slider: UISlider!
     @IBOutlet var label: UILabel!
-    var gen: Generator
-    var rou: GameRound
-    var game: Game
-    //var game = Game(startValue: 1, endValue: 50, rounds: 5, generator: gen, round: rou)!
+    var game: NewGame<Int>
     // Используем инициализатор `init(coder:)`
         required init?(coder: NSCoder) {
             // Инициализируем свойства перед вызовом `super.init`
-            self.gen = Generator()
-            self.rou = GameRound()
-            self.game = Game(startValue: 1, endValue: 50, rounds: 5, generator: gen, round: rou)!
+            
+            let gen = NewGenerator{ Int.random(in: 1...50) }
+            self.game = NewGame(rounds: 5, generator: gen)
             super.init(coder: coder)  // Вызов инициализатора суперкласса
         }
     
@@ -54,7 +51,7 @@ class ViewController: UIViewController {
         print("viewDidLoad")
         //создаем новую игру
         game.restartGame()
-        self.label.text = String(game.currentRound.currentSecretValue)
+        self.label.text = String(game.currentRound.secretValue)
         }
     
     @IBAction func checkNumber() {
@@ -74,7 +71,7 @@ class ViewController: UIViewController {
         }else{
             game.startNewRound()
         }
-        self.label.text = String(game.currentRound.currentSecretValue)
+        self.label.text = String(game.currentRound.secretValue)
    }
     
 }

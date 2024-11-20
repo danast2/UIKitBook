@@ -86,4 +86,108 @@ class Game: GameProtocol{
     }
 }
 
-// MARK
+// MARK new realisation
+
+protocol NewGeneratorProtocol{
+    associatedtype Value
+    func newGenerateRandomValue() -> Value
+}
+
+protocol NewGameRoundProtocol{
+    associatedtype Value
+    var score: Int { get set }
+    var secretValue: Value { get set }
+    func calculateScore(with value: Value)
+}
+
+protocol NewGameProtocol {
+    associatedtype Value: Equatable
+    var score: Int { get set }
+    var generator: NewGenerator<Value> { get set } // Указываем конкретный класс
+    var currentRound: NewGameRound<Value>! { get set } // Указываем конкретный класс
+    var isGameEnded: Bool { get }
+
+    func restartGame()
+    func startNewRound()
+}
+
+
+class NewGenerator<T>: NewGeneratorProtocol{
+    typealias Value = T
+    private let generateBlock: () -> T
+    
+    init(generateBlock: @escaping () -> T) {
+        self.generateBlock = generateBlock
+    }
+    
+    func newGenerateRandomValue() -> T {
+        return generateBlock()
+    }
+    
+}
+
+
+class NewGameRound<T: Equatable>: NewGameRoundProtocol{
+    typealias Value = T
+    
+    var score:Int = 0
+    var secretValue: T
+    
+    init(secretValue:T) {
+        self.secretValue = secretValue
+    }
+    
+    func calculateScore(with value: T) {
+        if let valueInt = value as? Int, let secretValueInt = secretValue as? Int {
+            if valueInt > secretValueInt {
+                score += 50 - valueInt + secretValueInt
+            } else if valueInt < secretValueInt {
+                score += 50 - secretValueInt + valueInt
+            } else {
+                score += 50
+            }
+        } else {
+            // Обработка других типов
+            score -= 10
+        }
+    }
+
+//        if value == secretValue {
+//            score += 50
+//        } else {
+//            score -= 10
+//        }
+    }
+
+
+
+class NewGame<T: Equatable>: NewGameProtocol {
+    typealias Value = T
+
+    private var totalRounds: Int
+    private var currentRoundNumber: Int = 1
+    var score: Int = 0
+    var generator: NewGenerator<T> // Используем конкретный класс
+    var currentRound: NewGameRound<T>! // Используем конкретный класс
+    var isGameEnded: Bool {
+        return currentRoundNumber >= totalRounds
+    }
+
+    init(rounds: Int, generator: NewGenerator<T>) {
+        self.totalRounds = rounds
+        self.generator = generator
+    }
+
+    func restartGame() {
+        score = 0
+        currentRoundNumber = 0
+        startNewRound()
+    }
+
+    func startNewRound() {
+        let secretValue = generator.newGenerateRandomValue()
+        currentRound = NewGameRound(secretValue: secretValue)
+        currentRoundNumber += 1
+    }
+}
+
