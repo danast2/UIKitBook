@@ -81,6 +81,7 @@ class SecondViewController: UIViewController {
             } else if sender == button4 {
                 print("Нажата кнопка 4")
             }
+        //review 21.11.24
     }
     /*
     // MARK: - Navigation
