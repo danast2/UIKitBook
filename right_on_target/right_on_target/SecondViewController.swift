@@ -82,6 +82,7 @@ class SecondViewController: UIViewController {
                 print("Нажата кнопка 4")
             }
         //review 21.11.24
+        //review 22.11.24
     }
     /*
     // MARK: - Navigation
@@ -92,5 +93,6 @@ class SecondViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }
