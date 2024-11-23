@@ -1,8 +1,8 @@
 //
 //  AppDelegate.swift
-//  right_on_target
+//  ContactsProj
 //
-//  Created by Даниил Асташов on 30.10.2024.
+//  Created by Даниил Асташов on 23.11.2024.
 //
 
 import UIKit
@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        print("applicationDidFinishLaunching")
         // Override point for customization after application launch.
         return true
     }
