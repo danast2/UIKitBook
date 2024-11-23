@@ -50,13 +50,13 @@ class SecondViewController: UIViewController {
         hexColors.shuffle() // Перемешиваем цвета
 
         // Устанавливаем цвета кнопкам
+        // Assign colors to buttons
         for (index, button) in buttons.enumerated() {
             let hexCode = hexColors[index]
             if let color = UIColor(hex: hexCode) {
                 button.backgroundColor = color
                 button.setTitle("", for: .normal)
-            } else {
-                print("Invalid HEX code: \(hexCode)")
+                button.accessibilityIdentifier = hexCode // Store the hex code
             }
         }
     }
@@ -73,17 +73,18 @@ class SecondViewController: UIViewController {
 
     // Обработка нажатия кнопок
     @IBAction func checkAccordance(_ sender: UIButton) {
-        guard let buttonColor = sender.backgroundColor else { return }
+        guard let selectedHex = sender.accessibilityIdentifier else { return }
 
-        // Проверяем, соответствует ли цвет кнопки "загаданному" HEX
-        if buttonColor == UIColor(hex: correctHex) {
+        if selectedHex == correctHex {
             print("Правильный ответ!")
-            game.currentRound.score += 1
         } else {
             print("Неправильный ответ!")
         }
 
-        // Переход к следующему раунду или окончание игры
+        game.currentRound.calculateScore(with: selectedHex)
+        game.score += game.currentRound.score
+
+        // Proceed to next round or end the game
         if game.isGameEnded {
             let alert = UIAlertController(
                 title: "Игра окончена",

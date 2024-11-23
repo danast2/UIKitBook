@@ -128,38 +128,35 @@ class NewGenerator<T>: NewGeneratorProtocol {
     }
 }
 
-class NewGameRound<T: Equatable>: NewGameRoundProtocol{
+class NewGameRound<T: Equatable>: NewGameRoundProtocol {
     typealias Value = T
     
-    var score:Int = 0
+    var score: Int = 0
     var secretValue: T
     
-    init(secretValue:T) {
+    init(secretValue: T) {
         self.secretValue = secretValue
     }
     
     func calculateScore(with value: T) {
-        if let valueInt = value as? Int, let secretValueInt = secretValue as? Int {
-            if valueInt > secretValueInt {
-                score += 50 - valueInt + secretValueInt
-            } else if valueInt < secretValueInt {
-                score += 50 - secretValueInt + valueInt
-            } else {
-                score += 50
-            }
+        fatalError("This method should be overridden in a type-specific extension")
+    }
+}
+extension NewGameRound where T == Int {
+    func calculateScore(with value: Int) {
+        let difference = abs(secretValue - value)
+        score = max(0, 50 - difference)
+    }
+}
+extension NewGameRound where T == String {
+    func calculateScore(with value: String) {
+        if value == secretValue {
+            score = 50  // Correct answer
         } else {
-            // Обработка других типов
-            score -= 10
+            score = 0   // Incorrect answer
         }
     }
-
-//        if value == secretValue {
-//            score += 50
-//        } else {
-//            score -= 10
-//        }
-    }
-
+}
 
 
 class NewGame<T: Equatable>: NewGameProtocol {
