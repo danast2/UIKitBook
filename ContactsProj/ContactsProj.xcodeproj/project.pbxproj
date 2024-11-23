@@ -16,6 +16,7 @@
 		30BDC7342CF2724700A0F0C9 /* ContactsProjTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC7332CF2724700A0F0C9 /* ContactsProjTests.swift */; };
 		30BDC73E2CF2724700A0F0C9 /* ContactsProjUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC73D2CF2724700A0F0C9 /* ContactsProjUITests.swift */; };
 		30BDC7402CF2724700A0F0C9 /* ContactsProjUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC73F2CF2724700A0F0C9 /* ContactsProjUITestsLaunchTests.swift */; };
+		30BDC74D2CF273D700A0F0C9 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC74C2CF273D700A0F0C9 /* test.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		30BDC7392CF2724700A0F0C9 /* ContactsProjUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ContactsProjUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BDC73D2CF2724700A0F0C9 /* ContactsProjUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsProjUITests.swift; sourceTree = "<group>"; };
 		30BDC73F2CF2724700A0F0C9 /* ContactsProjUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsProjUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		30BDC74C2CF273D700A0F0C9 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				30BDC7252CF2724600A0F0C9 /* Assets.xcassets */,
 				30BDC7272CF2724600A0F0C9 /* LaunchScreen.storyboard */,
 				30BDC72A2CF2724600A0F0C9 /* Info.plist */,
+				30BDC74C2CF273D700A0F0C9 /* test.swift */,
 			);
 			path = ContactsProj;
 			sourceTree = "<group>";
@@ -259,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30BDC7212CF2724500A0F0C9 /* ViewController.swift in Sources */,
+				30BDC74D2CF273D700A0F0C9 /* test.swift in Sources */,
 				30BDC71D2CF2724500A0F0C9 /* AppDelegate.swift in Sources */,
 				30BDC71F2CF2724500A0F0C9 /* SceneDelegate.swift in Sources */,
 			);
