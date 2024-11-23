@@ -1,98 +1,103 @@
-//
-//  SecondViewController.swift
-//  right_on_target
-//
-//  Created by Даниил Асташов on 07.11.2024.
-//
-
 import UIKit
 
 class SecondViewController: UIViewController {
-    //@IBOutlet var slider: UISlider!
     @IBOutlet var label: UILabel!
     @IBOutlet var button1: UIButton!
     @IBOutlet var button2: UIButton!
     @IBOutlet var button3: UIButton!
     @IBOutlet var button4: UIButton!
+
     var game: NewGame<String>
+    var buttons: [UIButton] = []
+    var correctHex: String = ""
+
     // Используем инициализатор `init(coder:)`
-        required init?(coder: NSCoder) {
-            // Инициализируем свойства перед вызовом `super.init`
-            
-            let gen = NewGenerator {
-                let hexValues = "0123456789ABCDEF"
-                var color = "#"
-                for _ in 0..<6 {
-                    color.append(hexValues.randomElement()!)
-                }
-                return color
+    required init?(coder: NSCoder) {
+        // Инициализируем свойства перед вызовом `super.init`
+        let gen = NewGenerator {
+            let hexValues = "0123456789ABCDEF"
+            var color = "#"
+            for _ in 0..<6 {
+                color.append(hexValues.randomElement()!)
             }
-            //let gen = NewGenerator{ Int.random(in: 1...50) }
-            self.game = NewGame(rounds: 5, generator: gen)
-            super.init(coder: coder)  // Вызов инициализатора суперкласса
+            return color
         }
-    override func loadView() {
-         super.loadView()
-         print("loadView SecondViewController")
-        
-        //метка для вывода номера версии
-        let versionLabel = UILabel(frame: CGRect(x: 20, y: 10, width: 200, height: 20))
-        //текст метки
-        versionLabel.text = "version 1.1"
-        //добавляем метку в родительский view
-        self.view.addSubview(versionLabel)
-     }
-     override func viewDidLoad() {
-         super.viewDidLoad()
-         print("viewDidLoad SecondViewController")
-         
-         game.restartGame()
-         self.label.text = String(game.currentRound.secretValue)
-     }
+        self.game = NewGame(rounds: 5, generator: gen)
+        super.init(coder: coder)  // Вызов инициализатора суперкласса
+    }
 
-     override func viewWillAppear(_ animated: Bool) {
-         super.viewWillAppear(animated)
-         print("viewWillAppear SecondViewController")
-     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        buttons = [button1, button2, button3, button4] // Добавляем кнопки в массив
+        game.restartGame()
+        setupNewRound()
+    }
 
-     override func viewDidAppear(_ animated: Bool) {
-         super.viewDidAppear(animated)
-         print("viewDidAppear SecondViewController")
-     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-         super.viewWillDisappear(animated)
-         print("viewWillDisappear SecondViewController")
-     }
+    // Настройка нового раунда
+    func setupNewRound() {
+        // Загаданный цвет
+        correctHex = game.currentRound.secretValue
+        label.text = correctHex
 
-     override func viewDidDisappear(_ animated: Bool) {
-         super.viewDidDisappear(animated)
-         print("viewDidDisappear SecondViewController")
-     }
-    
-    @IBAction func checkAccordance(_ sender: UIButton){
-        //print("Кнопка нажата: \(sender.currentTitle ?? "Без имени")")
-        if sender == button1 {
-                print("Нажата кнопка 1")
-            } else if sender == button2 {
-                print("Нажата кнопка 2")
-            } else if sender == button3 {
-                print("Нажата кнопка 3")
-            } else if sender == button4 {
-                print("Нажата кнопка 4")
+        // Генерируем дополнительные цвета
+        var hexColors: [String] = [correctHex] // Добавляем загаданный цвет
+        while hexColors.count < 4 {
+            let newColor = generateRandomHexColor()
+            if !hexColors.contains(newColor) { // Исключаем дубликаты
+                hexColors.append(newColor)
             }
-        //review 21.11.24
-        //review 22.11.24
-    }
-    /*
-    // MARK: - Navigation
+        }
+        hexColors.shuffle() // Перемешиваем цвета
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        // Устанавливаем цвета кнопкам
+        for (index, button) in buttons.enumerated() {
+            let hexCode = hexColors[index]
+            if let color = UIColor(hex: hexCode) {
+                button.backgroundColor = color
+                button.setTitle("", for: .normal)
+            } else {
+                print("Invalid HEX code: \(hexCode)")
+            }
+        }
     }
-    */
-    
 
+    // Генерация случайного HEX-кода
+    func generateRandomHexColor() -> String {
+        let hexValues = "0123456789ABCDEF"
+        var color = "#"
+        for _ in 0..<6 {
+            color.append(hexValues.randomElement()!)
+        }
+        return color
+    }
+
+    // Обработка нажатия кнопок
+    @IBAction func checkAccordance(_ sender: UIButton) {
+        guard let buttonColor = sender.backgroundColor else { return }
+
+        // Проверяем, соответствует ли цвет кнопки "загаданному" HEX
+        if buttonColor == UIColor(hex: correctHex) {
+            print("Правильный ответ!")
+            game.currentRound.score += 1
+        } else {
+            print("Неправильный ответ!")
+        }
+
+        // Переход к следующему раунду или окончание игры
+        if game.isGameEnded {
+            let alert = UIAlertController(
+                title: "Игра окончена",
+                message: "Ваш счёт: \(game.score)",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "Начать заново", style: .default) { _ in
+                self.game.restartGame()
+                self.setupNewRound()
+            })
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            game.startNewRound()
+            setupNewRound()
+        }
+    }
 }
