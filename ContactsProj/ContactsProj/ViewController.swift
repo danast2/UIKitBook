@@ -13,7 +13,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    private func configure(cell: inout UITableViewCell, for indexPath:IndexPath) {
+     var configuration = cell.defaultContentConfiguration()
+     configuration.text = "Строка \(indexPath.row)"
+     cell.contentConfiguration = configuration
+    }
 
 }
 
@@ -22,15 +26,15 @@ extension ViewController: UITableViewDataSource{
         return 50
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell") else {
-            print("Создаем новую ячейку для строки с индексом \(indexPath.row)")
-            let newCell = UITableViewCell(style: .default, reuseIdentifier: "MyCell")
-            var configuration = newCell.defaultContentConfiguration()
-            configuration.text = "Строка \(indexPath.row)"
-            newCell.contentConfiguration = configuration
-            return newCell
+        var cell: UITableViewCell
+         if let reuseCell = tableView.dequeueReusableCell(withIdentifier:"MyCell") {
+             print("Используем старую ячейку для строки с индексом \(indexPath.row)")
+             cell = reuseCell
+         } else {
+             print("Создаем новую ячейку для строки с индексом \(indexPath.row)")
+             cell = UITableViewCell(style: .default, reuseIdentifier: "MyCell")
          }
-         print("Используем старую ячейку для строки с индексом \(indexPath.row)")
+         configure(cell: &cell, for: indexPath)
          return cell
     }
 }

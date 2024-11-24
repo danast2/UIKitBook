@@ -17,6 +17,7 @@
 		30BDC73E2CF2724700A0F0C9 /* ContactsProjUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC73D2CF2724700A0F0C9 /* ContactsProjUITests.swift */; };
 		30BDC7402CF2724700A0F0C9 /* ContactsProjUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC73F2CF2724700A0F0C9 /* ContactsProjUITestsLaunchTests.swift */; };
 		30BDC74D2CF273D700A0F0C9 /* test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC74C2CF273D700A0F0C9 /* test.swift */; };
+		30BDC7502CF3D26400A0F0C9 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BDC74F2CF3D26400A0F0C9 /* Contact.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		30BDC73D2CF2724700A0F0C9 /* ContactsProjUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsProjUITests.swift; sourceTree = "<group>"; };
 		30BDC73F2CF2724700A0F0C9 /* ContactsProjUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsProjUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		30BDC74C2CF273D700A0F0C9 /* test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = test.swift; sourceTree = "<group>"; };
+		30BDC74F2CF3D26400A0F0C9 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 		30BDC71B2CF2724500A0F0C9 /* ContactsProj */ = {
 			isa = PBXGroup;
 			children = (
+				30BDC74E2CF3D24100A0F0C9 /* Contact */,
 				30BDC71C2CF2724500A0F0C9 /* AppDelegate.swift */,
 				30BDC71E2CF2724500A0F0C9 /* SceneDelegate.swift */,
 				30BDC7202CF2724500A0F0C9 /* ViewController.swift */,
@@ -128,6 +131,14 @@
 				30BDC73F2CF2724700A0F0C9 /* ContactsProjUITestsLaunchTests.swift */,
 			);
 			path = ContactsProjUITests;
+			sourceTree = "<group>";
+		};
+		30BDC74E2CF3D24100A0F0C9 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				30BDC74F2CF3D26400A0F0C9 /* Contact.swift */,
+			);
+			path = Contact;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +274,7 @@
 			files = (
 				30BDC7212CF2724500A0F0C9 /* ViewController.swift in Sources */,
 				30BDC74D2CF273D700A0F0C9 /* test.swift in Sources */,
+				30BDC7502CF3D26400A0F0C9 /* Contact.swift in Sources */,
 				30BDC71D2CF2724500A0F0C9 /* AppDelegate.swift in Sources */,
 				30BDC71F2CF2724500A0F0C9 /* SceneDelegate.swift in Sources */,
 			);
