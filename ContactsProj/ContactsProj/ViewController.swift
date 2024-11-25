@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
-    var userDefaults = UserDefaults.standard
+    var storage: ContactStorageProtocol!
     @IBAction func showNewContactAlert(){
         //создание alert controller
         let alertController = UIAlertController(title: "Создайте новый контакт", message: "Введите имя и телефон", preferredStyle: .alert)
@@ -42,26 +42,29 @@ class ViewController: UIViewController {
     private var contacts:[ContactProtocol] = [] {
         didSet{
             contacts.sort(by: {$0.title < $1.title })
+            storage.save(contacts: contacts)
         }
     }
     private func loadContacts() {
-     contacts.append(Contact(title: "Саня Техосмотр", phone: "+799912312323"))
-     contacts.append(Contact(title: "Владимир Анатольевич", phone: "+781213342321"))
-     contacts.append(Contact(title: "Сильвестр", phone: "+7000911112"))
+//     contacts.append(Contact(title: "Саня Техосмотр", phone: "+799912312323"))
+//     contacts.append(Contact(title: "Владимир Анатольевич", phone: "+781213342321"))
+//     contacts.append(Contact(title: "Сильвестр", phone: "+7000911112"))
+        contacts = storage.load()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        storage = ContactStorage()
         loadContacts()
         // Do any additional setup after loading the view.
     }
     private func configure(cell: inout UITableViewCell, for indexPath:
     IndexPath) {
-     var configuration = cell.defaultContentConfiguration()
-     // имя контакта
-     configuration.text = contacts[indexPath.row].title
-     // номер телефона контакта
-     configuration.secondaryText = contacts[indexPath.row].phone
-     cell.contentConfiguration = configuration
+         var configuration = cell.defaultContentConfiguration()
+         // имя контакта
+         configuration.text = contacts[indexPath.row].title
+         // номер телефона контакта
+         configuration.secondaryText = contacts[indexPath.row].phone
+         cell.contentConfiguration = configuration
     }
 
 }
