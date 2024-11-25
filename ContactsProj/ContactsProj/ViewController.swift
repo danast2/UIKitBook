@@ -8,6 +8,36 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet var tableView: UITableView!
+    @IBAction func showNewContactAlert(){
+        //создание alert controller
+        let alertController = UIAlertController(title: "Создайте новый контакт", message: "Введите имя и телефон", preferredStyle: .alert)
+        alertController.addTextField{ textField in
+            textField.placeholder = "Имя"
+        }
+        // добавляем второе текстовое поле в Alert Controller
+         alertController.addTextField { textField in
+             textField.placeholder = "Номер телефона"
+         }
+        //создаем кнопки
+        //кнопки контакта
+        let createButton = UIAlertAction(title: "Создать", style: .default) { _ in
+            guard let contactName = alertController.textFields?[0].text, let contactPhone = alertController.textFields?[1].text else {
+                return
+            }
+            // создаем новый контакт
+             let contact = Contact(title: contactName, phone: contactPhone)
+             self.contacts.append(contact)
+             self.tableView.reloadData()
+        }
+        // кнопка отмены
+        let cancelButton = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+        // добавляем кнопки в Alert Controller
+         alertController.addAction(cancelButton)
+         alertController.addAction(createButton)
+        // отображаем Alert Controller
+         self.present(alertController, animated: true, completion: nil)
+    }
     private var contacts = [ContactProtocol]()
     private func loadContacts() {
      contacts.append(Contact(title: "Саня Техосмотр", phone: "+799912312323"))
@@ -51,3 +81,18 @@ extension ViewController: UITableViewDataSource{
 }
      
 
+extension ViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+         // действие удаления
+         let actionDelete = UIContextualAction(style: .destructive, title: "Удалить") { _,_,_ in
+         // удаляем контакт
+         self.contacts.remove(at: indexPath.row)
+         // заново формируем табличное представление
+         tableView.reloadData()
+     }
+     // формируем экземпляр, описывающий доступные действия
+     let actions = UISwipeActionsConfiguration(actions: [actionDelete])
+     return actions
+    }
+    
+}
