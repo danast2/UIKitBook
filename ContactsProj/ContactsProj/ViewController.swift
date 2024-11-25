@@ -9,6 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
+    var userDefaults = UserDefaults.standard
     @IBAction func showNewContactAlert(){
         //создание alert controller
         let alertController = UIAlertController(title: "Создайте новый контакт", message: "Введите имя и телефон", preferredStyle: .alert)
@@ -47,7 +48,6 @@ class ViewController: UIViewController {
      contacts.append(Contact(title: "Саня Техосмотр", phone: "+799912312323"))
      contacts.append(Contact(title: "Владимир Анатольевич", phone: "+781213342321"))
      contacts.append(Contact(title: "Сильвестр", phone: "+7000911112"))
-     //contacts.sort{ $0.title < $1.title }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
