@@ -38,12 +38,16 @@ class ViewController: UIViewController {
         // отображаем Alert Controller
          self.present(alertController, animated: true, completion: nil)
     }
-    private var contacts = [ContactProtocol]()
+    private var contacts:[ContactProtocol] = [] {
+        didSet{
+            contacts.sort(by: {$0.title < $1.title })
+        }
+    }
     private func loadContacts() {
      contacts.append(Contact(title: "Саня Техосмотр", phone: "+799912312323"))
      contacts.append(Contact(title: "Владимир Анатольевич", phone: "+781213342321"))
      contacts.append(Contact(title: "Сильвестр", phone: "+7000911112"))
-     contacts.sort{ $0.title < $1.title }
+     //contacts.sort{ $0.title < $1.title }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
