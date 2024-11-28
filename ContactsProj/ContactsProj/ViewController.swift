@@ -101,5 +101,5 @@ extension ViewController: UITableViewDelegate{
      let actions = UISwipeActionsConfiguration(actions: [actionDelete])
      return actions
     }
-    
+    //review 28.11.24
 }
