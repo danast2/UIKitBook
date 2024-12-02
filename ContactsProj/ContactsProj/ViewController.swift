@@ -101,7 +101,5 @@ extension ViewController: UITableViewDelegate{
      let actions = UISwipeActionsConfiguration(actions: [actionDelete])
      return actions
     }
-    //review 28.11.24
-    //review 29.11.24
-    //review 30.11.24
+    
 }
