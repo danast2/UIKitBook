@@ -18,6 +18,7 @@ class ViewController: UIViewController {
          // обращаемся к Navigation Controller
          // и вызываем метод перехода к новому контроллеру
          self.navigationController?.pushViewController(nextViewController, animated: true)
+        //review 03.11.24
     }
     // перейти к желтой сцене
     @IBAction func toYellowScene(_ sender: UIButton) {
