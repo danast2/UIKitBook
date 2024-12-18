@@ -47,16 +47,46 @@
                                     <segue destination="QYQ-4E-GX8" kind="show" identifier="toEditScreen" id="ja0-Qh-yLM"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Qb-jv-eu5">
+                                <rect key="frame" x="30" y="610" width="333" height="38"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <color key="tintColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Изменить с помощью делегата">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="editDataWithDelegate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AZc-xD-2Fd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZNU-cV-ZJi">
+                                <rect key="frame" x="30" y="678" width="333" height="38"/>
+                                <color key="backgroundColor" red="0.6538209134770423" green="0.0" blue="0.55820863920869435" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Изменить с помощью замыкания">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="editDataWithСlosure:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SIx-UN-KEU"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7Qb-jv-eu5" secondAttribute="trailing" constant="30" id="2Ke-iB-8Hy"/>
+                            <constraint firstItem="ZNU-cV-ZJi" firstAttribute="top" secondItem="7Qb-jv-eu5" secondAttribute="bottom" constant="30" id="AMy-eO-ias"/>
+                            <constraint firstItem="7Qb-jv-eu5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="BoZ-R5-5YY"/>
                             <constraint firstItem="oDw-0A-wD3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="LfX-sS-bI7"/>
                             <constraint firstItem="sKD-DL-kwX" firstAttribute="top" secondItem="oDw-0A-wD3" secondAttribute="bottom" constant="30" id="NtX-49-Lkg"/>
                             <constraint firstItem="oDw-0A-wD3" firstAttribute="top" secondItem="fau-q8-4nW" secondAttribute="bottom" constant="30" id="R7m-n2-bhc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sKD-DL-kwX" secondAttribute="trailing" constant="30" id="WaK-ih-vcU"/>
                             <constraint firstItem="fau-q8-4nW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cUP-kY-Zp8"/>
+                            <constraint firstItem="ZNU-cV-ZJi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="dau-Mc-jy4"/>
                             <constraint firstItem="sKD-DL-kwX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="fRZ-f1-PTs"/>
+                            <constraint firstItem="7Qb-jv-eu5" firstAttribute="top" secondItem="sKD-DL-kwX" secondAttribute="bottom" constant="30" id="fsi-a3-kBq"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZNU-cV-ZJi" secondAttribute="trailing" constant="30" id="k0p-Qz-ohc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oDw-0A-wD3" secondAttribute="trailing" constant="30" id="rAc-iJ-naE"/>
                             <constraint firstItem="fau-q8-4nW" firstAttribute="centerX" secondItem="oDw-0A-wD3" secondAttribute="centerX" id="slt-Or-qti"/>
                         </constraints>
@@ -107,18 +137,46 @@
                                     <segue destination="SWk-uv-bDY" kind="unwind" identifier="toFirstScreen" unwindAction="unwindToFirstScreen:" id="fNZ-Sb-4xV"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="px6-Le-0DR">
+                                <rect key="frame" x="30" y="609" width="333" height="62"/>
+                                <color key="backgroundColor" red="0.025398307916533806" green="0.591796875" blue="0.0013146188949705508" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" systemColor="secondarySystemGroupedBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Сохранить данные с помощью делегата">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="saveDataWithDelegate:" destination="QYQ-4E-GX8" eventType="touchUpInside" id="ev1-WX-9p4"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxf-dH-JXx">
+                                <rect key="frame" x="30" y="701" width="333" height="35"/>
+                                <color key="backgroundColor" red="0.62264416881443296" green="0.0" blue="0.53159106266082645" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="tintColor" systemColor="systemBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Сохранить с помощью замыкания"/>
+                                <connections>
+                                    <action selector="saveDataWithClosure:" destination="QYQ-4E-GX8" eventType="touchUpInside" id="1Ta-YD-H8D"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="erb-7y-ji1"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                         <constraints>
+                            <constraint firstItem="px6-Le-0DR" firstAttribute="leading" secondItem="erb-7y-ji1" secondAttribute="leading" constant="30" id="5CS-kP-HvC"/>
+                            <constraint firstItem="px6-Le-0DR" firstAttribute="top" secondItem="6PD-DE-Ff5" secondAttribute="bottom" constant="30" id="DCa-kC-U14"/>
+                            <constraint firstItem="erb-7y-ji1" firstAttribute="trailing" secondItem="px6-Le-0DR" secondAttribute="trailing" constant="30" id="EYn-7g-zxG"/>
+                            <constraint firstItem="cxf-dH-JXx" firstAttribute="top" secondItem="px6-Le-0DR" secondAttribute="bottom" constant="30" id="Pmb-nE-ovW"/>
                             <constraint firstItem="o9N-vg-Miu" firstAttribute="top" secondItem="Fea-1W-BfM" secondAttribute="bottom" constant="30" id="aQf-Kd-AWV"/>
                             <constraint firstItem="Fea-1W-BfM" firstAttribute="leading" secondItem="erb-7y-ji1" secondAttribute="leading" constant="30" id="bfI-Ti-58o"/>
                             <constraint firstItem="erb-7y-ji1" firstAttribute="trailing" secondItem="o9N-vg-Miu" secondAttribute="trailing" constant="30" id="eMc-hq-OFN"/>
                             <constraint firstItem="o9N-vg-Miu" firstAttribute="leading" secondItem="erb-7y-ji1" secondAttribute="leading" constant="30" id="gVO-UG-7Lf"/>
                             <constraint firstItem="6PD-DE-Ff5" firstAttribute="leading" secondItem="erb-7y-ji1" secondAttribute="leading" constant="30" id="i1K-De-lDs"/>
                             <constraint firstItem="6PD-DE-Ff5" firstAttribute="top" secondItem="o9N-vg-Miu" secondAttribute="bottom" constant="30" id="is7-s3-5bi"/>
+                            <constraint firstItem="erb-7y-ji1" firstAttribute="trailing" secondItem="cxf-dH-JXx" secondAttribute="trailing" constant="30" id="nvg-Fa-fpD"/>
                             <constraint firstItem="erb-7y-ji1" firstAttribute="trailing" secondItem="6PD-DE-Ff5" secondAttribute="trailing" constant="30" id="ojf-Ap-244"/>
                             <constraint firstItem="erb-7y-ji1" firstAttribute="trailing" secondItem="Fea-1W-BfM" secondAttribute="trailing" constant="30" id="sB6-UY-CT3"/>
+                            <constraint firstItem="cxf-dH-JXx" firstAttribute="leading" secondItem="erb-7y-ji1" secondAttribute="leading" constant="30" id="txi-Va-V4v"/>
                             <constraint firstItem="Fea-1W-BfM" firstAttribute="centerY" secondItem="HeZ-sA-x8l" secondAttribute="centerY" id="vS0-mo-f9i"/>
                         </constraints>
                     </view>
@@ -160,6 +218,9 @@
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemGroupedBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
