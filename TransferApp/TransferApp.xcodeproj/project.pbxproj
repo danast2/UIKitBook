@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3077E36E2D1318980088AC5F /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3077E36D2D1318980088AC5F /* SecondViewController.swift */; };
+		3077E3702D1329170088AC5F /* DataUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3077E36F2D1329170088AC5F /* DataUpdate.swift */; };
 		30C97B192CFD9DB0004FB9EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C97B182CFD9DB0004FB9EE /* AppDelegate.swift */; };
 		30C97B1B2CFD9DB0004FB9EE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C97B1A2CFD9DB0004FB9EE /* SceneDelegate.swift */; };
 		30C97B1D2CFD9DB0004FB9EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C97B1C2CFD9DB0004FB9EE /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		3077E36D2D1318980088AC5F /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		3077E36F2D1329170088AC5F /* DataUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUpdate.swift; sourceTree = "<group>"; };
 		30C97B152CFD9DB0004FB9EE /* TransferApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TransferApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C97B182CFD9DB0004FB9EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30C97B1A2CFD9DB0004FB9EE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				30C97B1A2CFD9DB0004FB9EE /* SceneDelegate.swift */,
 				3077E36D2D1318980088AC5F /* SecondViewController.swift */,
 				30C97B1C2CFD9DB0004FB9EE /* ViewController.swift */,
+				3077E36F2D1329170088AC5F /* DataUpdate.swift */,
 				30C97B1E2CFD9DB0004FB9EE /* Main.storyboard */,
 				30C97B212CFD9DB1004FB9EE /* Assets.xcassets */,
 				30C97B232CFD9DB1004FB9EE /* LaunchScreen.storyboard */,
@@ -263,6 +266,7 @@
 			files = (
 				3077E36E2D1318980088AC5F /* SecondViewController.swift in Sources */,
 				30C97B1D2CFD9DB0004FB9EE /* ViewController.swift in Sources */,
+				3077E3702D1329170088AC5F /* DataUpdate.swift in Sources */,
 				30C97B192CFD9DB0004FB9EE /* AppDelegate.swift in Sources */,
 				30C97B1B2CFD9DB0004FB9EE /* SceneDelegate.swift in Sources */,
 			);
