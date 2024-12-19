@@ -8,6 +8,8 @@
 import UIKit
 
 class TaskListController: UITableViewController {
+    // порядок отображения задач по их статусу
+    var tasksStatusPosition: [TaskStatus] = [.planned, .completed]
     // хранилище задач
     var tasksStorage: TasksStorageProtocol = TasksStorage()
     // коллекция задач
@@ -18,6 +20,14 @@ class TaskListController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //можно установить программно
+//        // Установка стиля таблицы программно (если это нужно)
+//            if tableView.style != .grouped {
+//                tableView = UITableView(frame: tableView.frame, style: .grouped)
+//            }
+//        // Настройка разделителей
+//            tableView.separatorInset = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+//            tableView.separatorStyle = .singleLine
         // загрузка задач
         loadTasks()
         // Uncomment the following line to preserve selection between presentations
@@ -36,6 +46,13 @@ class TaskListController: UITableViewController {
         tasksStorage.loadTasks().forEach { task in
             tasks[task.type]?.append(task)
         }
+        for (tasksGroupPriority, tasksGroup) in tasks {
+            tasks[tasksGroupPriority] = tasksGroup.sorted { task1, task2 in
+                let task1position = tasksStatusPosition.firstIndex(of: task1.status) ?? 0
+                let task2position = tasksStatusPosition.firstIndex(of: task2.status) ?? 0
+                return task1position < task2position
+            }
+        }
     }
     
     // количество секций в таблице
@@ -53,7 +70,10 @@ class TaskListController: UITableViewController {
     }
     // ячейка для строки таблицы
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath:IndexPath) -> UITableViewCell {
-        return getConfiguredTaskCell_constraints(for: indexPath)
+        // ячейка на основе констрейнтов
+        //return getConfiguredTaskCell_constraints(for: indexPath)
+        // ячейка на основе стека
+        return getConfiguredTaskCell_stack(for: indexPath)
     }
     // ячейка на основе ограничений
     private func getConfiguredTaskCell_constraints(for indexPath: IndexPath) -> UITableViewCell {
@@ -93,5 +113,44 @@ class TaskListController: UITableViewController {
             resultSymbol = ""
         }
         return resultSymbol
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var title: String?
+        let tasksType = sectionsTypesPosition[section]
+        if tasksType == .important {
+            title = "Важные"
+        } else if tasksType == .normal {
+            title = "Текущие"
+        }
+            return title
+        }
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 70 // Высота заголовка секции
+//    }
+
+    // ячейка на основе стека
+    private func getConfiguredTaskCell_stack(for indexPath: IndexPath) -> UITableViewCell {
+     // загружаем прототип ячейки по идентификатору
+         let cell = tableView.dequeueReusableCell(withIdentifier: "taskCellStack", for: indexPath) as! TaskCell
+         // получаем данные о задаче, которые необходимо вывести в ячейке
+         let taskType = sectionsTypesPosition[indexPath.section]
+         guard let currentTask = tasks[taskType]?[indexPath.row] else {
+             return cell
+         }
+
+         // изменяем текст в ячейке
+         cell.title.text = currentTask.title
+         // изменяем символ в ячейке
+         cell.symbol.text = getSymbolForTask(with: currentTask.status)
+
+         // изменяем цвет текста
+         if currentTask.status == .planned {
+             cell.title.textColor = .black
+             cell.symbol.textColor = .black
+         } else {
+             cell.title.textColor = .lightGray
+             cell.symbol.textColor = .lightGray
+         }
+            return cell
     }
 }
