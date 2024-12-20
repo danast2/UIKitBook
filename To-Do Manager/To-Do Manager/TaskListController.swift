@@ -14,16 +14,25 @@ class TaskListController: UITableViewController {
     var tasksStorage: TasksStorageProtocol = TasksStorage()
     // коллекция задач
     var tasks: [TaskPriority:[TaskProtocol]] = [:] {
-     didSet {
-         for (tasksGroupPriority, tasksGroup) in tasks {
-             tasks[tasksGroupPriority] = tasksGroup.sorted{ task1, task2 in
-                 let task1position = tasksStatusPosition.firstIndex(of: task1.status) ?? 0
-                 let task2position = tasksStatusPosition.firstIndex(of: task2.status) ?? 0
-                    return task1position < task2position
-             }
-         }
+        didSet {
+            for (tasksGroupPriority, tasksGroup) in tasks {
+                tasks[tasksGroupPriority] = tasksGroup.sorted { task1, task2 in
+                    let task1Position = tasksStatusPosition.firstIndex(of: task1.status) ?? 0
+                    let task2Position = tasksStatusPosition.firstIndex(of: task2.status) ?? 0
+                    return task1Position < task2Position
+                }
+            }
+            
+            // Сохраняем задачи после изменения
+            var savingArray: [TaskProtocol] = []
+            tasks.forEach { _, value in
+                savingArray += value
+            }
+            print("Tasks to be saved: \(savingArray)") // Логирование перед сохранением
+            tasksStorage.saveTasks(savingArray) // Сохраняем в хранилище
+        }
     }
-}
+
     // порядок отображения секций по типам
     // индекс в массиве соответствует индексу секции в таблице
     var sectionsTypesPosition: [TaskPriority] = [.important, .normal]
@@ -47,6 +56,18 @@ class TaskListController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    // получение списка задач, их разбор и установка в свойство tasks
+    func setTasks(_ tasksCollection: [TaskProtocol]) {
+        // подготовка коллекции с задачами
+        // будем использовать только те задачи, для которых определена секция
+        sectionsTypesPosition.forEach { taskType in
+            tasks[taskType] = []
+        }
+        // загрузка и разбор задач из хранилища
+        tasksCollection.forEach { task in
+            tasks[task.type]?.append(task)
+        }
     }
     private func loadTasks() {
         // подготовка коллекции с задачами

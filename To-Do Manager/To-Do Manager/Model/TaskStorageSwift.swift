@@ -27,23 +27,25 @@ class TasksStorage: TasksStorageProtocol {
     }
     func loadTasks() -> [TaskProtocol] {
         var resultTasks: [TaskProtocol] = []
-        let tasksFromStorage = storage.array(forKey: storageKey) as?
-        [[String:String]] ?? []
+        let tasksFromStorage = storage.array(forKey: storageKey) as? [[String:String]] ?? []
+        print("Loading tasks: \(tasksFromStorage)") // Логирование при загрузке
+        
         for task in tasksFromStorage {
             guard let title = task[TaskKey.title.rawValue],
-            let typeRaw = task[TaskKey.type.rawValue],
-            let statusRaw = task[TaskKey.status.rawValue] else {
+                  let typeRaw = task[TaskKey.type.rawValue],
+                  let statusRaw = task[TaskKey.status.rawValue] else {
                 continue
             }
-            let type: TaskPriority = typeRaw == "important" ? .important :
-            .normal
-            let status: TaskStatus = statusRaw == "planned" ? .planned :
-            .completed
-            resultTasks.append(Task(title: title, type: type, status:
-            status))
+
+            let type: TaskPriority = typeRaw == "important" ? .important : .normal
+            let status: TaskStatus = statusRaw == "planned" ? .planned : .completed
+            
+            resultTasks.append(Task(title: title, type: type, status: status))
         }
+        
         return resultTasks
     }
+
     func saveTasks(_ tasks: [TaskProtocol]) {
         var arrayForStorage: [[String:String]] = []
         tasks.forEach { task in
@@ -53,6 +55,7 @@ class TasksStorage: TasksStorageProtocol {
             newElementForStorage[TaskKey.status.rawValue] = (task.status == .planned) ? "planned" : "completed"
             arrayForStorage.append(newElementForStorage)
         }
+        print("Saving tasks: \(arrayForStorage)") // Логирование перед сохранением
         storage.set(arrayForStorage, forKey: storageKey)
     }
 }
