@@ -1,8 +1,8 @@
 //
 //  SceneDelegate.swift
-//  To-Do Manager
+//  Cards
 //
-//  Created by Даниил Асташов on 18.12.2024.
+//  Created by Даниил Асташов on 20.12.2024.
 //
 
 import UIKit
@@ -13,30 +13,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
-        guard let window = window else {
-            return
-        }
-
-        // загрузка списка задач
-        // ее необходимо выполнить до создания экземпляра класса TaskListController
-        // иначе данные будут перезаписаны
-        let tasks = TasksStorage().loadTasks()
-        
-        // загрузка сцены со списком задач
-        let taskListController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "TaskListController") as! TaskListController
-        
-        //передача списка задач в контроллер
-        taskListController.setTasks(tasks)
-        
-        // создание навигационного контроллера
-        let navigationController = UINavigationController(rootViewController: taskListController)
-        
-        // отображение сцен
-        self.window?.windowScene = windowScene
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
+        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
+        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        guard let _ = (scene as? UIWindowScene) else { return }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -52,9 +32,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        
+        // Called when the scene will move from an active state to an inactive state.
+        // This may occur due to temporary interruptions (ex. an incoming phone call).
     }
-
 
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.

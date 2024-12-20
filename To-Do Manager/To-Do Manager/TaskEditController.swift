@@ -52,7 +52,7 @@ class TaskEditController: UITableViewController {
             // передача выбранного типа
             destination.selectedType = taskType
             // передача обработчика выбора типа
-            destination.doAfterTypeSelected = { [unowned self] selectedType in taskType = selectedType
+            destination.doAfterTypeSelected = { [self] selectedType in taskType = selectedType
             // обновляем метку с текущим типом
             taskTypeLabel?.text = taskTitles[taskType]
             }

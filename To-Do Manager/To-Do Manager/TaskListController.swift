@@ -16,11 +16,12 @@ class TaskListController: UITableViewController {
     var tasks: [TaskPriority:[TaskProtocol]] = [:] {
         didSet {
             for (tasksGroupPriority, tasksGroup) in tasks {
-                tasks[tasksGroupPriority] = tasksGroup.sorted { task1, task2 in
-                    let task1Position = tasksStatusPosition.firstIndex(of: task1.status) ?? 0
-                    let task2Position = tasksStatusPosition.firstIndex(of: task2.status) ?? 0
-                    return task1Position < task2Position
+                tasks[tasksGroupPriority] = tasksGroup.sorted{ task1, task2 in
+                    let task1position = tasksStatusPosition.firstIndex(of: task1.status) ?? 0
+                    let task2position = tasksStatusPosition.firstIndex(of: task2.status) ?? 0
+                    return task1position < task2position
                 }
+
             }
             
             // Сохраняем задачи после изменения
