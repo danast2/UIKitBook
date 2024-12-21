@@ -31,18 +31,7 @@ class MyViewController : UIViewController {
         return view
     }
     private func set(view moveView: UIView, toCenterOfView baseView: UIView){
-        // размеры вложенного представления
-        let moveViewWidth = moveView.frame.width
-        let moveViewHeight = moveView.frame.height
-
-        // размеры родительского представления
-        let baseViewWidth = baseView.frame.width
-        let baseViewHeight = baseView.frame.height
-
-        // вычисление и изменение координат
-        let newXCoordinate = (baseViewWidth - moveViewWidth) / 2
-        let newYCoordinate = (baseViewHeight - moveViewHeight) / 2
-        moveView.frame.origin = CGPoint(x: newXCoordinate, y: newYCoordinate)
+     moveView.center = CGPoint(x: baseView.bounds.midX, y: baseView.bounds.midY)
     }
     // создание красного представления
     private func getRedView() -> UIView {
@@ -70,16 +59,6 @@ class MyViewController : UIViewController {
         layer.cornerRadius = 10
         // добавление в иерархию слоев
         view.layer.addSublayer(layer)
-        // вывод на консоль размеров представления
-        print(view.frame)
-        // поворот представления
-        //view.transform = CGAffineTransform(rotationAngle: .pi/4)
-        //растяжение
-        //view.transform = CGAffineTransform(scaleX: 1.5, y: 0.7)
-        //смещение
-        view.transform = CGAffineTransform(translationX: 100, y: 5)
-        // вывод на консоль размеров представления
-        print(view.frame)
         return view
     }
     // создание корневого представления
