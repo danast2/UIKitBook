@@ -94,6 +94,137 @@ class FillShape: CAShapeLayer, ShapeLayerProtocol {
     }
 }
 
+class BackSideCircle: CAShapeLayer, ShapeLayerProtocol {
+    required init(size: CGSize, fillColor: CGColor) {
+        super.init()
+        let path = UIBezierPath()
+        // рисуем 15 кругов
+        for _ in 1...15 {
+            // координаты центра очередного круга
+            let randomX = Int.random(in: 0...Int(size.width))
+            let randomY = Int.random(in: 0...Int(size.height))
+            let center = CGPoint(x: randomX, y: randomY)
+            // смещаем указатель к центру круга
+            path.move(to: center)
+            // определяем случайный радиус
+            let radius = Int.random(in: 5...15)
+            // рисуем круг
+            path.addArc(withCenter: center, radius: CGFloat(radius),
+            startAngle: 0, endAngle: .pi*2, clockwise: true)
+        }
+        // инициализируем созданный путь
+        self.path = path.cgPath
+        // изменяем цвет
+        self.strokeColor = fillColor
+        self.fillColor = fillColor
+        self.lineWidth = 1
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+class BackSideLine: CAShapeLayer, ShapeLayerProtocol {
+    required init(size: CGSize, fillColor: CGColor) {
+        super.init()
+
+        let path = UIBezierPath()
+
+        // рисуем 15 линий
+        for _ in 1...15 {
+            // координаты начала очередной линии
+            let randomXStart = Int.random(in: 0...Int(size.width))
+            let randomYStart = Int.random(in: 0...Int(size.height))
+            // координаты конца очередной линии
+            let randomXEnd = Int.random(in: 0...Int(size.width))
+            let randomYEnd = Int.random(in: 0...Int(size.height))
+            // смещаем указатель к началу линии
+            path.move(to: CGPoint(x: randomXStart, y: randomYStart))
+            // рисуем линию
+            path.addLine(to: CGPoint(x: randomXEnd, y: randomYEnd))
+        }
+        // инициализируем созданный путь
+        self.path = path.cgPath
+        // изменяем стиль линий
+        self.strokeColor = fillColor
+        self.lineWidth = 3
+        self.lineCap = .round
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+protocol FlippableView: UIView {
+    var isFlipped: Bool { get set }
+    var flipCompletionHandler: ((FlippableView) -> Void)? { get set }
+    func flip()
+}
+
+class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
+    var isFlipped: Bool = false
+    var flipCompletionHandler: ((FlippableView) -> Void)?
+    func flip() {}
+    // цвет фигуры
+    var color: UIColor!
+    init(frame: CGRect, color: UIColor) {
+        super.init(frame: frame)
+        self.color = color
+        if isFlipped {
+            self.addSubview(backSideView)
+            self.addSubview(frontSideView)
+        } else {
+            self.addSubview(frontSideView)
+            self.addSubview(backSideView)
+        }
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // внутренний отступ представления
+    private let margin: Int = 10
+    // представление с лицевой стороной карты
+    lazy var frontSideView: UIView = self.getFrontSideView()
+    // представление с обратной стороной карты
+    lazy var backSideView: UIView = self.getBackSideView()
+    // возвращает представление для лицевой стороны карточки
+    private func getFrontSideView() -> UIView {
+        let view = UIView(frame: self.bounds)
+        view.backgroundColor = .white
+        let shapeView = UIView(frame: CGRect(x: margin, y: margin, width:
+        Int(self.bounds.width)-margin*2, height: Int(self.bounds.height)-margin*2))
+        view.addSubview(shapeView)
+        // создание слоя с фигурой
+        let shapeLayer = ShapeType(size: shapeView.frame.size, fillColor:
+        color.cgColor)
+        shapeView.layer.addSublayer(shapeLayer)
+        return view
+    }
+    // возвращает вью для обратной стороны карточки
+    private func getBackSideView() -> UIView {
+        let view = UIView(frame: self.bounds)
+
+        view.backgroundColor = .white
+
+        //выбор случайного узора для рубашки
+        switch ["circle", "line"].randomElement()! {
+        case "circle":
+            let layer = BackSideCircle(size: self.bounds.size, fillColor:
+            UIColor.black.cgColor)
+            view.layer.addSublayer(layer)
+        case "line":
+            let layer = BackSideLine(size: self.bounds.size, fillColor:
+            UIColor.black.cgColor)
+            view.layer.addSublayer(layer)
+        default:
+            break
+        }
+        return view
+    }
+}
+
 class MyViewController : UIViewController {
     override func loadView() {
         let view = UIView()
