@@ -163,6 +163,26 @@ protocol FlippableView: UIView {
 }
 
 class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
+    private var startTouchPoint: CGPoint!
+    private var customAnchorPoint: CGPoint = CGPoint(x: 0, y: 0)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        // изменяем координаты точки привязки
+        customAnchorPoint.x = touches.first!.location(in: window).x - frame.minX
+        customAnchorPoint.y = touches.first!.location(in: window).y - frame.minY
+
+        // сохраняем исходные координаты
+        startTouchPoint = frame.origin
+    }
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.frame.origin.x = touches.first!.location(in: window).x -
+        customAnchorPoint.x
+        self.frame.origin.y = touches.first!.location(in: window).y -
+        customAnchorPoint.y
+    }
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        flip()
+    }
+
     // радиус закругления
     var cornerRadius = 20
     var isFlipped: Bool = false {
@@ -171,7 +191,15 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
         }
     }
     var flipCompletionHandler: ((FlippableView) -> Void)?
-    func flip() {}
+    func flip() {
+        // определяем, между какими представлениями осуществить переход
+        let fromView = isFlipped ? frontSideView : backSideView
+        let toView = isFlipped ? backSideView : frontSideView
+        // запускаем анимированный переход
+        UIView.transition(from: fromView, to: toView, duration: 0.5, options:
+        [.transitionFlipFromTop], completion: nil)
+        isFlipped = !isFlipped
+    }
     // цвет фигуры
     var color: UIColor!
     init(frame: CGRect, color: UIColor) {
@@ -220,6 +248,9 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
         let shapeLayer = ShapeType(size: shapeView.frame.size, fillColor:
         color.cgColor)
         shapeView.layer.addSublayer(shapeLayer)
+        // скругляем углы корневого слоя
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = CGFloat(cornerRadius)
         return view
     }
     // возвращает вью для обратной стороны карточки
@@ -241,14 +272,14 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
         default:
             break
         }
+        // скругляем углы корневого слоя
+        view.layer.masksToBounds = true
+        view.layer.cornerRadius = CGFloat(cornerRadius)
         return view
     }
 }
 
 class MyViewController : UIViewController {
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-     print("touchesBegan Controller")
-    }
     override func loadView() {
         let view = UIView()
         view.backgroundColor = .white
@@ -264,6 +295,16 @@ class MyViewController : UIViewController {
         width: 120, height: 150), color: .red)
          self.view.addSubview(secondCardView)
          secondCardView.isFlipped = true
+    }
+}
+
+extension UIResponder {
+    func responderChain() -> String {
+        guard let next = next else {
+            //Конструкция Self.self позволяет получить название типа данных рассматриваемого значения
+            return String(describing: Self.self)
+        }
+    return String(describing: Self.self) + " -> " + next.responderChain()
     }
 }
 // Present the view controller in the Live View window
