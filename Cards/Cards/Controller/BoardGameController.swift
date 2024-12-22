@@ -8,6 +8,7 @@
 import UIKit
 
 class BoardGameController: UIViewController {
+    private var flippedCards = [UIView]()
     // размеры карточек
     private var cardSize: CGSize {
         CGSize(width: 80, height: 120)
@@ -103,14 +104,50 @@ class BoardGameController: UIViewController {
          cardTwo.tag = index
          cardViews.append(cardTwo)
      }
-     // добавляем всем картам обработчик переворота
-     for card in cardViews {
-         (card as! FlippableView).flipCompletionHandler = { flippedCard in
-             // переносим карточку вверх иерархии
-             flippedCard.superview?.bringSubviewToFront(flippedCard)
-         }
-     }
-        return cardViews
+        // добавляем всем картам обработчик переворота
+        for card in cardViews {
+            (card as! FlippableView).flipCompletionHandler = { [self] flippedCard in
+                // переносим карточку вверх иерархии
+                flippedCard.superview?.bringSubviewToFront(flippedCard)
+                
+                // добавляем или удаляем карточку
+                if flippedCard.isFlipped {
+                    self.flippedCards.append(flippedCard)
+                } else {
+                    if let cardIndex = self.flippedCards.firstIndex(of: flippedCard) {
+                        self.flippedCards.remove(at: cardIndex)
+                    }
+                }
+                
+                // если перевернуто 2 карточки
+                if self.flippedCards.count == 2 {
+                    // получаем карточки из данных модели
+                    let firstCard = game.cards[self.flippedCards.first!.tag]
+                    let secondCard = game.cards[self.flippedCards.last!.tag]
+                    
+                    // если карточки одинаковые
+                    if game.checkCards(firstCard, secondCard) {
+                        // сперва анимировано скрываем их
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.flippedCards.first!.layer.opacity = 0
+                            self.flippedCards.last!.layer.opacity = 0
+                            // после чего удаляем из иерархии
+                        }, completion: {_ in
+                            self.flippedCards.first!.removeFromSuperview()
+                            self.flippedCards.last!.removeFromSuperview()
+                            self.flippedCards = []
+                        })
+                        // в ином случае
+                    } else {
+                        // переворачиваем карточки рубашкой вверх
+                        for card in self.flippedCards {
+                            (card as! FlippableView).flip()
+                        }
+                    }
+                }
+            }
+        }
+         return cardViews
     }
     // игральные карточки
     var cardViews = [UIView]()
@@ -147,8 +184,9 @@ class BoardGameController: UIViewController {
     }
     
     @objc func startGame(_ sender: UIButton) {
-        //print("Window: \(UIApplication.shared.connectedScenes.first)")
-        print("button was pressed")
+        game = getNewGame()
+        let cards = getCardsBy(modelData: game.cards)
+        placeCardsOnBoard(cards)
     }
 
     /*
