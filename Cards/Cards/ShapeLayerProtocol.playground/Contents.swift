@@ -163,6 +163,7 @@ protocol FlippableView: UIView {
 }
 
 class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
+    
     private var startTouchPoint: CGPoint!
     private var customAnchorPoint: CGPoint = CGPoint(x: 0, y: 0)
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -180,7 +181,9 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
         customAnchorPoint.y
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        flip()
+        if self.frame.origin == startTouchPoint {
+            flip()
+        }
     }
 
     // радиус закругления
@@ -192,13 +195,14 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
     }
     var flipCompletionHandler: ((FlippableView) -> Void)?
     func flip() {
-        // определяем, между какими представлениями осуществить переход
         let fromView = isFlipped ? frontSideView : backSideView
         let toView = isFlipped ? backSideView : frontSideView
-        // запускаем анимированный переход
         UIView.transition(from: fromView, to: toView, duration: 0.5, options:
-        [.transitionFlipFromTop], completion: nil)
-        isFlipped = !isFlipped
+        [.transitionFlipFromTop], completion: { _ in
+        // обработчик переворота
+        self.flipCompletionHandler?(self)
+        })
+        isFlipped.toggle()
     }
     // цвет фигуры
     var color: UIColor!
@@ -281,6 +285,7 @@ class CardView<ShapeType: ShapeLayerProtocol>: UIView, FlippableView {
 
 class MyViewController : UIViewController {
     override func loadView() {
+        
         let view = UIView()
         view.backgroundColor = .white
         self.view = view
@@ -289,13 +294,20 @@ class MyViewController : UIViewController {
          let firstCardView = CardView<CircleShape>(frame: CGRect(x: 0, y: 0,
         width: 120, height: 150), color: .red)
          self.view.addSubview(firstCardView)
-
+        
+        firstCardView.flipCompletionHandler = { card in
+         card.superview?.bringSubviewToFront(card)
+        }
          // игральная карточка лицевой стороной вверх
          let secondCardView = CardView<CircleShape>(frame: CGRect(x: 200, y: 0,
         width: 120, height: 150), color: .red)
          self.view.addSubview(secondCardView)
          secondCardView.isFlipped = true
+        secondCardView.flipCompletionHandler = { card in
+         card.superview?.bringSubviewToFront(card)
+        }
     }
+    
 }
 
 extension UIResponder {
