@@ -9,41 +9,34 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let picker = UIPickerView()
+    let picker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.picker.center = self.view.center
-        //подписаться
-        picker.dataSource = self
-        picker.delegate = self
+        self.picker.datePickerMode = .countDownTimer
         
         self.view.addSubview(picker)
-    }
-
-
-}
-
-extension ViewController: UIPickerViewDataSource{
-    
-    //сколько компонентов выводится
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-    
-    //сколько строк в компоненте
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 10
+        var oneYearTime = TimeInterval()
+        oneYearTime = 365 * 24 * 60 * 60
+        
+        let todayDate = Date()
+        let oneYearFromToday = todayDate.addingTimeInterval(oneYearTime)
+        let twoYearFromToday = todayDate.addingTimeInterval(oneYearTime * 2)
+        
+        picker.minimumDate = oneYearFromToday
+        picker.maximumDate = twoYearFromToday
+        
+        picker.countDownDuration = 2 * 60
+        
+        self.picker.addTarget(self, action: #selector(datePickerChange(paramDatePicker: )), for: .valueChanged)
     }
     
-    
-    
-}
-
-extension ViewController: UIPickerViewDelegate{
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let result = "row = \(row)"
-        return result
+    @objc
+    func datePickerChange(paramDatePicker: UIDatePicker){
+        if paramDatePicker.isEqual(self.picker){
+            print("data change = ", paramDatePicker.date)
+        }
     }
+
 }
