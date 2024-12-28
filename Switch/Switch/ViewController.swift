@@ -8,33 +8,38 @@
 import UIKit
 
 class ViewController: UIViewController {
-    let mySwitch = UISwitch()
+    let mySwitch2 = UISwitch()
+    let button = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        self.mySwitch.frame = CGRect(x: 100, y: 100, width: 0, height: 0)
-        self.view.addSubview(self.mySwitch)
+        self.button.frame = CGRect.init(x: 100, y: 200, width: 200, height: 200)
+        self.button.backgroundColor = UIColor.black
+        self.button.setTitle("OK", for: .normal)
+        self.button.setTitle("кнопка нажата", for: .highlighted)
+        self.view.addSubview(button)
         
-        self.mySwitch.setOn(true, animated: true)
+        self.mySwitch2.frame = CGRect.zero
         
-//        if self.mySwitch.isOn{
-//            print("switch is on")
-//        }else{
-//            print("switch is off")
-//        }
+        self.mySwitch2.center = self.view.center
+        self.view.addSubview(self.mySwitch2)
         
-        self.mySwitch.addTarget(self, action: #selector(switchChange(paramTarget: )), for: .valueChanged)
+        //off
+        self.mySwitch2.tintColor = UIColor.green
+        self.mySwitch2.thumbTintColor = UIColor.black
+        //on
+        self.mySwitch2.onTintColor = UIColor.blue
+        
+        self.mySwitch2.addTarget(self, action: #selector(isOn(target: )), for: .valueChanged)
     }
-    
-    @objc func switchChange(paramTarget: UISwitch){
-        print("param is = ", paramTarget)
-
-        if self.mySwitch.isOn{
-            print("switch is on")
+    @objc
+    func isOn(target: UISwitch){
+        if target.isOn{
+            self.button.isUserInteractionEnabled = false
         }else{
-            print("switch is off")
+            self.button.isUserInteractionEnabled = true
         }
     }
+ 
 }
