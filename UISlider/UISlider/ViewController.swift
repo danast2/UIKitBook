@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation 
 
 class ViewController: UIViewController {
+    @IBOutlet weak var volumeSlider: UISlider!
     var player = AVAudioPlayer()
     let slider = UISlider()
     override func viewDidLoad() {
@@ -44,6 +45,10 @@ class ViewController: UIViewController {
     
     @IBAction func buttonPause(_ sender: Any) {
         self.player.pause()
+    }
+    
+    @IBAction func volumeSliderChange(_ sender: Any) {
+        self.player.volume = self.volumeSlider.value
     }
     
 }
