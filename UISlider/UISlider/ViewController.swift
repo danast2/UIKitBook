@@ -10,8 +10,10 @@ import AVFoundation
 
 class ViewController: UIViewController {
     @IBOutlet weak var volumeSlider: UISlider!
+    @IBOutlet weak var playButton: UIButton!
     var player = AVAudioPlayer()
     let slider = UISlider()
+    var updateTimer: Timer?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,8 +33,16 @@ class ViewController: UIViewController {
         }catch{
             print("error ept")
         }
-        self.player.play()
+        updateTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(changeTimer(sender:)), userInfo: nil, repeats: true)
     }
+    
+    @objc
+    func changeTimer(sender: Timer){
+        if self.player.isPlaying{
+            self.slider.value = Float(player.currentTime)
+        }
+    }
+    
     @objc
     func changeSlider(sender: UISlider){
         if sender == slider{
@@ -40,11 +50,13 @@ class ViewController: UIViewController {
         }
     }
     @IBAction func buttonPlay(_ sender: Any) {
-        self.player.play()
-    }
-    
-    @IBAction func buttonPause(_ sender: Any) {
-        self.player.pause()
+        if self.player.isPlaying{
+            self.player.pause()
+            playButton.setTitle("Play", for: .normal)
+        }else{
+            self.player.play()
+            playButton.setTitle("Pause", for: .normal)
+        }
     }
     
     @IBAction func volumeSliderChange(_ sender: Any) {
