@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     var buttonShare = UIButton()
     var textField = UITextField()
     var activityViewController: UIActivityViewController? = nil
@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         self.textField.center = self.view.center
         self.textField.borderStyle = UITextField.BorderStyle.roundedRect
         self.textField.placeholder = "enter text to share"
+        self.textField.delegate = self
         self.view.addSubview(self.textField)
     }
     
@@ -48,6 +49,13 @@ class ViewController: UIViewController {
         
         self.activityViewController = UIActivityViewController(activityItems: [text], applicationActivities: nil)
         self.present(self.activityViewController!, animated: true, completion: nil)
+    }
+    
+    //MARK: - UITextFieldDelegate
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.textField.resignFirstResponder()
+        
+        return true
     }
 }
 
