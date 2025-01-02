@@ -25,6 +25,15 @@ class SecondViewController: UIViewController {
         //self.navigationController?.popViewController(animated: true)
         //получаем текущий массив контроллера
         var currentControllerArray = self.navigationController?.viewControllers
+        
+        //удаляем последний контроллер в этом массиве
+        currentControllerArray?.removeLast()
+        
+        //Присвоим
+        if let newController = currentControllerArray{
+            //получаем текущий массив контроллера
+            self.navigationController?.viewControllers = newController
+        }
     }
     
 }
