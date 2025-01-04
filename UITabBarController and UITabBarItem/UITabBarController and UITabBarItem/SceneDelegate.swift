@@ -11,12 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         // Создаём контроллеры
         let firstVC = ViewController()
-        firstVC.title = "First"
-        firstVC.tabBarItem = UITabBarItem(title: "First", image: UIImage(systemName: "house"), tag: 0)
         
         let secondVC = SecondViewController()
-        secondVC.title = "Second"
-        secondVC.tabBarItem = UITabBarItem(title: "Second", image: UIImage(systemName: "gear"), tag: 1)
 
         // Добавляем навигационные контроллеры
         let firstNavController = UINavigationController(rootViewController: firstVC)
