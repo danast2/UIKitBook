@@ -16,7 +16,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.createTextField()
         myTextField.delegate = self
         
-        NotificationCenter.default.addObserver(self, selector: #selector(textFieldTextDidChange(ncParam:)), name: UITextField.textDidChangeNotification, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(textFieldTextDidChange(ncParam:)), name: UITextField.textDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil){(nc) in
+            self.view.frame.origin.y = -200
+        }
+        NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil){(nc) in
+            self.view.frame.origin.y = 0.0
+        }
     }
     
     //MARK: - Notification
