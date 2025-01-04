@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  UILabel
-//
-//  Created by Даниил Асташов on 04.01.2025.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -14,7 +7,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let labelFrame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        // Устанавливаем ширину и максимальную высоту
+        let labelWidth: CGFloat = 200
+        let maxLabelHeight: CGFloat = CGFloat.greatestFiniteMagnitude
+        let labelX: CGFloat = (view.bounds.width - labelWidth) / 2
+        let labelFrame = CGRect(x: labelX, y: 0, width: labelWidth, height: maxLabelHeight)
         
         self.myLabel.frame = labelFrame
         self.myLabel.numberOfLines = 0
@@ -22,14 +19,17 @@ class ViewController: UIViewController {
         self.myLabel.text = "ios что-то там"
         self.myLabel.adjustsFontSizeToFitWidth = true
         self.myLabel.shadowOffset = CGSize(width: 2, height: 2)
-        self.myLabel.sizeToFit()
         self.myLabel.shadowColor = UIColor.lightGray
         
         self.myLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        self.myLabel.center = self.view.center
+        self.myLabel.textAlignment = .center
+
+        // Автоматически рассчитываем высоту метки
+        self.myLabel.sizeToFit()
+        self.myLabel.frame.size.width = labelWidth // Фиксируем ширину
+        self.myLabel.center = self.view.center // Центрируем
+        
         self.view.addSubview(myLabel)
     }
-
-
 }
 
