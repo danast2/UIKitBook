@@ -13,13 +13,16 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTextView(param:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(updateTextView(param:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         self.createTextView()
     }
 
     func createTextView() {
         self.myTextView = UITextView(frame: CGRect(x: 20, y: 100, width: self.view.bounds.width - 50, height: self.view.bounds.height/2))
         self.myTextView.text = "smth"
-        self.myTextView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        self.myTextView.contentInset = UIEdgeInsets(top: 10, left: 5, bottom: 5, right: 5)
         self.myTextView.font = UIFont.systemFont(ofSize: 17)
         self.myTextView.backgroundColor = .green
         self.view.addSubview(myTextView)
