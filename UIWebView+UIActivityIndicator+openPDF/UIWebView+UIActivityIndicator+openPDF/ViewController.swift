@@ -19,57 +19,62 @@ class ViewController: UIViewController {
     }
     
     func setupWebView() {
+        // Создаем WKWebView
         self.webView = WKWebView(frame: .zero)
         self.webView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(webView)
         
-        //настраиваем auto layout
-        NSLayoutConstraint.activate([self.webView.topAnchor.constraint(equalTo: self.view.topAnchor),
-                                     self.webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                                     self.webView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
-                                    ])
+        // Настраиваем Auto Layout
+        NSLayoutConstraint.activate([
+            self.webView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            self.webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            self.webView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            self.webView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -50) // Оставляем место для UIToolbar
+        ])
         
-        //загружаем web страницу
-        if let url = URL(string: "https://www.youtube.com/watch?v=q2PJ0kdrYIs&list=PLmTuDg46zmKD6nI5Meg0_atl0qY-UgTtP&index=18"){
+        // Загружаем web-страницу
+        if let url = URL(string: "https://mail.ru/".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "") {
             self.webView.load(URLRequest(url: url))
         }
     }
     
     func setupToolBar() {
+        // Создаем UIToolbar
         let toolbar = UIToolbar(frame: .zero)
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(toolbar)
         
-        NSLayoutConstraint.activate([self.webView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
-                                     self.webView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-                                     self.webView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-                                     self.webView.heightAnchor.constraint(equalToConstant: 50.0)
-                                    ])
+        // Настраиваем Auto Layout для Toolbar
+        NSLayoutConstraint.activate([
+            toolbar.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            toolbar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            toolbar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: 50.0)
+        ])
+        
         // Создаем кнопки
         let backButton = UIBarButtonItem(title: "Назад", style: .plain, target: self, action: #selector(goBack))
         let forwardButton = UIBarButtonItem(title: "Вперед", style: .plain, target: self, action: #selector(goForward))
         let reloadButton = UIBarButtonItem(title: "Обновить", style: .plain, target: self, action: #selector(reloadPage))
-        let flexibleSpace = UIBarButtonItem.flexibleSpace() // Для равномерного распределения кнопок
+        let flexibleSpace = UIBarButtonItem.flexibleSpace() // Разделитель для равномерного распределения кнопок
 
-        // Добавляем кнопки на Toolbar
+        // Добавляем кнопки в UIToolbar
         toolbar.items = [backButton, flexibleSpace, forwardButton, flexibleSpace, reloadButton]
     }
     
     @objc func goBack() {
-        if webView.canGoBack {
-            webView.goBack()
-        }
+        guard let webView = webView, webView.canGoBack else { return }
+        webView.goBack()
     }
 
     @objc func goForward() {
-        if webView.canGoForward {
-            webView.goForward()
-        }
+        guard let webView = webView, webView.canGoForward else { return }
+        webView.goForward()
     }
 
     @objc func reloadPage() {
+        guard let webView = webView else { return }
         webView.reload()
     }
-
 }
 
