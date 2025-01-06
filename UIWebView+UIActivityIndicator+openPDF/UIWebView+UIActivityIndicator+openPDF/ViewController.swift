@@ -11,11 +11,15 @@ import WebKit
 class ViewController: UIViewController {
     
     var webView: WKWebView!
+    var activityIndicator: UIActivityIndicatorView!
+    var goBackItem: UIBarButtonItem!
+    var goForwardItem: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupWebView()
         self.setupToolBar()
+        self.setupActivityIndicator()
     }
     
     func setupWebView() {
@@ -76,5 +80,38 @@ class ViewController: UIViewController {
         guard let webView = webView else { return }
         webView.reload()
     }
+    func setupActivityIndicator() {
+        self.activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        
+        NSLayoutConstraint.activate([
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+        ])
+    }
+    func updateActivityIndicator(isAnimating: Bool, indicator: UIActivityIndicatorView) {
+        if isAnimating {
+            indicator.startAnimating()
+            indicator.isHidden = false
+        } else {
+            indicator.stopAnimating()
+            indicator.isHidden = true
+        }
+    }
+        
+        // MARK: - Navigation Delegate Methods
+        func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+            updateActivityIndicator(isAnimating: true, indicator: activityIndicator)
+            goBackItem.isEnabled = false
+            goForwardItem.isEnabled = false
+        }
+        
+        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            updateActivityIndicator(isAnimating: false, indicator: activityIndicator)
+            goBackItem.isEnabled = webView.canGoBack
+            goForwardItem.isEnabled = webView.canGoForward
+        }
 }
 
