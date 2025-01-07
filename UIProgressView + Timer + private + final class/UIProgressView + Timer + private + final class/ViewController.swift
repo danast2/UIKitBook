@@ -16,12 +16,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.createProgress(myProgressView)
+        self.createButton(myButton)
+        self.createTimer()
     }
     
     //MARK: Time
     func createTimer() {
-        myTime = Timer(timeInterval: 1, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+        myTime = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
     }
+
     
     
     //MARK: Selector
