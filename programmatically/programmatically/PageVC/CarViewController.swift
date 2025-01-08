@@ -20,7 +20,7 @@ class CarViewController: UIViewController {
     
     //MARK: - Label
     private let nameLabel: UILabel = {
-       let label = UILabel()
+        let label = UILabel()
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
