@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         
         let numberOfView = 2
         squareViews.reserveCapacity(numberOfView)
-        var colors = [UIColor.red, UIColor.green]
+        let colors = [UIColor.red, UIColor.green]
         var currentCenterPoint: CGPoint = view.center
         let eachViewSize = CGSize(width: 50, height: 50)
         
@@ -65,5 +65,24 @@ class ViewController: UIViewController {
 //        animator.addBehavior(gravity)
     }
 
+}
+
+extension ViewController: UICollisionBehaviorDelegate {
+    func collisionBehavior(_ behavior: UICollisionBehavior, beganContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, at p: CGPoint) {
+        let identifier = identifier as? String
+        let kBottomBoundary = "bottomBoundary"
+        if identifier == kBottomBoundary {
+            UIView.animate(withDuration: 1.0, animations: {
+                let view = item as? UIView
+                view?.backgroundColor = UIColor.red
+                view?.alpha = 0.0
+                view?.transform = CGAffineTransform(scaleX: 2.0, y: 2.0)
+            }, completion: { (finished) in
+                let view = item as? UIView
+                behavior.removeItem(item)
+                view?.removeFromSuperview()
+            })
+        }
+    }
 }
 
