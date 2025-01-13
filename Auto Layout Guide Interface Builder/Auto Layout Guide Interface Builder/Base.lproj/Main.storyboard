@@ -16,8 +16,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cva-bf-dmW">
-                                <rect key="frame" x="133" y="367" width="127" height="119"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cva-bf-dmW">
+                                <rect key="frame" x="133" y="366.66666666666669" width="127" height="119"/>
+                                <color key="backgroundColor" red="0.65576675259999995" green="0.0" blue="0.59989530300000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="119" id="smV-uL-vtc"/>
+                                    <constraint firstAttribute="width" constant="127" id="sr7-8a-AZp"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -26,10 +31,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="cva-bf-dmW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="133" id="Jjn-Ok-eom"/>
-                            <constraint firstItem="cva-bf-dmW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="308" id="R7v-Mw-fiZ"/>
-                            <constraint firstItem="cva-bf-dmW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="l9K-io-gyt"/>
-                            <constraint firstItem="cva-bf-dmW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="mF7-av-oLV"/>
+                            <constraint firstItem="cva-bf-dmW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Bfw-S0-HSx"/>
+                            <constraint firstItem="cva-bf-dmW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="LmS-yd-3cK"/>
                         </constraints>
                     </view>
                 </viewController>
