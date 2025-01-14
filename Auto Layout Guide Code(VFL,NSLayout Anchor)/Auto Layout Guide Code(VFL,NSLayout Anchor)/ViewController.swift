@@ -23,25 +23,23 @@ class ViewController: UIViewController {
         view.addSubview(viewRed)
         view.addSubview(viewGreen)
         
-        // Создаем метрики
-        let metrics = ["height": 100, "width": view.bounds.size.width / 3, "top": 200]
-        let viewVFL = ["viewRed": viewRed, "viewGreen": viewGreen]
-        
-        // Вертикальные ограничения
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[viewRed(height)]",
-                                                           options: [],
-                                                           metrics: metrics,
-                                                           views: viewVFL))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-top-[viewGreen(height)]",
-                                                           options: [],
-                                                           metrics: metrics,
-                                                           views: viewVFL))
-        
-        // Горизонтальные ограничения
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|-[viewRed(width)]-(50)-[viewGreen(width)]-|",
-                                                           options: [],
-                                                           metrics: metrics,
-                                                           views: viewVFL))
+        // Устанавливаем ограничения
+        createViewRedConstrait()
+        createViewGreenConstrait()
+    }
+    
+    func createViewRedConstrait() {
+        viewRed.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        viewRed.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        viewRed.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/3).isActive = true
+        viewRed.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    func createViewGreenConstrait() {
+        viewGreen.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        viewGreen.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        viewGreen.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/3).isActive = true
+        viewGreen.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
 }
 
