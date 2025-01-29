@@ -13,6 +13,9 @@
 		3090AEBF2D4A9E6600A3187E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3090AEBE2D4A9E6600A3187E /* Base */; };
 		3090AEC12D4A9E6700A3187E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3090AEC02D4A9E6700A3187E /* Assets.xcassets */; };
 		3090AEC42D4A9E6700A3187E /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 3090AEC32D4A9E6700A3187E /* Base */; };
+		3090AECC2D4AC38300A3187E /* MyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090AECB2D4AC38300A3187E /* MyTableViewController.swift */; };
+		3090AECE2D4ACAF600A3187E /* MyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3090AECD2D4ACAF600A3187E /* MyTableViewCell.swift */; };
+		30CEA7EB2D4ACF5C007EE12C /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30CEA7EA2D4ACF5C007EE12C /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		3090AEC02D4A9E6700A3187E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3090AEC32D4A9E6700A3187E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3090AEC52D4A9E6700A3187E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3090AECB2D4AC38300A3187E /* MyTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewController.swift; sourceTree = "<group>"; };
+		3090AECD2D4ACAF600A3187E /* MyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableViewCell.swift; sourceTree = "<group>"; };
+		30CEA7EA2D4ACF5C007EE12C /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +64,14 @@
 			children = (
 				3090AEB72D4A9E6600A3187E /* AppDelegate.swift */,
 				3090AEB92D4A9E6600A3187E /* SceneDelegate.swift */,
+				3090AECB2D4AC38300A3187E /* MyTableViewController.swift */,
+				3090AECD2D4ACAF600A3187E /* MyTableViewCell.swift */,
 				3090AEBB2D4A9E6600A3187E /* ViewController.swift */,
 				3090AEBD2D4A9E6600A3187E /* Main.storyboard */,
 				3090AEC02D4A9E6700A3187E /* Assets.xcassets */,
 				3090AEC22D4A9E6700A3187E /* LaunchScreen.storyboard */,
 				3090AEC52D4A9E6700A3187E /* Info.plist */,
+				30CEA7EA2D4ACF5C007EE12C /* Model.swift */,
 			);
 			path = "UITableViewController,MVC,UserDefaults";
 			sourceTree = "<group>";
@@ -141,6 +150,9 @@
 				3090AEBC2D4A9E6600A3187E /* ViewController.swift in Sources */,
 				3090AEB82D4A9E6600A3187E /* AppDelegate.swift in Sources */,
 				3090AEBA2D4A9E6600A3187E /* SceneDelegate.swift in Sources */,
+				30CEA7EB2D4ACF5C007EE12C /* Model.swift in Sources */,
+				3090AECE2D4ACAF600A3187E /* MyTableViewCell.swift in Sources */,
+				3090AECC2D4AC38300A3187E /* MyTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
