@@ -11,6 +11,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     var myTableView = UITableView()
     let identefier = "MyCell"
+    var array = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,30 +39,25 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 3
-        case 1:
-            return 5
-        case 2:
-            return 8
-        default:
-            break
-        }
-        return 0
+        array.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: identefier, for: indexPath)
         
-        cell.textLabel?.text = "section = \(indexPath.section) cell = \(indexPath.row)"
+        let number = array[indexPath.row]
+        cell.textLabel?.text = number
         
         return cell
     }
     
     //MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
+        return 70.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
     }
 }
 
