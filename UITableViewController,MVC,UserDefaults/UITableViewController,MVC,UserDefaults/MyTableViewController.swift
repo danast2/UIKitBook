@@ -8,37 +8,40 @@
 import UIKit
 
 class MyTableViewController: UITableViewController {
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var lastNameTextField: UITextField!
+    @IBOutlet weak var polSegment: UISegmentedControl!
+    @IBOutlet weak var isPushedOn: UISwitch!
     
-    var itemArray = [Model]()
-
+    let userDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let item = Model(name: "Даниил Дементьев", prof: "прогер")
-        itemArray.append(item)
-        
-    }
-
-    // MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemArray.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? MyTableViewCell{
-            
-            let item = itemArray[indexPath.row]
-            
-            cell.refresh(item)
-            
-            return cell
+        //load
+        if let name = userDefaults.object(forKey: "name"){
+            nameTextField.text = name as? String
         }
-        return UITableViewCell()
+        
+        if let last = userDefaults.object(forKey: "lastName"){
+            lastNameTextField.text = last as? String
+        }
+        
+        if let isSwitch = userDefaults.object(forKey: "switch"){
+            isPushedOn.isOn = isSwitch as! Bool
+        }
+        
+        if let pol = userDefaults.object(forKey: "segment"){
+            polSegment.selectedSegmentIndex = pol as! Int
+        }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+    @IBAction func saveButton(_ sender: Any) {
+        userDefaults.setValue(nameTextField.text, forKey: "name")
+        userDefaults.setValue(lastNameTextField.text, forKey: "lastName")
+        userDefaults.set(isPushedOn.isOn, forKey: "switch")
+        userDefaults.set(polSegment.selectedSegmentIndex, forKey: "segment")
+        print("save")
+        lastNameTextField.resignFirstResponder()
     }
-    
 }
