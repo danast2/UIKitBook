@@ -1,63 +1,78 @@
-//
-//  ViewController.swift
-//  UITableView
-//
-//  Created by Даниил Асташов on 29.01.2025.
-//
-
 import UIKit
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    var myTableView = UITableView()
-    let identefier = "MyCell"
-    var array = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
     
+    var tableView: UITableView!
+    var array: [String] = ["Item 1", "Item 2", "Item 3", "Item 4"]
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        createTable()
+
+        tableView = UITableView(frame: view.bounds, style: .plain)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        view.addSubview(tableView)
+
+        // Включаем редактирование
+        navigationItem.rightBarButtonItem = editButtonItem
     }
-    
-    func createTable(){
-        self.myTableView = UITableView(frame: view.bounds, style: .plain)
-        myTableView.register(UITableViewCell.self, forCellReuseIdentifier: identefier)
-        
-        self.myTableView.delegate = self
-        self.myTableView.dataSource = self
-        
-        myTableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        view.addSubview(myTableView)
-    }
-    
-    
-    //MARK: - UITableViewDataSource
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
-    }
-    
+
+    // MARK: - UITableViewDataSource
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        array.count
+        return array.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: identefier, for: indexPath)
-        
-        let number = array[indexPath.row]
-        cell.textLabel?.text = number
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.textLabel?.text = array[indexPath.row]
         return cell
     }
     
     //MARK: - UITableViewDelegate
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+    // Удаление строк
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            array.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+
+    // можно ли перемещать строку
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
+    //перемещение строк
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = array[sourceIndexPath.row]
+        array.remove(at: sourceIndexPath.row)
+        array.insert(item, at: destinationIndexPath.row)
+    }
+
+    // Долгое нажатие: копирование текста
+    func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        if action == #selector(copy(_:)) {
+            return true
+        }
+        return false
+    }
+
+    func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        if action == #selector(copy(_:)) {
+            let cell = tableView.cellForRow(at: indexPath)
+            let pasteBoard = UIPasteboard.general
+            pasteBoard.string = cell?.textLabel?.text
+        }
     }
 }
 
