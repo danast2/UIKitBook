@@ -27,13 +27,23 @@ class ViewController: UIViewController {
     
     
     func createTableView() {
-          let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-          tableViewController.tableView = tableView
-          tableViewController.tableView.register(
-              UITableViewCell.self, forCellReuseIdentifier: cellIdentefier)
-          tableViewController.tableView.delegate = self
-          tableViewController.tableView.dataSource = self
-      }
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableViewController.tableView = tableView
+        tableViewController.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentefier)
+        tableViewController.tableView.delegate = self
+        tableViewController.tableView.dataSource = self
+        
+        view.addSubview(tableViewController.tableView)
+
+        // Установка ограничений
+        NSLayoutConstraint.activate([
+            tableViewController.tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableViewController.tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableViewController.tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableViewController.tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
