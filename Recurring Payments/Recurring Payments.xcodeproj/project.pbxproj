@@ -68,12 +68,12 @@
 		30FF977D2D4BC35A00C109FA /* Recurring Payments */ = {
 			isa = PBXGroup;
 			children = (
+				30FF97802D4BC35A00C109FA /* SceneDelegate.swift */,
+				30FF977E2D4BC35A00C109FA /* AppDelegate.swift */,
 				30FF97A32D4BC55100C109FA /* Resources */,
 				30FF97942D4BC38900C109FA /* Views */,
 				30FF97932D4BC37E00C109FA /* ViewModels */,
 				30FF97922D4BC37300C109FA /* Models */,
-				30FF977E2D4BC35A00C109FA /* AppDelegate.swift */,
-				30FF97802D4BC35A00C109FA /* SceneDelegate.swift */,
 				30FF97962D4BC3AB00C109FA /* Notifications */,
 				30FF97952D4BC39D00C109FA /* Storage */,
 			);
