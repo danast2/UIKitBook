@@ -50,9 +50,9 @@ class SubscriptionViewModel {
                 totalCost += subscription.price / 12
             case .weekly:
                 totalCost += subscription.price * 4
-            case .halthOfMonth:
+            case .halfOfMonth:
                 totalCost += subscription.price * 2
-            case .halthOfYear:
+            case .halfOfYear:
                 totalCost += subscription.price / 6
             }
         }
