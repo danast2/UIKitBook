@@ -68,6 +68,7 @@
 		30FF977D2D4BC35A00C109FA /* Recurring Payments */ = {
 			isa = PBXGroup;
 			children = (
+				30FF978C2D4BC35A00C109FA /* Info.plist */,
 				30FF97802D4BC35A00C109FA /* SceneDelegate.swift */,
 				30FF977E2D4BC35A00C109FA /* AppDelegate.swift */,
 				30FF97A32D4BC55100C109FA /* Resources */,
@@ -128,7 +129,6 @@
 				30FF97842D4BC35A00C109FA /* Main.storyboard */,
 				30FF97892D4BC35A00C109FA /* LaunchScreen.storyboard */,
 				30FF97872D4BC35A00C109FA /* Assets.xcassets */,
-				30FF978C2D4BC35A00C109FA /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

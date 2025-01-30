@@ -3,11 +3,11 @@ import UIKit
 
 class SubscriptionListViewController: UIViewController {
 
-//setupUI - Cоздаёт интерфейс с UITableView.
-//loadSubscriptions() - Загружает подписки из SubscriptionViewModel
-//addSubscriptionTapped() - Открывает экран добавления подписки. AddSubscriptionViewController.swift
-//deleteSubscription(at:) - Удаляет подписку свайпом влево.
-//editSubscription() - редактирует подписку с помощью SubscriptionDetailViewController.swift
+//setupUI - Cоздаёт интерфейс с UITableView. +
+//loadSubscriptions() - Загружает подписки из SubscriptionViewModel +
+//addSubscriptionTapped() - Открывает экран добавления подписки. AddSubscriptionViewController.swift +
+//deleteSubscription(at:) - Удаляет подписку свайпом влево. +
+//editSubscription() - редактирует подписку с помощью SubscriptionDetailViewController.swift ???
     
     //ViewModel для управления подписками
     private var viewModel = SubscriptionViewModel()
@@ -30,7 +30,7 @@ class SubscriptionListViewController: UIViewController {
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableView.self, forCellReuseIdentifier: "SubscriptionCell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SubscriptionCell")
         view.addSubview(tableView)
         
         //добавляю кнопку Добавить
