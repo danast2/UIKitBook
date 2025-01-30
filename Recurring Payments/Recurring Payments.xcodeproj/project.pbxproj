@@ -19,6 +19,7 @@
 		30FF97A02D4BC4FB00C109FA /* AddSubscriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FF979F2D4BC4FB00C109FA /* AddSubscriptionViewController.swift */; };
 		30FF97A22D4BC51600C109FA /* SubscriptionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FF97A12D4BC51600C109FA /* SubscriptionDetailViewController.swift */; };
 		30FF97A52D4BD0CE00C109FA /* SubscriptionStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FF97A42D4BD0CE00C109FA /* SubscriptionStorage.swift */; };
+		30FF97A82D4BF8A200C109FA /* AddSubscriptionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FF97A72D4BF8A200C109FA /* AddSubscriptionDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		30FF979F2D4BC4FB00C109FA /* AddSubscriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionViewController.swift; sourceTree = "<group>"; };
 		30FF97A12D4BC51600C109FA /* SubscriptionDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDetailViewController.swift; sourceTree = "<group>"; };
 		30FF97A42D4BD0CE00C109FA /* SubscriptionStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionStorage.swift; sourceTree = "<group>"; };
+		30FF97A72D4BF8A200C109FA /* AddSubscriptionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubscriptionDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		30FF977D2D4BC35A00C109FA /* Recurring Payments */ = {
 			isa = PBXGroup;
 			children = (
+				30FF97A62D4BF88700C109FA /* Protocols */,
 				30FF978C2D4BC35A00C109FA /* Info.plist */,
 				30FF97802D4BC35A00C109FA /* SceneDelegate.swift */,
 				30FF977E2D4BC35A00C109FA /* AppDelegate.swift */,
@@ -131,6 +134,14 @@
 				30FF97872D4BC35A00C109FA /* Assets.xcassets */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		30FF97A62D4BF88700C109FA /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				30FF97A72D4BF8A200C109FA /* AddSubscriptionDelegate.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				30FF97A22D4BC51600C109FA /* SubscriptionDetailViewController.swift in Sources */,
+				30FF97A82D4BF8A200C109FA /* AddSubscriptionDelegate.swift in Sources */,
 				30FF977F2D4BC35A00C109FA /* AppDelegate.swift in Sources */,
 				30FF97982D4BC3D000C109FA /* Subscription.swift in Sources */,
 				30FF97A02D4BC4FB00C109FA /* AddSubscriptionViewController.swift in Sources */,

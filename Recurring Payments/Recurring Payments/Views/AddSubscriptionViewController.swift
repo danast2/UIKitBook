@@ -2,6 +2,11 @@ import UIKit
 
 class AddSubscriptionViewController: UIViewController {
     
+
+    
+    
+    weak var delegate: AddSubscriptionDelegate?
+    
     // ViewModel
     private let viewModel = SubscriptionViewModel()
     
@@ -91,6 +96,7 @@ class AddSubscriptionViewController: UIViewController {
         )
 
         viewModel.addSubscription(newSubscription)
+        delegate?.didAddSubscription(newSubscription)
         navigationController?.popViewController(animated: true)
     }
 

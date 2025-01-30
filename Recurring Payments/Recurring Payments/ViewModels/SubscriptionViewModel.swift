@@ -20,13 +20,11 @@ class SubscriptionViewModel {
         storage.save(subscriptions)
     }
     
-    func addSubscription(_ subscription: Subscription) -> Void {
+    func addSubscription(_ subscription: Subscription) {
         subscriptions.append(subscription)
         saveSubscriptions()
-        
-        //создание напоминания перед списанием
-        //........................................
     }
+
     
     func removeSubscription(at index: Int) -> Void {
         let subscription = subscriptions.remove(at: index)

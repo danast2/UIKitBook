@@ -1,7 +1,7 @@
 
 import UIKit
 
-class SubscriptionListViewController: UIViewController {
+class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate {
 
 //setupUI - Cоздаёт интерфейс с UITableView. +
 //loadSubscriptions() - Загружает подписки из SubscriptionViewModel +
@@ -20,6 +20,8 @@ class SubscriptionListViewController: UIViewController {
         setupUI()
         loadSubscriptions()
     }
+    
+    
     
     //MARK: - настройка UI
     private func setupUI(){
@@ -46,6 +48,7 @@ class SubscriptionListViewController: UIViewController {
     //MARK: - открытие экрана добавления подписки
     @objc private func addSubscriptionTapped(){
         let addVC = AddSubscriptionViewController()
+        addVC.delegate = self // ✅ Устанавливаем делегат
         navigationController?.pushViewController(addVC, animated: true)
     }
 }
@@ -76,4 +79,12 @@ extension SubscriptionListViewController: UITableViewDataSource, UITableViewDele
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    // MARK: - Делегат, обновляющий список подписок
+    func didAddSubscription(_ subscription: Subscription) {
+        viewModel.addSubscription(subscription) // ✅ Теперь подписка добавится правильно
+        tableView.reloadData()
+    }
+
+    
 }
