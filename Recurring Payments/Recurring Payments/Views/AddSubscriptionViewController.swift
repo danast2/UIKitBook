@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddSubscriptionViewController: UITableView {
+class AddSubscriptionViewController: UIViewController {
 
     /*
     // Only override draw() if you perform custom drawing.
