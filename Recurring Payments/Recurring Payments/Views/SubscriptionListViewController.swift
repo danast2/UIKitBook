@@ -17,6 +17,8 @@ class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.isEditing = false //  По умолчанию отключено
+        tableView.allowsSelectionDuringEditing = true //  Позволяет перемещать элементы
         setupUI()
         loadSubscriptions()
     }
@@ -39,6 +41,14 @@ class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate,
         
         //добавляю кнопку Добавить (+)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSubscriptionTapped))
+        //добавляю кнопку "изменить порядок"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Порядок", style: .plain, target: self, action: #selector(toggleEditingMode))
+    }
+    
+    //MARK: - режим редактирование подписок на главной странице
+    @objc private func toggleEditingMode() {
+        tableView.setEditing(!tableView.isEditing, animated: true)
+        navigationItem.leftBarButtonItem?.title = tableView.isEditing ? "Готово" : "Порядок"
     }
     
     //MARK: - открытие экрана добавления подписки
@@ -90,6 +100,22 @@ extension SubscriptionListViewController: UITableViewDataSource, UITableViewDele
         detailVC.delegate = self //устанавливаю делегат
         navigationController?.pushViewController(detailVC, animated: true)
     }
+    
+    //разрешаю перемещение ячеек
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //обрабатываю перемещение ячеек
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        viewModel.moveSubscription(from: sourceIndexPath.row, to: destinationIndexPath.row)
+    }
+    
+    // Разрешаем редактирование (перемещение)
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none // Отключаем стандартное удаление, чтобы было только перетаскивание
+    }
+
     
     // MARK: - AddSubscriptionDelegate Делегат, обновляющий список подписок
     func didAddSubscription(_ subscription: Subscription) {

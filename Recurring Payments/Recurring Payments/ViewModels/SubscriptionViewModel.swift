@@ -51,6 +51,13 @@ class SubscriptionViewModel {
         NotificationManager.shared.removeNotification(for: id) //удалить уведомление
     }
     
+    //метод для изменения порядка подписок, нужен, так как private(set) var subscriptions
+    func moveSubscription(from sourceIndex: Int, to destinationIndex: Int) -> Void {
+        let movedSubscriptions = subscriptions.remove(at: sourceIndex)// Удаляем подписку из старого места
+        subscriptions.insert(movedSubscriptions, at: destinationIndex) // Вставляем в новое место
+        saveSubscriptions() //сохраняем порядок подписок
+    }
+    
     //подсчет стоимости подписок за месяц
     //можно добавить рассчет на год / пол месяца / неделю и тд
     func calculateMonthlyCost() -> Double {
