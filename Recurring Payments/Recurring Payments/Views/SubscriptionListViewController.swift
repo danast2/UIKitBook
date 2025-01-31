@@ -32,7 +32,9 @@ class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate,
         tableView.frame = view.bounds
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SubscriptionCell")
+        tableView.register(SubscriptionCell.self, forCellReuseIdentifier: SubscriptionCell.identifier)
+        tableView.estimatedRowHeight = 150 //фиксируем высоту ячеек - пока не работает
+        tableView.rowHeight = UITableView.automaticDimension //(в случае чего, они сами адаптируются) - пока не работает
         view.addSubview(tableView)
         
         //добавляю кнопку Добавить (+)
@@ -63,14 +65,15 @@ extension SubscriptionListViewController: UITableViewDataSource, UITableViewDele
     
     //обязательный метод (UITableViewDataSource) - заполнение ячеек данными
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCell.identifier, for: indexPath) as? SubscriptionCell else {
+            return UITableViewCell()
+        }
+        
         let subscription = viewModel.subscriptions[indexPath.row]
-        
-        cell.textLabel?.text = "\(subscription.name) - \(subscription.price) ₽"
-        cell.detailTextLabel?.text = "Списания: \(subscription.renewalDate)"
-        
+        cell.configure(with: subscription)
         return cell
     }
+
     
     //удаление подписки свайпом влево
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {

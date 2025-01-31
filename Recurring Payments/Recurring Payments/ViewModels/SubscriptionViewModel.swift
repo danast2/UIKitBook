@@ -24,24 +24,23 @@ class SubscriptionViewModel {
         subscriptions.append(subscription)
         saveSubscriptions()
         
-        //добавления уведомления
-        //..................................
+        //добавление уведомления
+        NotificationManager.shared.scheduleNotification(for: subscription) //Запланировать уведомление
     }
 
-    
-    func removeSubscription(at index: Int) -> Void {
-        let subscription = subscriptions.remove(at: index)
-        saveSubscriptions()
-        
-        //удаление уведомления
-        //..................................
+    //тут происходит все равно удаление по id
+    func removeSubscription(at index: Int) {
+        let subscription = subscriptions[index]
+        removeSubscriptionByID(subscription.id) //  Теперь вызываем удаление по `UUID`
     }
+
     
     //обновление подписки
     func updateSubscription(_ updatedSubscription: Subscription) -> Void {
         if let index = subscriptions.firstIndex(where: {$0.id == updatedSubscription.id}){
             subscriptions[index] = updatedSubscription
             saveSubscriptions()
+            NotificationManager.shared.updateNotification(for: updatedSubscription) // Обновить уведомление
         }
     }
     
@@ -49,6 +48,7 @@ class SubscriptionViewModel {
     func removeSubscriptionByID(_ id: UUID) -> Void {
         subscriptions.removeAll {$0.id == id}
         saveSubscriptions()
+        NotificationManager.shared.removeNotification(for: id) //удалить уведомление
     }
     
     //подсчет стоимости подписок за месяц
