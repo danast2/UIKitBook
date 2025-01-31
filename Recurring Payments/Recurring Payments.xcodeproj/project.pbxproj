@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		307B57972D4CBA5A000CB0F2 /* SubscriptionDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307B57962D4CBA5A000CB0F2 /* SubscriptionDetailDelegate.swift */; };
+		307B57992D4CBF14000CB0F2 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307B57982D4CBF14000CB0F2 /* NotificationManager.swift */; };
 		30FF977F2D4BC35A00C109FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FF977E2D4BC35A00C109FA /* AppDelegate.swift */; };
 		30FF97812D4BC35A00C109FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FF97802D4BC35A00C109FA /* SceneDelegate.swift */; };
 		30FF97862D4BC35A00C109FA /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 30FF97852D4BC35A00C109FA /* Base */; };
@@ -25,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		307B57962D4CBA5A000CB0F2 /* SubscriptionDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDetailDelegate.swift; sourceTree = "<group>"; };
+		307B57982D4CBF14000CB0F2 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		30FF977B2D4BC35A00C109FA /* Recurring Payments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recurring Payments.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30FF977E2D4BC35A00C109FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30FF97802D4BC35A00C109FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 		30FF97962D4BC3AB00C109FA /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				307B57982D4CBF14000CB0F2 /* NotificationManager.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 				30FF97982D4BC3D000C109FA /* Subscription.swift in Sources */,
 				307B57972D4CBA5A000CB0F2 /* SubscriptionDetailDelegate.swift in Sources */,
 				30FF97A02D4BC4FB00C109FA /* AddSubscriptionViewController.swift in Sources */,
+				307B57992D4CBF14000CB0F2 /* NotificationManager.swift in Sources */,
 				30FF979C2D4BC40F00C109FA /* SubscriptionViewModel.swift in Sources */,
 				30FF979A2D4BC3E100C109FA /* BillingCycle.swift in Sources */,
 				30FF979E2D4BC4CB00C109FA /* SubscriptionListViewController.swift in Sources */,
