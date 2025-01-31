@@ -1,7 +1,7 @@
 
 import UIKit
 
-class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate {
+class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate, SubscriptionDetailDelegate {
 
 //setupUI - Cоздаёт интерфейс с UITableView. +
 //loadSubscriptions() - Загружает подписки из SubscriptionViewModel +
@@ -35,33 +35,33 @@ class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "SubscriptionCell")
         view.addSubview(tableView)
         
-        //добавляю кнопку Добавить
+        //добавляю кнопку Добавить (+)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSubscriptionTapped))
-    }
-    
-    //MARK: - загрузка подписок
-    private func loadSubscriptions(){
-        viewModel.loadSubscription()
-        tableView.reloadData() //MARK: - ?
     }
     
     //MARK: - открытие экрана добавления подписки
     @objc private func addSubscriptionTapped(){
         let addVC = AddSubscriptionViewController()
-        addVC.delegate = self // ✅ Устанавливаем делегат
+        addVC.delegate = self //  Устанавливаем делегат для AddSubscriptionViewController
         navigationController?.pushViewController(addVC, animated: true)
     }
+    
+    //MARK: - загрузка подписок
+    private func loadSubscriptions(){
+        viewModel.loadSubscription()
+    }
+    
 }
 
 //MARK: - UITableView DataSource & Delegate
 extension SubscriptionListViewController: UITableViewDataSource, UITableViewDelegate{
     
-    //обязательный метод - кол-во строк
+    //обязательный метод (UITableViewDataSource) - кол-во строк
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.subscriptions.count
     }
     
-    //обязательный метод - заполнение ячеек данными
+    //обязательный метод (UITableViewDataSource) - заполнение ячеек данными
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubscriptionCell", for: indexPath)
         let subscription = viewModel.subscriptions[indexPath.row]
@@ -80,11 +80,29 @@ extension SubscriptionListViewController: UITableViewDataSource, UITableViewDele
         }
     }
     
-    // MARK: - Делегат, обновляющий список подписок
+    //экран изменения значений подписки
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedSubscription = viewModel.subscriptions[indexPath.row]
+        let detailVC = SubscriptionDetailViewController(subscription: selectedSubscription)
+        detailVC.delegate = self //устанавливаю делегат
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    // MARK: - AddSubscriptionDelegate Делегат, обновляющий список подписок
     func didAddSubscription(_ subscription: Subscription) {
-        viewModel.addSubscription(subscription) // ✅ Теперь подписка добавится правильно
+        viewModel.addSubscription(subscription) 
         tableView.reloadData()
     }
-
+    
+    //MARK: - SubscriptionDetailDelegate
+    func didDeleteSubscription(_ subscriptionID: UUID) -> Void {
+        viewModel.removeSubscriptionByID(subscriptionID) //удаляем подписку из viewModel
+        tableView.reloadData() // обновляем таблицу
+    }
+    
+    func didUpdateSubscription(_ subscription: Subscription) -> Void {
+        viewModel.updateSubscription(subscription) // обновляем подписку в viewModel
+        tableView.reloadData() // обновляем таблицу
+    }
     
 }

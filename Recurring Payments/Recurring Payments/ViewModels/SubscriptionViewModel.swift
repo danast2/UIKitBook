@@ -23,6 +23,9 @@ class SubscriptionViewModel {
     func addSubscription(_ subscription: Subscription) {
         subscriptions.append(subscription)
         saveSubscriptions()
+        
+        //добавления уведомления
+        //..................................
     }
 
     
@@ -34,6 +37,19 @@ class SubscriptionViewModel {
         //..................................
     }
     
+    //обновление подписки
+    func updateSubscription(_ updatedSubscription: Subscription) -> Void {
+        if let index = subscriptions.firstIndex(where: {$0.id == updatedSubscription.id}){
+            subscriptions[index] = updatedSubscription
+            saveSubscriptions()
+        }
+    }
+    
+    //удаление подписки по id
+    func removeSubscriptionByID(_ id: UUID) -> Void {
+        subscriptions.removeAll {$0.id == id}
+        saveSubscriptions()
+    }
     
     //подсчет стоимости подписок за месяц
     //можно добавить рассчет на год / пол месяца / неделю и тд
