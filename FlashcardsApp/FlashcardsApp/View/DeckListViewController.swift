@@ -1,9 +1,4 @@
-//
-//  DeckListViewController.swift
-//  FlashcardsApp
-//
-//  Created by Даниил Асташов on 01.02.2025.
-//
+
 
 import UIKit
 
@@ -23,6 +18,7 @@ class DeckListViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDeck))
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DeckCell")
         view.addSubview(tableView)
         
@@ -54,7 +50,7 @@ class DeckListViewController: UIViewController {
 }
 
 
-extension DeckListViewController: UITableViewDataSource {
+extension DeckListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.decks.count
     }
@@ -64,6 +60,21 @@ extension DeckListViewController: UITableViewDataSource {
         cell.textLabel?.text = viewModel.decks[indexPath.row].name
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedDeck = viewModel.decks[indexPath.row]
+        let deckDetailVM = DeckDetailViewModel(deck: selectedDeck)
+        
+        //обновляем список колод при изменении карточек
+        deckDetailVM.onDeckUpdated = { updatedDeck in
+            self.viewModel.decks[indexPath.row] = updatedDeck
+            self.tableView.reloadData() //обновляем список колод
+        }
+        
+        let detailVC = DeckDetailViewController(viewModel: deckDetailVM)
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+
     
     
 }
