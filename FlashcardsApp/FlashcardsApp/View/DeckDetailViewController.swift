@@ -20,9 +20,26 @@ class DeckDetailViewController: UIViewController {
         setupUI()
     }
     
+    
+    @objc private func startTraining() {
+        let trainingVM = TrainingViewModel(deck: viewModel.deck)
+        let trainingVC = TrainingViewController(viewModel: trainingVM)
+        navigationController?.pushViewController(trainingVC, animated: true)
+    }
+    
+    
     private func setupUI(){
         title = viewModel.deck.name
         view.backgroundColor = .white
+        
+        //включаем стандартную кнопку "назад"
+        navigationItem.hidesBackButton = false
+        
+        // Переносим "Тренировку" на правую сторону
+        navigationItem.rightBarButtonItems = [
+           UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCard)),
+           UIBarButtonItem(title: "Тренировка", style: .plain, target: self, action: #selector(startTraining))
+        ]
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addCard))
         

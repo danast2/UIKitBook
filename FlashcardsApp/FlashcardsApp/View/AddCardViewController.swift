@@ -26,10 +26,10 @@ class AddCardViewController: UIViewController {
         title = "Новая карточка"
         view.backgroundColor = .white
 
-        frontTextField.placeholder = "Первая сторона"
+        frontTextField.placeholder = "Слово"
         frontTextField.borderStyle = .roundedRect
 
-        backTextField.placeholder = "Вторая сторона"
+        backTextField.placeholder = "Перевод / Описание"
         backTextField.borderStyle = .roundedRect
 
         saveButton.setTitle("Сохранить", for: .normal)
