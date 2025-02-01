@@ -25,11 +25,24 @@
 		30FF97A82D4BF8A200C109FA /* AddSubscriptionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30FF97A72D4BF8A200C109FA /* AddSubscriptionDelegate.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		307B57A22D4D06CC000CB0F2 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		307B57962D4CBA5A000CB0F2 /* SubscriptionDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionDetailDelegate.swift; sourceTree = "<group>"; };
 		307B57982D4CBF14000CB0F2 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		307B579A2D4CE83B000CB0F2 /* SubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
-		30FF977B2D4BC35A00C109FA /* Recurring Payments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Recurring Payments.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		30CA73CD2D4D2AB30074B007 /* Recurring Payments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = "Recurring Payments.app"; path = "/Users/danast/UIKitBook/Recurring Payments/build/Debug-iphoneos/Recurring Payments.app"; sourceTree = "<absolute>"; };
 		30FF977E2D4BC35A00C109FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30FF97802D4BC35A00C109FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		30FF97852D4BC35A00C109FA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -61,16 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				30FF977D2D4BC35A00C109FA /* Recurring Payments */,
-				30FF977C2D4BC35A00C109FA /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		30FF977C2D4BC35A00C109FA /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				30FF977B2D4BC35A00C109FA /* Recurring Payments.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		30FF977D2D4BC35A00C109FA /* Recurring Payments */ = {
@@ -163,14 +167,17 @@
 				30FF97772D4BC35900C109FA /* Sources */,
 				30FF97782D4BC35900C109FA /* Frameworks */,
 				30FF97792D4BC35900C109FA /* Resources */,
+				307B57A22D4D06CC000CB0F2 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Recurring Payments";
+			packageProductDependencies = (
+			);
 			productName = "Recurring Payments";
-			productReference = 30FF977B2D4BC35A00C109FA /* Recurring Payments.app */;
+			productReference = 30CA73CD2D4D2AB30074B007 /* Recurring Payments.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -197,7 +204,9 @@
 				Base,
 			);
 			mainGroup = 30FF97722D4BC35900C109FA;
-			productRefGroup = 30FF977C2D4BC35A00C109FA /* Products */;
+			packageReferences = (
+			);
+			productRefGroup = 30FF97722D4BC35900C109FA;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -386,6 +395,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G9Q236HNN8;
@@ -403,6 +413,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daniil.dementyev.Recurring-Payments";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -414,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G9Q236HNN8;
@@ -431,6 +443,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.daniil.dementyev.Recurring-Payments";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

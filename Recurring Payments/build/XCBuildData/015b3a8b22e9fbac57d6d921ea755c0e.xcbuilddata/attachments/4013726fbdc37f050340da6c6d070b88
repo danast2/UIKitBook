@@ -1,0 +1,80 @@
+{
+  "" : {
+    "const-values" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Recurring Payments-master.swiftconstvalues",
+    "dependencies" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Recurring Payments-master.d",
+    "diagnostics" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Recurring Payments-master.dia",
+    "emit-module-dependencies" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Recurring Payments-master-emit-module.d",
+    "emit-module-diagnostics" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Recurring Payments-master-emit-module.dia",
+    "swift-dependencies" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Recurring Payments-master.swiftdeps"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/AppDelegate.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AppDelegate.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AppDelegate.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AppDelegate.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Models/BillingCycle.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/BillingCycle.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/BillingCycle.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/BillingCycle.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Models/Subscription.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Subscription.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Subscription.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/Subscription.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Notifications/NotificationManager.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/NotificationManager.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/NotificationManager.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/NotificationManager.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Protocols/AddSubscriptionDelegate.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AddSubscriptionDelegate.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AddSubscriptionDelegate.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AddSubscriptionDelegate.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Protocols/SubscriptionDetailDelegate.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionDetailDelegate.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionDetailDelegate.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionDetailDelegate.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/SceneDelegate.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SceneDelegate.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SceneDelegate.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SceneDelegate.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Storage/SubscriptionStorage.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionStorage.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionStorage.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionStorage.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/ViewModels/SubscriptionViewModel.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionViewModel.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionViewModel.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionViewModel.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Views/AddSubscriptionViewController.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AddSubscriptionViewController.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AddSubscriptionViewController.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/AddSubscriptionViewController.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Views/SubscriptionCell.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionCell.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionCell.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionCell.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Views/SubscriptionDetailViewController.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionDetailViewController.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionDetailViewController.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionDetailViewController.o"
+  },
+  "/Users/danast/UIKitBook/Recurring Payments/Recurring Payments/Views/SubscriptionListViewController.swift" : {
+    "index-unit-output-path" : "/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionListViewController.o",
+    "llvm-bc" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionListViewController.bc",
+    "object" : "/Users/danast/UIKitBook/Recurring Payments/build/Recurring Payments.build/Release-iphoneos/Recurring Payments.build/Objects-normal/arm64/SubscriptionListViewController.o"
+  }
+}

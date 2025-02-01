@@ -59,6 +59,7 @@ class SubscriptionDetailViewController: UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        setupTapGesture()
         setupUI()
         loadSubscriptionData()
     }
@@ -77,6 +78,16 @@ class SubscriptionDetailViewController: UIViewController {
                                      stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
                                      stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
                                  ])
+    }
+    
+    private func setupTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc private func dismissKeyboard(){
+        view.endEditing(true)
     }
     
     

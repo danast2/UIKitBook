@@ -1,0 +1,14 @@
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Views/SubscriptionDetailViewController.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Protocols/AddSubscriptionDelegate.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/AppDelegate.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Models/Subscription.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Protocols/SubscriptionDetailDelegate.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Views/AddSubscriptionViewController.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Views/SubscriptionCell.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Notifications/NotificationManager.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/ViewModels/SubscriptionViewModel.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Models/BillingCycle.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Views/SubscriptionListViewController.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/Storage/SubscriptionStorage.swift
+/Users/danast/UIKitBook/Recurring\ Payments/Recurring\ Payments/SceneDelegate.swift
+/Users/danast/UIKitBook/Recurring\ Payments/build/Recurring\ Payments.build/Release-iphoneos/Recurring\ Payments.build/DerivedSources/GeneratedAssetSymbols.swift

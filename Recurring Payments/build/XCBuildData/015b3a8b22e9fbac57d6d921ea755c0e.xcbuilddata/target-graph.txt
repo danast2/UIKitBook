@@ -1,0 +1,2 @@
+Target dependency graph (1 target)
+Target 'Recurring Payments' in project 'Recurring Payments' (no dependencies)
