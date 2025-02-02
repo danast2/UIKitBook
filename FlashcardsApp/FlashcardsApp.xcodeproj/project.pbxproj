@@ -26,6 +26,8 @@
 		30646D9C2D4FA3A200CD9D61 /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D9B2D4FA3A200CD9D61 /* EditCardViewController.swift */; };
 		30646D9E2D4FBF7100CD9D61 /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D9D2D4FBF7100CD9D61 /* DeckCell.swift */; };
 		30646DA02D4FCA2800CD9D61 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D9F2D4FCA2800CD9D61 /* CardCell.swift */; };
+		30646DA22D4FD3AC00CD9D61 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA12D4FD3AC00CD9D61 /* ProfileCell.swift */; };
+		30646DA42D4FD88D00CD9D61 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA32D4FD88D00CD9D61 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		30646D9B2D4FA3A200CD9D61 /* EditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
 		30646D9D2D4FBF7100CD9D61 /* DeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		30646D9F2D4FCA2800CD9D61 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		30646DA12D4FD3AC00CD9D61 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		30646DA32D4FD88D00CD9D61 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +128,8 @@
 				30646D9B2D4FA3A200CD9D61 /* EditCardViewController.swift */,
 				30646D9D2D4FBF7100CD9D61 /* DeckCell.swift */,
 				30646D9F2D4FCA2800CD9D61 /* CardCell.swift */,
+				30646DA12D4FD3AC00CD9D61 /* ProfileCell.swift */,
+				30646DA32D4FD88D00CD9D61 /* ProfileViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -217,11 +223,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30646DA22D4FD3AC00CD9D61 /* ProfileCell.swift in Sources */,
 				30646D942D4E84D700CD9D61 /* DeckDetailViewController.swift in Sources */,
 				30646D862D4E660500CD9D61 /* Deck.swift in Sources */,
 				30646D922D4E698100CD9D61 /* DeckListViewController.swift in Sources */,
 				30646DA02D4FCA2800CD9D61 /* CardCell.swift in Sources */,
 				30646D8E2D4E668800CD9D61 /* DeckDetailViewModel.swift in Sources */,
+				30646DA42D4FD88D00CD9D61 /* ProfileViewController.swift in Sources */,
 				30646D9C2D4FA3A200CD9D61 /* EditCardViewController.swift in Sources */,
 				30646D902D4E669400CD9D61 /* TrainingViewModel.swift in Sources */,
 				30646D9E2D4FBF7100CD9D61 /* DeckCell.swift in Sources */,

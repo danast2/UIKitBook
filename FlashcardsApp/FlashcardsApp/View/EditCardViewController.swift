@@ -1,9 +1,3 @@
-//
-//  EditCardViewController.swift
-//  FlashcardsApp
-//
-//  Created by Даниил Асташов on 02.02.2025.
-//
 
 import UIKit
 
