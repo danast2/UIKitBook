@@ -2,7 +2,7 @@
 
 import Foundation
 
-struct Deck:Identifiable{
+struct Deck:Identifiable, Codable{
     let id: UUID
     var name: String
     var cards: [Card]
