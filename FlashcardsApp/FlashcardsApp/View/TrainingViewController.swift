@@ -1,9 +1,7 @@
-
 import UIKit
 
 class TrainingViewController: UIViewController {
     private let viewModel: TrainingViewModel
-    private let cardLabel = UILabel()
     private let showAnswerButton = UIButton()
     private let knownButton = UIButton()
     private let unknownButton = UIButton()
@@ -16,6 +14,27 @@ class TrainingViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private let cardView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        view.layer.cornerRadius = 16
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowRadius = 4
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let cardLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 24, weight: .bold)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,36 +53,46 @@ class TrainingViewController: UIViewController {
         title = "Тренировка"
         view.backgroundColor = .white
                 
-        cardLabel.font = .systemFont(ofSize: 24, weight: .bold)
-        cardLabel.textAlignment = .center
-        cardLabel.numberOfLines = 0
+        configureButton(showAnswerButton, title: "Показать ответ", backgroundColor: .systemGray)
+        configureButton(knownButton, title: "Запомнил", backgroundColor: .systemGreen)
+        configureButton(unknownButton, title: "Не запомнил", backgroundColor: .systemRed)
         
-        showAnswerButton.setTitle("Показать ответ", for: .normal)
-        showAnswerButton.backgroundColor = .systemGray
         showAnswerButton.addTarget(self, action: #selector(showAnswer), for: .touchUpInside)
-        
-        knownButton.setTitle("Запомнил", for: .normal)
-        knownButton.backgroundColor = .systemGreen
-        knownButton.isHidden = true
         knownButton.addTarget(self, action: #selector(markAsKnown), for: .touchUpInside)
-        
-        unknownButton.setTitle("Не запомнил", for: .normal)
-        unknownButton.backgroundColor = .systemRed
-        unknownButton.isHidden = true
         unknownButton.addTarget(self, action: #selector(markAsUnknown), for: .touchUpInside)
         
-        let stackView = UIStackView(arrangedSubviews: [cardLabel, showAnswerButton, knownButton, unknownButton])
+        view.addSubview(cardView)
+        cardView.addSubview(cardLabel)
+        
+        let stackView = UIStackView(arrangedSubviews: [showAnswerButton, knownButton, unknownButton])
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
+            cardView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            cardView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            cardView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
+            
+            cardLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+            cardLabel.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
+            cardLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.8),
+            
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            stackView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 20),
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
         
+    }
+    
+    private func configureButton(_ button: UIButton, title: String, backgroundColor: UIColor) {
+        button.setTitle(title, for: .normal)
+        button.backgroundColor = backgroundColor
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func updateCard() {
@@ -81,14 +110,15 @@ class TrainingViewController: UIViewController {
 
         // Обновляем карточку, если есть текущая
         if let card = viewModel.getCurrentCard() {
+            UIView.transition(with: cardView, duration: 0.3, options: .transitionFlipFromRight, animations: {
+                self.cardLabel.text = card.frontText
+            }, completion: nil)
             cardLabel.text = card.frontText
             showAnswerButton.isHidden = false
             knownButton.isHidden = true
             unknownButton.isHidden = true
         }
     }
-
-
     
     private func showNoCardsAlert() {
         let alert = UIAlertController(
@@ -101,7 +131,7 @@ class TrainingViewController: UIViewController {
         })
         present(alert, animated: true)
     }
-
+    
     private func showTrainingEndAlert() {
         let alert = UIAlertController(
             title: "Тренировка",
@@ -113,7 +143,6 @@ class TrainingViewController: UIViewController {
         })
         present(alert, animated: true)
     }
-
     
     @objc private func showAnswer() {
         guard let card = viewModel.getCurrentCard() else { return }
@@ -133,5 +162,5 @@ class TrainingViewController: UIViewController {
         viewModel.markAsUnknown()
         updateCard()
     }
-
 }
+

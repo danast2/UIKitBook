@@ -89,4 +89,17 @@ extension DeckDetailViewController: UITableViewDelegate {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let card = viewModel.getCards()[indexPath.row]
+        let editVC = EditCardViewController(viewModel: viewModel, cardIndex: indexPath.row, card: card)
+        
+        //подписываем на обновление карточки
+        editVC.onCardUpdated = { [weak self] in
+            DispatchQueue.main.async {
+                self?.tableView.reloadData() // Обновляем таблицу
+            }
+        }
+        
+        navigationController?.pushViewController(editVC, animated: true)
+    }
 }

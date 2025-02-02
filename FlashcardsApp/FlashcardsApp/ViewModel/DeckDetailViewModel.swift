@@ -53,4 +53,12 @@ class DeckDetailViewModel: ObservableObject {
         storageService.saveDecks(allDecks)
         onDeckUpdated?(deck)
     }
+    
+    func editCard(at index: Int, front: String, back: String) {
+        guard index < deck.cards.count else { return }
+        
+        deck.cards[index].frontText = front
+        deck.cards[index].backText = back
+        saveChanges() //сохраняем изменения
+    }
 }
