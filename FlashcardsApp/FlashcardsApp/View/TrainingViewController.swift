@@ -1,17 +1,12 @@
-//
-//  TrainingViewController.swift
-//  FlashcardsApp
-//
-//  Created by Даниил Асташов on 01.02.2025.
-//
 
 import UIKit
 
 class TrainingViewController: UIViewController {
     private let viewModel: TrainingViewModel
     private let cardLabel = UILabel()
-    private let rememberedButton = UIButton()
-    private let difficultButton = UIButton()
+    private let showAnswerButton = UIButton()
+    private let knownButton = UIButton()
+    private let unknownButton = UIButton()
     
     init(viewModel: TrainingViewModel) {
         self.viewModel = viewModel
@@ -25,6 +20,13 @@ class TrainingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        // Подписываемся на окончание тренировки
+        viewModel.onTrainingEnd = { [weak self] in
+            DispatchQueue.main.async {
+                self?.showTrainingEndAlert()
+            }
+        }
+        
         updateCard()
     }
     
@@ -36,20 +38,26 @@ class TrainingViewController: UIViewController {
         cardLabel.textAlignment = .center
         cardLabel.numberOfLines = 0
         
-        rememberedButton.setTitle("Запомнил", for: .normal)
-        rememberedButton.backgroundColor = .systemGreen
-        rememberedButton.addTarget(self, action: #selector(markAsRemembered), for: .touchUpInside)
+        showAnswerButton.setTitle("Показать ответ", for: .normal)
+        showAnswerButton.backgroundColor = .systemGray
+        showAnswerButton.addTarget(self, action: #selector(showAnswer), for: .touchUpInside)
         
-        difficultButton.setTitle("Сложно", for: .normal)
-        difficultButton.backgroundColor = .systemRed
-        difficultButton.addTarget(self, action: #selector(markAsDifficult), for: .touchUpInside)
+        knownButton.setTitle("Запомнил", for: .normal)
+        knownButton.backgroundColor = .systemGreen
+        knownButton.isHidden = true
+        knownButton.addTarget(self, action: #selector(markAsKnown), for: .touchUpInside)
         
-        let stackView = UIStackView(arrangedSubviews: [cardLabel, rememberedButton, difficultButton])
+        unknownButton.setTitle("Не запомнил", for: .normal)
+        unknownButton.backgroundColor = .systemRed
+        unknownButton.isHidden = true
+        unknownButton.addTarget(self, action: #selector(markAsUnknown), for: .touchUpInside)
+        
+        let stackView = UIStackView(arrangedSubviews: [cardLabel, showAnswerButton, knownButton, unknownButton])
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        
         view.addSubview(stackView)
+        
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -58,28 +66,72 @@ class TrainingViewController: UIViewController {
         
     }
     
-    private func updateCard(){
-        if let card = viewModel.currentCard {
+    private func updateCard() {
+        // Если тренировка закончилась
+        if viewModel.isTrainingFinished {
+            showTrainingEndAlert()
+            return
+        }
+
+        // Если карточек нет вообще (изначально пустая колода)
+        if !viewModel.hasTrainingCards {
+            showNoCardsAlert()
+            return
+        }
+
+        // Обновляем карточку, если есть текущая
+        if let card = viewModel.getCurrentCard() {
             cardLabel.text = card.frontText
-        } else {
-            showCompletionMessage()
+            showAnswerButton.isHidden = false
+            knownButton.isHidden = true
+            unknownButton.isHidden = true
         }
     }
+
+
     
-    @objc private func markAsRemembered() {
-        viewModel.markAsRemembered()
+    private func showNoCardsAlert() {
+        let alert = UIAlertController(
+            title: "Нет карточек",
+            message: "Добавьте хотя бы одну карточку, чтобы начать тренировку",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            self.navigationController?.popViewController(animated: true)
+        })
+        present(alert, animated: true)
+    }
+
+    private func showTrainingEndAlert() {
+        let alert = UIAlertController(
+            title: "Тренировка",
+            message: "Вы повторили все карточки",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            self.navigationController?.popViewController(animated: true)
+        })
+        present(alert, animated: true)
+    }
+
+    
+    @objc private func showAnswer() {
+        guard let card = viewModel.getCurrentCard() else { return }
+        cardLabel.text = card.backText
+        
+        showAnswerButton.isHidden = true
+        knownButton.isHidden = false
+        unknownButton.isHidden = false
+    }
+    
+    @objc private func markAsKnown() {
+        viewModel.markAsKnown()
         updateCard()
     }
     
-    @objc private func markAsDifficult() {
-        viewModel.markAsDifficult()
+    @objc private func markAsUnknown() {
+        viewModel.markAsUnknown()
         updateCard()
-    }
-    
-    private func showCompletionMessage() {
-        cardLabel.text = "Все слова повторены!"
-        rememberedButton.isHidden = true
-        difficultButton.isHidden = true
     }
 
 }

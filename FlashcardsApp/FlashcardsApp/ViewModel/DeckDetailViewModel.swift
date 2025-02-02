@@ -11,11 +11,17 @@ class DeckDetailViewModel: ObservableObject {
         self.deck = deck
     }
     
-    func addCard(front: String, back: String) -> Void {
-        let newCard = Card(id: UUID(), frontText: front, backText: back, reviewDate: Date(), difficulty: 3)
-        deck.cards.append(newCard)
-        onDeckUpdated?(deck) // уведомляем о том, что колода обновилась
-    }
+    func addCard(front: String, back: String) {
+            let newCard = Card(
+                id: UUID(),
+                frontText: front,
+                backText: back,
+                reviewDate: Date(),
+                difficulty: 3 // Средний уровень сложности по умолчанию
+            )
+            deck.cards.append(newCard)
+            onDeckUpdated?(deck) // Уведомляем о том, что колода обновилась
+        }
     
     func deleteCard(at index: Int) -> Void {
         deck.cards.remove(at: index)
@@ -24,5 +30,18 @@ class DeckDetailViewModel: ObservableObject {
     
     func getCards() -> [Card] {
         return deck.cards
+    }
+    
+    func updateCard(at index: Int, isMemorized: Bool) -> Void {
+        guard index < deck.cards.count else { return }
+        let currentCard = deck.cards[index]
+        
+        let newDifficulty = isMemorized ? max(1, currentCard.difficulty - 1) : min(5, currentCard.difficulty + 1)
+        let nextReviewDate = Calendar.current.date(byAdding: .day, value: newDifficulty, to: Date()) ?? Date()
+        
+        //обновляем карточку
+        deck.cards[index] = Card(id: currentCard.id, frontText: currentCard.frontText, backText: currentCard.backText, reviewDate: nextReviewDate, difficulty: newDifficulty)
+        
+        onDeckUpdated?(deck)
     }
 }
