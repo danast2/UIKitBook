@@ -45,7 +45,7 @@ class DeckDetailViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CardCell")
+        tableView.register(CardCell.self, forCellReuseIdentifier: CardCell.identifier)
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -75,9 +75,9 @@ extension DeckDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CardCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: CardCell.identifier, for: indexPath) as! CardCell
         let card = viewModel.getCards()[indexPath.row]
-        cell.textLabel?.text = card.frontText
+        cell.configure(with: card)
         return cell
     }
 }

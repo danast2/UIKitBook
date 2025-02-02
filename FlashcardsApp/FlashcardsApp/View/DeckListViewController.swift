@@ -17,9 +17,12 @@ class DeckListViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDeck))
         
+        
+        tableView.register(DeckCell.self, forCellReuseIdentifier: DeckCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "DeckCell")
+        tableView.separatorStyle = .none //убираем разделители
+        tableView.backgroundColor = .systemGroupedBackground
         view.addSubview(tableView)
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,8 +59,9 @@ extension DeckListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DeckCell", for: indexPath)
-        cell.textLabel?.text = viewModel.decks[indexPath.row].name
+        let cell = tableView.dequeueReusableCell(withIdentifier: DeckCell.identifier, for: indexPath) as! DeckCell
+        let deck = viewModel.decks[indexPath.row]
+        cell.configure(with: deck)
         return cell
     }
     

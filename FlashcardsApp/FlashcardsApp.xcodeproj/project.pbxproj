@@ -24,6 +24,8 @@
 		30646D982D4E9BF700CD9D61 /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D972D4E9BF700CD9D61 /* TrainingViewController.swift */; };
 		30646D9A2D4F984A00CD9D61 /* LocalStorageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D992D4F984A00CD9D61 /* LocalStorageService.swift */; };
 		30646D9C2D4FA3A200CD9D61 /* EditCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D9B2D4FA3A200CD9D61 /* EditCardViewController.swift */; };
+		30646D9E2D4FBF7100CD9D61 /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D9D2D4FBF7100CD9D61 /* DeckCell.swift */; };
+		30646DA02D4FCA2800CD9D61 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D9F2D4FCA2800CD9D61 /* CardCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		30646D972D4E9BF700CD9D61 /* TrainingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		30646D992D4F984A00CD9D61 /* LocalStorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageService.swift; sourceTree = "<group>"; };
 		30646D9B2D4FA3A200CD9D61 /* EditCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCardViewController.swift; sourceTree = "<group>"; };
+		30646D9D2D4FBF7100CD9D61 /* DeckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
+		30646D9F2D4FCA2800CD9D61 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +122,8 @@
 				30646D952D4E862000CD9D61 /* AddCardViewController.swift */,
 				30646D972D4E9BF700CD9D61 /* TrainingViewController.swift */,
 				30646D9B2D4FA3A200CD9D61 /* EditCardViewController.swift */,
+				30646D9D2D4FBF7100CD9D61 /* DeckCell.swift */,
+				30646D9F2D4FCA2800CD9D61 /* CardCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -214,9 +220,11 @@
 				30646D942D4E84D700CD9D61 /* DeckDetailViewController.swift in Sources */,
 				30646D862D4E660500CD9D61 /* Deck.swift in Sources */,
 				30646D922D4E698100CD9D61 /* DeckListViewController.swift in Sources */,
+				30646DA02D4FCA2800CD9D61 /* CardCell.swift in Sources */,
 				30646D8E2D4E668800CD9D61 /* DeckDetailViewModel.swift in Sources */,
 				30646D9C2D4FA3A200CD9D61 /* EditCardViewController.swift in Sources */,
 				30646D902D4E669400CD9D61 /* TrainingViewModel.swift in Sources */,
+				30646D9E2D4FBF7100CD9D61 /* DeckCell.swift in Sources */,
 				30646D6B2D4E654300CD9D61 /* AppDelegate.swift in Sources */,
 				30646D982D4E9BF700CD9D61 /* TrainingViewController.swift in Sources */,
 				30646D962D4E862000CD9D61 /* AddCardViewController.swift in Sources */,
