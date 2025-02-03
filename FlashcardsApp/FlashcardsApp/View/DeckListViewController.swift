@@ -79,22 +79,39 @@ extension DeckListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         if indexPath.section == 0 {
             let profileVC = ProfileViewController()
             navigationController?.pushViewController(profileVC, animated: true)
         } else {
             let selectedDeck = viewModel.decks[indexPath.row]
             let deckDetailVM = DeckDetailViewModel(deck: selectedDeck)
-            
-            //обновляем список колод при изменении карточек
+
+            // Подписка на обновление карточек внутри колоды
             deckDetailVM.onDeckUpdated = { updatedDeck in
                 self.viewModel.decks[indexPath.row] = updatedDeck
-                self.tableView.reloadData() //обновляем список колод
+                self.tableView.reloadData() // Обновляем список колод
             }
-            
+
             let detailVC = DeckDetailViewController(viewModel: deckDetailVM)
+
+            // Подписка на удаление колоды
+            detailVC.onDeckDeleted = { [weak self] in
+                guard let self = self else { return }
+                
+                DispatchQueue.main.async {
+                    // Удаляем колоду из списка
+                    self.viewModel.decks.remove(at: indexPath.row)
+                    
+                    // Обновляем UI
+                    self.tableView.reloadData()
+                    
+                    // Возвращаемся в `DeckListViewController`
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }
+
 }

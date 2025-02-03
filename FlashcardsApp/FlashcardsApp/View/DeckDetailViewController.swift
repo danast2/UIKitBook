@@ -5,6 +5,7 @@ class DeckDetailViewController: UIViewController {
     
     private let tableView = UITableView()
     private let viewModel: DeckDetailViewModel
+    var onDeckDeleted: (() -> Void)? // Callback для обновления списка колод
     
     init(viewModel: DeckDetailViewModel) {
         self.viewModel = viewModel
@@ -27,6 +28,16 @@ class DeckDetailViewController: UIViewController {
         navigationController?.pushViewController(trainingVC, animated: true)
     }
     
+    private let deleteDeckButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Удалить колоду", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemRed
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     
     private func setupUI(){
         title = viewModel.deck.name
@@ -48,12 +59,21 @@ class DeckDetailViewController: UIViewController {
         tableView.register(CardCell.self, forCellReuseIdentifier: CardCell.identifier)
         
         view.addSubview(tableView)
+        view.addSubview(deleteDeckButton) //кнопка удаления колоды
+        
+        deleteDeckButton.addTarget(self, action: #selector(deleteDeck), for: .touchUpInside)
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: deleteDeckButton.topAnchor, constant: -16),
+
+            deleteDeckButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            deleteDeckButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            deleteDeckButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            deleteDeckButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
     
@@ -67,6 +87,25 @@ class DeckDetailViewController: UIViewController {
             self.tableView.reloadData() //Перерисовываем список карточек
         }
         navigationController?.pushViewController(addCardVC, animated: true)
+    }
+    
+    @objc private func deleteDeck() {
+        let alert = UIAlertController(title: "Удалить колоду?", message: "Вы уверены, что хотите удалить всю колоду?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Удалить", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            
+            // Удаляем колоду через viewModel
+            self.viewModel.deleteDeck()
+            
+            // Сообщаем `DeckListViewController`, что колода удалена
+            self.onDeckDeleted?()
+            
+            // Возвращаемся в список колод
+            self.navigationController?.popViewController(animated: true)
+        })
+        
+        present(alert, animated: true)
     }
 }
 

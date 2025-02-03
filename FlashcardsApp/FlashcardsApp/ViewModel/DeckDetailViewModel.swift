@@ -23,7 +23,14 @@ class DeckDetailViewModel: ObservableObject {
             )
         deck.cards.append(newCard)
         saveChanges()
-        }
+    }
+    
+    func deleteDeck() {
+        var allDecks = storageService.loadDecks()
+        allDecks.removeAll() { $0.id == deck.id }
+        storageService.saveDecks(allDecks)
+    }
+  
     
     func deleteCard(withId cardId: UUID) {
         if let index = deck.cards.firstIndex(where: { $0.id == cardId }) {
