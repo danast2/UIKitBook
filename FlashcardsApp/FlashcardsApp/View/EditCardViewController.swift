@@ -5,6 +5,7 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
     private let cardIndex: Int
     private var card: Card
     var onCardUpdated: (() -> Void)? // callback для обновления
+    var onCardDeleted: (() -> Void)? // callback для удаления карточки
 
     private let frontTextField = UITextField()
     private let backTextField = UITextField()
@@ -29,6 +30,16 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
         setupUI()
         loadCardData()
     }
+    
+    private let deleteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Удалить карточку", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemRed
+        button.layer.cornerRadius = 10
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
 
     private func setupUI() {
         view.backgroundColor = .white
@@ -59,13 +70,15 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.layer.cornerRadius = 8
         saveButton.addTarget(self, action: #selector(saveCard), for: .touchUpInside)
+        
+        deleteButton.addTarget(self, action: #selector(deleteCard), for: .touchUpInside)
 
         let buttonStack = UIStackView(arrangedSubviews: [pickImageButton, removeImageButton])
         buttonStack.axis = .horizontal
         buttonStack.spacing = 10
         buttonStack.distribution = .fillEqually
 
-        let stackView = UIStackView(arrangedSubviews: [frontTextField, backTextField, imageView, buttonStack, saveButton])
+        let stackView = UIStackView(arrangedSubviews: [frontTextField, backTextField, imageView, buttonStack, saveButton, deleteButton])
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +93,8 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
             imageView.heightAnchor.constraint(equalToConstant: 150),
             pickImageButton.heightAnchor.constraint(equalToConstant: 44),
             removeImageButton.heightAnchor.constraint(equalToConstant: 44),
-            saveButton.heightAnchor.constraint(equalToConstant: 44)
+            saveButton.heightAnchor.constraint(equalToConstant: 44),
+            deleteButton.heightAnchor.constraint(equalToConstant: 44)
         ])
     }
 
@@ -132,6 +146,26 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
         onCardUpdated?()
         navigationController?.popViewController(animated: true)
     }
+    
+    @objc private func deleteCard(){
+        let alert = UIAlertController(title: "Удалить карточку?", message: "Вы уверены, что хотите удалить эту карточку?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Удалить", style: .destructive){ [weak self] _ in
+            guard let self = self else { return }
+            self.viewModel.deleteCard(withId: self.card.id) // Удаляем карточку по ID
+            self.onCardDeleted?() // Вызываем callback для обновления UI
+
+            // Вместо popViewController используем popToViewController, чтобы гарантированно остаться в DeckDetailViewController
+            if let deckDetailVC = self.navigationController?.viewControllers.first(where: { $0 is DeckDetailViewController }) {
+                self.navigationController?.popToViewController(deckDetailVC, animated: true)
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
+        })
+        present(alert, animated: true)
+    }
+
+
 
     private func showErrorAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)

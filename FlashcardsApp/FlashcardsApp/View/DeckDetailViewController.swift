@@ -87,21 +87,38 @@ extension DeckDetailViewController: UITableViewDataSource {
 extension DeckDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            viewModel.deleteCard(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let card = viewModel.getCards()[indexPath.row] // Получаем карточку
+            viewModel.deleteCard(withId: card.id) // Удаляем карточку по ID
+
+            // Обновляем данные
+            tableView.performBatchUpdates({
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }, completion: { _ in
+                self.tableView.reloadData() // Перезагружаем, чтобы индексы обновились
+            })
         }
     }
+
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let card = viewModel.getCards()[indexPath.row]
         let editVC = EditCardViewController(viewModel: viewModel, cardIndex: indexPath.row, card: card)
-        
-        //подписываем на обновление карточки
+
         editVC.onCardUpdated = { [weak self] in
             DispatchQueue.main.async {
-                self?.tableView.reloadData() // Обновляем таблицу
+                self?.tableView.reloadData()
             }
         }
-        
+
+        editVC.onCardDeleted = { [weak self] in
+            guard let self = self else { return }
+            self.viewModel.deleteCard(withId: card.id) // Теперь удаляем по ID
+            self.tableView.reloadData()
+            self.navigationController?.popViewController(animated: true)
+        }
+
         navigationController?.pushViewController(editVC, animated: true)
     }
+
+
 }

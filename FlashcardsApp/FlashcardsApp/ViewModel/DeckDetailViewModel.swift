@@ -25,10 +25,18 @@ class DeckDetailViewModel: ObservableObject {
         saveChanges()
         }
     
-    func deleteCard(at index: Int) -> Void {
-        deck.cards.remove(at: index)
-        saveChanges()
+    func deleteCard(withId cardId: UUID) {
+        if let index = deck.cards.firstIndex(where: { $0.id == cardId }) {
+            print("Удаление карточки по ID: \(cardId)")
+            deck.cards.remove(at: index)
+            saveChanges()
+        } else {
+            print("Ошибка: Карточка не найдена для удаления")
+        }
     }
+
+
+
     
     func getCards() -> [Card] {
         return deck.cards
