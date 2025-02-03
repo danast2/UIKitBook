@@ -82,4 +82,16 @@ class DeckDetailViewModel: ObservableObject {
         
         saveChanges() //сохраняем изменения
     }
+    
+    func updateCard(at index: Int, front: String, back: String, imageData: Data?) {
+        guard index < deck.cards.count else { return }
+
+        deck.cards[index].frontText = front
+        deck.cards[index].backText = back
+        deck.cards[index].imageData = imageData
+        deck.cards[index].lastUpdated = Date()
+
+        saveChanges()
+    }
+
 }

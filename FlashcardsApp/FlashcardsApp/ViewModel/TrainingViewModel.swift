@@ -31,10 +31,16 @@ class TrainingViewModel: ObservableObject {
         }
         
         trainingCards.shuffle() // Перемешиваем для разнообразия
+        // Логируем карточки
+        for card in trainingCards {
+            print("Картинка есть? \(card.imageData != nil) для \(card.frontText)")
+        }
     }
     
     func getCurrentCard() -> Card? {
-        return trainingCards.isEmpty ? nil : trainingCards[currentIndex]
+        let card = trainingCards.isEmpty ? nil : trainingCards[currentIndex]
+        print("Текущая карточка: \(String(describing: card?.frontText))") // Логируем карточку
+        return card
     }
     
     

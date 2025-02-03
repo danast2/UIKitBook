@@ -2,12 +2,14 @@ import UIKit
 
 class AddCardViewController: UIViewController {
     private let viewModel: AddCardViewModel
-    var onCardAdded: (() -> Void)? //замыкание для обновления UI
-    
+    var onCardAdded: (() -> Void)?
+
     private let frontTextField = UITextField()
     private let backTextField = UITextField()
     private let saveButton = UIButton()
-
+    private let imageView = UIImageView()
+    private let addImageButton = UIButton()
+    private var selectedImageData: Data?
 
     init(viewModel: AddCardViewModel) {
         self.viewModel = viewModel
@@ -37,7 +39,17 @@ class AddCardViewController: UIViewController {
         saveButton.backgroundColor = .systemBlue
         saveButton.addTarget(self, action: #selector(saveCard), for: .touchUpInside)
 
-        let stackView = UIStackView(arrangedSubviews: [frontTextField, backTextField, saveButton])
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .lightGray
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
+        imageView.isHidden = true
+
+        addImageButton.setTitle("Добавить фото", for: .normal)
+        addImageButton.backgroundColor = .systemGray
+        addImageButton.addTarget(self, action: #selector(selectImage), for: .touchUpInside)
+
+        let stackView = UIStackView(arrangedSubviews: [frontTextField, backTextField, addImageButton, imageView, saveButton])
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -46,7 +58,8 @@ class AddCardViewController: UIViewController {
         NSLayoutConstraint.activate([
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+            imageView.heightAnchor.constraint(equalToConstant: 150)
         ])
     }
 
@@ -57,18 +70,34 @@ class AddCardViewController: UIViewController {
             return
         }
 
-        viewModel.addCard(front: frontText, back: backText)
-        
-        // Уведомляем DeckDetailViewController, что карточка добавлена
+        viewModel.addCard(front: frontText, back: backText, imageData: selectedImageData)
+
         onCardAdded?()
-        
         navigationController?.popViewController(animated: true)
+    }
+
+    @objc private func selectImage() {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = self
+        present(picker, animated: true)
     }
 
     private func showErrorAlert(message: String) {
         let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Ок", style: .default))
         present(alert, animated: true)
+    }
+}
+
+extension AddCardViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let image = info[.originalImage] as? UIImage {
+            imageView.image = image
+            imageView.isHidden = false
+            selectedImageData = image.jpegData(compressionQuality: 0.8)
+        }
+        picker.dismiss(animated: true)
     }
 }
 

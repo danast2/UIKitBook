@@ -12,7 +12,7 @@ class AddCardViewModel: ObservableObject {
         self.deck = deck
     }
     
-    func addCard(front: String, back: String) {
+    func addCard(front: String, back: String, imageData: Data?) {
         let newCard = Card(
             id: UUID(),
             frontText: front,
@@ -20,7 +20,8 @@ class AddCardViewModel: ObservableObject {
             reviewDate: Date(),  // Устанавливаем текущую дату
             difficulty: 3,       // Средний уровень сложности по умолчанию
             createdAt: Date(),
-            lastUpdated: Date()
+            lastUpdated: Date(),
+            imageData: imageData
         )
         deck.cards.append(newCard)
         saveChanges()

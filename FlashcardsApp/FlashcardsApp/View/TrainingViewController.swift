@@ -15,6 +15,16 @@ class TrainingViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private let cardImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.cornerRadius = 8
+        imageView.clipsToBounds = true
+        imageView.isHidden = true // по умолчанию скрыто
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     private let cardView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemBackground
@@ -39,6 +49,7 @@ class TrainingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        
         // Подписываемся на окончание тренировки
         viewModel.onTrainingEnd = { [weak self] in
             DispatchQueue.main.async {
@@ -49,7 +60,7 @@ class TrainingViewController: UIViewController {
         updateCard()
     }
     
-    private func setupUI(){
+    private func setupUI() {
         title = "Тренировка"
         view.backgroundColor = .white
                 
@@ -62,7 +73,8 @@ class TrainingViewController: UIViewController {
         unknownButton.addTarget(self, action: #selector(markAsUnknown), for: .touchUpInside)
         
         view.addSubview(cardView)
-        cardView.addSubview(cardLabel)
+        cardView.addSubview(cardImageView) // Добавляем изображение
+        cardView.addSubview(cardLabel) // Добавляем текст
         
         let stackView = UIStackView(arrangedSubviews: [showAnswerButton, knownButton, unknownButton])
         stackView.axis = .vertical
@@ -74,17 +86,23 @@ class TrainingViewController: UIViewController {
             cardView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             cardView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             cardView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            cardView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3),
             
+            // Настройка изображения (если есть)
+            cardImageView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 16),
+            cardImageView.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+            cardImageView.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.8),
+            cardImageView.heightAnchor.constraint(equalToConstant: 120), // Можно менять размер
+            
+            // Настройка текста
+            cardLabel.topAnchor.constraint(equalTo: cardImageView.bottomAnchor, constant: 8),
             cardLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
-            cardLabel.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
             cardLabel.widthAnchor.constraint(equalTo: cardView.widthAnchor, multiplier: 0.8),
+            cardLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -16),
             
             stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             stackView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 20),
             stackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
-        
     }
     
     private func configureButton(_ button: UIButton, title: String, backgroundColor: UIColor) {
@@ -102,23 +120,43 @@ class TrainingViewController: UIViewController {
             return
         }
 
-        // Если карточек нет вообще (изначально пустая колода)
+        // Если карточек нет (изначально пустая колода)
         if !viewModel.hasTrainingCards {
             showNoCardsAlert()
             return
         }
 
-        // Обновляем карточку, если есть текущая
-        if let card = viewModel.getCurrentCard() {
-            UIView.transition(with: cardView, duration: 0.3, options: .transitionFlipFromRight, animations: {
-                self.cardLabel.text = card.frontText
-            }, completion: nil)
-            cardLabel.text = card.frontText
-            showAnswerButton.isHidden = false
-            knownButton.isHidden = true
-            unknownButton.isHidden = true
+        // Получаем текущую карточку
+        guard let card = viewModel.getCurrentCard() else {
+            print("Ошибка: текущая карточка не найдена")
+            return
         }
+
+        print("Текущая карточка: \(card.frontText)")
+
+        // Анимация смены карточки
+        UIView.transition(with: cardView, duration: 0.3, options: .transitionFlipFromRight, animations: {
+            self.cardLabel.text = card.frontText
+        }, completion: nil)
+
+        // **Обновляем изображение**
+        if let imageData = card.imageData, let image = UIImage(data: imageData) {
+            print("Загружено изображение для карточки: \(card.frontText)")
+            self.cardImageView.image = image
+            self.cardImageView.isHidden = false
+        } else {
+            print("Нет изображения для карточки: \(card.frontText)")
+            self.cardImageView.image = nil
+            self.cardImageView.isHidden = true
+        }
+
+        // Текст обновляется
+        cardLabel.text = card.frontText
+        showAnswerButton.isHidden = false
+        knownButton.isHidden = true
+        unknownButton.isHidden = true
     }
+
     
     private func showNoCardsAlert() {
         let alert = UIAlertController(
