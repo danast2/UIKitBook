@@ -20,7 +20,16 @@ class CardCell: UITableViewCell {
         return label
     }()
     
-    private let dateLabel: UILabel = {
+    private let createdAtLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .gray
+        label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let updatedAtLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = .gray
@@ -47,7 +56,8 @@ class CardCell: UITableViewCell {
         contentView.addSubview(containerView)
         containerView.addSubview(frontLabel)
         containerView.addSubview(backLabel)
-        containerView.addSubview(dateLabel)
+        containerView.addSubview(createdAtLabel)
+        containerView.addSubview(updatedAtLabel)
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -55,8 +65,15 @@ class CardCell: UITableViewCell {
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
 
+            createdAtLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            createdAtLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+
+            updatedAtLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
+            updatedAtLabel.topAnchor.constraint(equalTo: createdAtLabel.bottomAnchor, constant: 2),
+
             frontLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             frontLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 12),
+            frontLabel.trailingAnchor.constraint(lessThanOrEqualTo: createdAtLabel.leadingAnchor, constant: -8),
 
             backLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
             backLabel.topAnchor.constraint(equalTo: frontLabel.bottomAnchor, constant: 4),
@@ -71,7 +88,8 @@ class CardCell: UITableViewCell {
     func configure(with card: Card) {
         frontLabel.text = card.frontText
         backLabel.text = card.backText
-        dateLabel.text = "Создано: \(formatDate(card.createdAt))  |  Обновлено: \(formatDate(card.lastUpdated))"
+        createdAtLabel.text = "📅 \(formatDate(card.createdAt))"
+        updatedAtLabel.text = "🔄 \(formatDate(card.lastUpdated))"
     }
     
     private func formatDate(_ date: Date) -> String {

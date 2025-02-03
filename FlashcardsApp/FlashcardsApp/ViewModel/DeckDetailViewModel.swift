@@ -78,6 +78,8 @@ class DeckDetailViewModel: ObservableObject {
         
         deck.cards[index].frontText = front
         deck.cards[index].backText = back
+        deck.cards[index].lastUpdated = Date() //фиксируем новое время обновления
+        
         saveChanges() //сохраняем изменения
     }
 }
