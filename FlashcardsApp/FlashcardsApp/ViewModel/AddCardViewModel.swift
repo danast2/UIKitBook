@@ -12,23 +12,22 @@ class AddCardViewModel: ObservableObject {
         self.deck = deck
     }
     
-    func addCard(front: String, back: String, image: UIImage?) {
-        let imagePath = image != nil ? storageService.saveImage(image!) : nil
-
+    func addCard(front: String, back: String, imagePath: String?) {
         let newCard = Card(
             id: UUID(),
             frontText: front,
             backText: back,
             reviewDate: Date(),
-            difficulty: 3, // Средний уровень сложности по умолчанию
-            createdAt: Date(), // Устанавливаем дату создания
-            lastUpdated: Date(), // Устанавливаем дату последнего обновления
-            imagePath: imagePath // Используем путь вместо imageData
+            difficulty: 3,
+            createdAt: Date(),
+            lastUpdated: Date(),
+            imagePath: imagePath // Передаем путь вместо UIImage
         )
         
         deck.cards.append(newCard)
         saveChanges()
     }
+
 
     
     private func saveChanges() {

@@ -29,6 +29,8 @@
 		30646DA22D4FD3AC00CD9D61 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA12D4FD3AC00CD9D61 /* ProfileCell.swift */; };
 		30646DA42D4FD88D00CD9D61 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA32D4FD88D00CD9D61 /* ProfileViewController.swift */; };
 		30646DA62D4FE22200CD9D61 /* AddCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA52D4FE22200CD9D61 /* AddCardViewModel.swift */; };
+		30646DA82D50FB2500CD9D61 /* UnsplashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA72D50FB2500CD9D61 /* UnsplashService.swift */; };
+		30646DAA2D51199E00CD9D61 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30646DA92D51199E00CD9D61 /* Secrets.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +58,8 @@
 		30646DA12D4FD3AC00CD9D61 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		30646DA32D4FD88D00CD9D61 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		30646DA52D4FE22200CD9D61 /* AddCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewModel.swift; sourceTree = "<group>"; };
+		30646DA72D50FB2500CD9D61 /* UnsplashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashService.swift; sourceTree = "<group>"; };
+		30646DA92D51199E00CD9D61 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				30646D992D4F984A00CD9D61 /* LocalStorageService.swift */,
+				30646DA72D50FB2500CD9D61 /* UnsplashService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -151,6 +156,7 @@
 				30646D732D4E654400CD9D61 /* Assets.xcassets */,
 				30646D702D4E654300CD9D61 /* Main.storyboard */,
 				30646D752D4E654400CD9D61 /* LaunchScreen.storyboard */,
+				30646DA92D51199E00CD9D61 /* Secrets.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -213,6 +219,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30646DAA2D51199E00CD9D61 /* Secrets.plist in Resources */,
 				30646D742D4E654400CD9D61 /* Assets.xcassets in Resources */,
 				30646D772D4E654400CD9D61 /* Base in Resources */,
 				30646D722D4E654300CD9D61 /* Base in Resources */,
@@ -245,6 +252,7 @@
 				30646D9A2D4F984A00CD9D61 /* LocalStorageService.swift in Sources */,
 				30646D842D4E65F500CD9D61 /* Card.swift in Sources */,
 				30646D6D2D4E654300CD9D61 /* SceneDelegate.swift in Sources */,
+				30646DA82D50FB2500CD9D61 /* UnsplashService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

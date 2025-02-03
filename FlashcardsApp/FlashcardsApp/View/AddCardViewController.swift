@@ -3,13 +3,15 @@ import UIKit
 class AddCardViewController: UIViewController {
     private let viewModel: AddCardViewModel
     var onCardAdded: (() -> Void)?
+    private let unsplashService = UnsplashService() // Сервис для получения URL картинки
 
     private let frontTextField = UITextField()
     private let backTextField = UITextField()
     private let saveButton = UIButton()
     private let imageView = UIImageView()
     private let addImageButton = UIButton()
-    private var selectedImageData: Data?
+    private let generateImageButton = UIButton()
+    private var selectedImagePath: String? // Сохраняем путь к файлу с изображением
 
     init(viewModel: AddCardViewModel) {
         self.viewModel = viewModel
@@ -24,14 +26,12 @@ class AddCardViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         let selectedTheme = UserDefaults.standard.integer(forKey: "selectedTheme")
         overrideUserInterfaceStyle = selectedTheme == 0 ? .light : .dark
     }
-
 
     private func setupUI() {
         title = "Новая карточка"
@@ -57,7 +57,22 @@ class AddCardViewController: UIViewController {
         addImageButton.backgroundColor = .systemGray
         addImageButton.addTarget(self, action: #selector(selectImage), for: .touchUpInside)
 
-        let stackView = UIStackView(arrangedSubviews: [frontTextField, backTextField, addImageButton, imageView, saveButton])
+        generateImageButton.setTitle("Сгенерировать изображение", for: .normal)
+        generateImageButton.backgroundColor = .systemBlue
+        generateImageButton.setTitleColor(.white, for: .normal)
+        generateImageButton.layer.cornerRadius = 10
+        generateImageButton.addTarget(self, action: #selector(generateImage), for: .touchUpInside)
+
+        let stackView = UIStackView(
+            arrangedSubviews: [
+                frontTextField,
+                backTextField,
+                addImageButton,
+                generateImageButton,
+                imageView,
+                saveButton
+            ]
+        )
         stackView.axis = .vertical
         stackView.spacing = 16
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,15 +86,66 @@ class AddCardViewController: UIViewController {
         ])
     }
 
+    @objc private func generateImage() {
+        guard let word = frontTextField.text, !word.isEmpty else {
+            showErrorAlert(message: "Введите слово перед генерацией изображения!")
+            return
+        }
+
+        // 1. Запрашиваем URL изображения с Unsplash
+        unsplashService.fetchImage(for: word) { [weak self] imageURLString in
+            guard let self = self else { return }
+            guard
+                let urlString = imageURLString,
+                let url = URL(string: urlString)
+            else {
+                DispatchQueue.main.async {
+                    self.showErrorAlert(message: "Не удалось получить URL изображения")
+                }
+                return
+            }
+
+            // 2. Скачиваем картинку по полученному URL
+            URLSession.shared.dataTask(with: url) { data, response, error in
+                guard
+                    let data = data,
+                    error == nil,
+                    let downloadedImage = UIImage(data: data)
+                else {
+                    DispatchQueue.main.async {
+                        self.showErrorAlert(message: "Не удалось скачать изображение")
+                    }
+                    return
+                }
+
+                // 3. Сохраняем изображение в локальное хранилище
+                DispatchQueue.main.async {
+                    self.imageView.isHidden = false
+                    if let imagePath = LocalStorageService().saveImage(downloadedImage) {
+                        self.selectedImagePath = imagePath
+                        self.imageView.image = downloadedImage
+                    } else {
+                        self.showErrorAlert(message: "Ошибка сохранения изображения")
+                    }
+                }
+            }.resume()
+        }
+    }
+
     @objc private func saveCard() {
-        guard let frontText = frontTextField.text, !frontText.isEmpty,
-              let backText = backTextField.text, !backText.isEmpty else {
+        guard
+            let frontText = frontTextField.text, !frontText.isEmpty,
+            let backText = backTextField.text, !backText.isEmpty
+        else {
             showErrorAlert(message: "Заполните оба поля!")
             return
         }
 
-        viewModel.addCard(front: frontText, back: backText, image: imageView.image)
-
+        viewModel.addCard(
+            front: frontText,
+            back: backText,
+            imagePath: selectedImagePath
+        ) // Передаём путь к изображению
         onCardAdded?()
         navigationController?.popViewController(animated: true)
     }
@@ -92,18 +158,26 @@ class AddCardViewController: UIViewController {
     }
 
     private func showErrorAlert(message: String) {
-        let alert = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: "Ошибка",
+            message: message,
+            preferredStyle: .alert
+        )
         alert.addAction(UIAlertAction(title: "Ок", style: .default))
         present(alert, animated: true)
     }
 }
 
+// MARK: - UIImagePickerControllerDelegate, UINavigationControllerDelegate
 extension AddCardViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
         if let image = info[.originalImage] as? UIImage {
             imageView.image = image
             imageView.isHidden = false
-            selectedImageData = image.jpegData(compressionQuality: 0.8)
+            selectedImagePath = LocalStorageService().saveImage(image)
         }
         picker.dismiss(animated: true)
     }
