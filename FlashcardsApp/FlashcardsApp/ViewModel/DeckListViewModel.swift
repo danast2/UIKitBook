@@ -16,10 +16,15 @@ class DeckListViewModel: ObservableObject {
         saveDecks()
     }
     
-    func deleteDecks(at index: Int){
+    func deleteDecks(at index: Int) {
+        let deckId = decks[index].id
         decks.remove(at: index)
-        saveDecks()
+
+        var savedDecks = storageServices.loadDecks()
+        savedDecks.removeAll { $0.id == deckId } // Удаление из сохранённых данных
+        storageServices.saveDecks(savedDecks)
     }
+
     
     private func saveDecks() {
         storageServices.saveDecks(decks)

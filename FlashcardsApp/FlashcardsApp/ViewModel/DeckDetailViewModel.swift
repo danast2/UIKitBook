@@ -6,7 +6,8 @@ class DeckDetailViewModel: ObservableObject {
     @Published var deck: Deck
     var onDeckUpdated: ((Deck) -> Void)? // замыкание для уведомления
     private let storageService = LocalStorageService() // Добавили сервис хранения
-    
+    var onDeckDeleted: (() -> Void)?
+
     init(deck: Deck) {
         self.deck = deck
     }
@@ -27,9 +28,14 @@ class DeckDetailViewModel: ObservableObject {
     
     func deleteDeck() {
         var allDecks = storageService.loadDecks()
-        allDecks.removeAll() { $0.id == deck.id }
+        allDecks.removeAll { $0.id == deck.id }
         storageService.saveDecks(allDecks)
+        
+        DispatchQueue.main.async {
+            self.onDeckDeleted?()  // Сообщаем UI об удалении
+        }
     }
+
   
     
     func deleteCard(withId cardId: UUID) {
@@ -37,6 +43,7 @@ class DeckDetailViewModel: ObservableObject {
             print("Удаление карточки по ID: \(cardId)")
             deck.cards.remove(at: index)
             saveChanges()
+            updateDeck()
         } else {
             print("Ошибка: Карточка не найдена для удаления")
         }

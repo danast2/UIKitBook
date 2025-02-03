@@ -4,6 +4,8 @@ class TrainingViewModel: ObservableObject {
     private var deck: Deck
     private var currentIndex: Int = 0
     private var trainingCards: [Card] = []
+    private let storageService = LocalStorageService()
+
     
     var onTrainingEnd: (() -> Void)?
     var isTrainingFinished: Bool = false
@@ -37,6 +39,15 @@ class TrainingViewModel: ObservableObject {
         }
     }
     
+    private func saveChanges() {
+        var allDecks = storageService.loadDecks()
+        if let index = allDecks.firstIndex(where: { $0.id == deck.id }) {
+            allDecks[index] = deck
+        }
+        storageService.saveDecks(allDecks)
+    }
+
+    
     func getCurrentCard() -> Card? {
         let card = trainingCards.isEmpty ? nil : trainingCards[currentIndex]
         print("Текущая карточка: \(String(describing: card?.frontText))") // Логируем карточку
@@ -62,22 +73,23 @@ class TrainingViewModel: ObservableObject {
     
     private func updateCard(_ card: Card, remembered: Bool) {
         guard let index = deck.cards.firstIndex(where: { $0.id == card.id }) else { return }
-        
+
         let newDifficulty = remembered ? max(1, card.difficulty - 1) : min(5, card.difficulty + 1)
         let nextReviewDate = Calendar.current.date(byAdding: .day, value: newDifficulty, to: Date()) ?? Date()
 
-        // Обновляем карточку в массиве
-        // Обновляем карточку в массиве с учетом новых полей
-            deck.cards[index] = Card(
+        deck.cards[index] = Card(
             id: card.id,
             frontText: card.frontText,
             backText: card.backText,
             reviewDate: nextReviewDate,
             difficulty: newDifficulty,
-            createdAt: card.createdAt,  // Оставляем дату создания неизменной
-            lastUpdated: Date() // Обновляем дату последнего изменения
+            createdAt: card.createdAt,
+            lastUpdated: Date()
         )
+
+        saveChanges() // <-- Сохранение после обновления
     }
+
     
     func nextCard() {
         if currentIndex < trainingCards.count - 1 {
