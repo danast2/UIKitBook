@@ -28,6 +28,7 @@
 		30646DA02D4FCA2800CD9D61 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D9F2D4FCA2800CD9D61 /* CardCell.swift */; };
 		30646DA22D4FD3AC00CD9D61 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA12D4FD3AC00CD9D61 /* ProfileCell.swift */; };
 		30646DA42D4FD88D00CD9D61 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA32D4FD88D00CD9D61 /* ProfileViewController.swift */; };
+		30646DA62D4FE22200CD9D61 /* AddCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA52D4FE22200CD9D61 /* AddCardViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		30646D9F2D4FCA2800CD9D61 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		30646DA12D4FD3AC00CD9D61 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		30646DA32D4FD88D00CD9D61 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		30646DA52D4FE22200CD9D61 /* AddCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				30646D8B2D4E667900CD9D61 /* DeckListViewModel.swift */,
 				30646D8D2D4E668800CD9D61 /* DeckDetailViewModel.swift */,
 				30646D8F2D4E669400CD9D61 /* TrainingViewModel.swift */,
+				30646DA52D4FE22200CD9D61 /* AddCardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 				30646D9C2D4FA3A200CD9D61 /* EditCardViewController.swift in Sources */,
 				30646D902D4E669400CD9D61 /* TrainingViewModel.swift in Sources */,
 				30646D9E2D4FBF7100CD9D61 /* DeckCell.swift in Sources */,
+				30646DA62D4FE22200CD9D61 /* AddCardViewModel.swift in Sources */,
 				30646D6B2D4E654300CD9D61 /* AppDelegate.swift in Sources */,
 				30646D982D4E9BF700CD9D61 /* TrainingViewController.swift in Sources */,
 				30646D962D4E862000CD9D61 /* AddCardViewController.swift in Sources */,

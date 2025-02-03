@@ -61,7 +61,16 @@ class TrainingViewModel: ObservableObject {
         let nextReviewDate = Calendar.current.date(byAdding: .day, value: newDifficulty, to: Date()) ?? Date()
 
         // Обновляем карточку в массиве
-        deck.cards[index] = Card(id: card.id, frontText: card.frontText, backText: card.backText, reviewDate: nextReviewDate, difficulty: newDifficulty)
+        // Обновляем карточку в массиве с учетом новых полей
+            deck.cards[index] = Card(
+            id: card.id,
+            frontText: card.frontText,
+            backText: card.backText,
+            reviewDate: nextReviewDate,
+            difficulty: newDifficulty,
+            createdAt: card.createdAt,  // Оставляем дату создания неизменной
+            lastUpdated: Date() // Обновляем дату последнего изменения
+        )
     }
     
     func nextCard() {

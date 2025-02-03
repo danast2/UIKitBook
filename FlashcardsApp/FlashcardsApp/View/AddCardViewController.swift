@@ -1,14 +1,15 @@
 import UIKit
 
 class AddCardViewController: UIViewController {
-    private let viewModel: DeckDetailViewModel
+    private let viewModel: AddCardViewModel
     var onCardAdded: (() -> Void)? //замыкание для обновления UI
     
     private let frontTextField = UITextField()
     private let backTextField = UITextField()
     private let saveButton = UIButton()
 
-    init(viewModel: DeckDetailViewModel) {
+
+    init(viewModel: AddCardViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

@@ -19,6 +19,15 @@ class CardCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    private let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .gray
+        label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
 
     private let containerView: UIView = {
         let view = UIView()
@@ -38,6 +47,7 @@ class CardCell: UITableViewCell {
         contentView.addSubview(containerView)
         containerView.addSubview(frontLabel)
         containerView.addSubview(backLabel)
+        containerView.addSubview(dateLabel)
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -61,6 +71,13 @@ class CardCell: UITableViewCell {
     func configure(with card: Card) {
         frontLabel.text = card.frontText
         backLabel.text = card.backText
+        dateLabel.text = "Создано: \(formatDate(card.createdAt))  |  Обновлено: \(formatDate(card.lastUpdated))"
+    }
+    
+    private func formatDate(_ date: Date) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy HH:mm"
+        return formatter.string(from: date)
     }
 }
 

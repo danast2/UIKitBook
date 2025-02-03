@@ -58,10 +58,12 @@ class DeckDetailViewController: UIViewController {
     }
     
     @objc private func addCard(){
-        let addCardVC = AddCardViewController(viewModel: viewModel)
+        let addCardVM = AddCardViewModel(deck: viewModel.deck) //передаем колоду
+        let addCardVC = AddCardViewController(viewModel: addCardVM)
         
         //передаем замыкание для обновления UI после возврата
         addCardVC.onCardAdded = {
+            self.viewModel.updateDeck()
             self.tableView.reloadData() //Перерисовываем список карточек
         }
         navigationController?.pushViewController(addCardVC, animated: true)

@@ -13,12 +13,14 @@ class DeckDetailViewModel: ObservableObject {
     
     func addCard(front: String, back: String) {
         let newCard = Card(
-            id: UUID(),
-            frontText: front,
-            backText: back,
-            reviewDate: Date(),
-            difficulty: 3 // Средний уровень сложности по умолчанию
-        )
+                id: UUID(),
+                frontText: front,
+                backText: back,
+                reviewDate: Date(),
+                difficulty: 3, // Средний уровень сложности по умолчанию
+                createdAt: Date(), // Устанавливаем дату создания
+                lastUpdated: Date() // Устанавливаем дату последнего обновления
+            )
         deck.cards.append(newCard)
         saveChanges()
         }
@@ -40,9 +42,26 @@ class DeckDetailViewModel: ObservableObject {
         let nextReviewDate = Calendar.current.date(byAdding: .day, value: newDifficulty, to: Date()) ?? Date()
         
         //обновляем карточку
-        deck.cards[index] = Card(id: currentCard.id, frontText: currentCard.frontText, backText: currentCard.backText, reviewDate: nextReviewDate, difficulty: newDifficulty)
+        // Обновляем карточку с новыми параметрами
+        deck.cards[index] = Card(
+            id: currentCard.id,
+            frontText: currentCard.frontText,
+            backText: currentCard.backText,
+            reviewDate: nextReviewDate,
+            difficulty: newDifficulty,
+            createdAt: currentCard.createdAt, // Оставляем дату создания неизменной
+            lastUpdated: Date() // Фиксируем дату последнего обновления
+        )
         
         saveChanges()
+    }
+    
+    func updateDeck() {
+        let allDecks = storageService.loadDecks()
+        if let updatedDeck = allDecks.first(where: { $0.id == deck.id }) {
+            self.deck = updatedDeck
+            onDeckUpdated?(deck) // Уведомляем UI
+        }
     }
     
     private func saveChanges() {
