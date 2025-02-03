@@ -1,6 +1,6 @@
 
 
-import Foundation
+import UIKit
 
 import Foundation
 
@@ -12,20 +12,24 @@ class AddCardViewModel: ObservableObject {
         self.deck = deck
     }
     
-    func addCard(front: String, back: String, imageData: Data?) {
+    func addCard(front: String, back: String, image: UIImage?) {
+        let imagePath = image != nil ? storageService.saveImage(image!) : nil
+
         let newCard = Card(
             id: UUID(),
             frontText: front,
             backText: back,
-            reviewDate: Date(),  // Устанавливаем текущую дату
-            difficulty: 3,       // Средний уровень сложности по умолчанию
-            createdAt: Date(),
-            lastUpdated: Date(),
-            imageData: imageData
+            reviewDate: Date(),
+            difficulty: 3, // Средний уровень сложности по умолчанию
+            createdAt: Date(), // Устанавливаем дату создания
+            lastUpdated: Date(), // Устанавливаем дату последнего обновления
+            imagePath: imagePath // Используем путь вместо imageData
         )
+        
         deck.cards.append(newCard)
         saveChanges()
     }
+
     
     private func saveChanges() {
         var allDecks = storageService.loadDecks()

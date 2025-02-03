@@ -2,6 +2,7 @@ import UIKit
 
 class CardCell: UITableViewCell {
     static let identifier = "CardCell"
+    private let storageService = LocalStorageService() // Для загрузки изображений
 
     private let frontLabel: UILabel = {
         let label = UILabel()
@@ -95,7 +96,8 @@ class CardCell: UITableViewCell {
         backLabel.text = card.backText
         dateLabel.text = formatDate(card.createdAt)
         
-        if let imageData = card.imageData, let image = UIImage(data: imageData) {
+        // Загружаем изображение по пути
+        if let imagePath = card.imagePath, let image = storageService.loadImage(from: imagePath) {
             cardImageView.image = image
             cardImageView.isHidden = false
         } else {

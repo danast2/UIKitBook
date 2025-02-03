@@ -24,10 +24,18 @@ class AddCardViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let selectedTheme = UserDefaults.standard.integer(forKey: "selectedTheme")
+        overrideUserInterfaceStyle = selectedTheme == 0 ? .light : .dark
+    }
+
 
     private func setupUI() {
         title = "Новая карточка"
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
 
         frontTextField.placeholder = "Слово"
         frontTextField.borderStyle = .roundedRect
@@ -70,7 +78,7 @@ class AddCardViewController: UIViewController {
             return
         }
 
-        viewModel.addCard(front: frontText, back: backText, imageData: selectedImageData)
+        viewModel.addCard(front: frontText, back: backText, image: imageView.image)
 
         onCardAdded?()
         navigationController?.popViewController(animated: true)

@@ -60,13 +60,21 @@ class TrainingViewController: UIViewController {
         updateCard()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let selectedTheme = UserDefaults.standard.integer(forKey: "selectedTheme")
+        overrideUserInterfaceStyle = selectedTheme == 0 ? .light : .dark
+    }
+
+    
     private func setupUI() {
         title = "Тренировка"
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
                 
         configureButton(showAnswerButton, title: "Показать ответ", backgroundColor: .systemGray)
-        configureButton(knownButton, title: "Запомнил", backgroundColor: .systemGreen)
-        configureButton(unknownButton, title: "Не запомнил", backgroundColor: .systemRed)
+        configureButton(knownButton, title: "Знаю", backgroundColor: .systemGreen)
+        configureButton(unknownButton, title: "Не знаю", backgroundColor: .systemRed)
         
         showAnswerButton.addTarget(self, action: #selector(showAnswer), for: .touchUpInside)
         knownButton.addTarget(self, action: #selector(markAsKnown), for: .touchUpInside)
@@ -140,21 +148,23 @@ class TrainingViewController: UIViewController {
         }, completion: nil)
 
         // **Обновляем изображение**
-        if let imageData = card.imageData, let image = UIImage(data: imageData) {
-            print("Загружено изображение для карточки: \(card.frontText)")
-            self.cardImageView.image = image
-            self.cardImageView.isHidden = false
-        } else {
-            print("Нет изображения для карточки: \(card.frontText)")
-            self.cardImageView.image = nil
-            self.cardImageView.isHidden = true
-        }
+        if let imagePath = card.imagePath,
+            let image = LocalStorageService.loadImage(from: imagePath) {
+             print("Загружено изображение для карточки: \(card.frontText)")
+             self.cardImageView.image = image
+             self.cardImageView.isHidden = false
+         } else {
+             print("Нет изображения для карточки: \(card.frontText)")
+             self.cardImageView.image = nil
+             self.cardImageView.isHidden = true
+         }
+
 
         // Текст обновляется
         cardLabel.text = card.frontText
         showAnswerButton.isHidden = false
-        knownButton.isHidden = true
-        unknownButton.isHidden = true
+        knownButton.isHidden = false
+        unknownButton.isHidden = false
     }
 
     
@@ -179,6 +189,9 @@ class TrainingViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
             self.navigationController?.popViewController(animated: true)
         })
+        
+        alert.overrideUserInterfaceStyle = self.overrideUserInterfaceStyle
+
         present(alert, animated: true)
     }
     

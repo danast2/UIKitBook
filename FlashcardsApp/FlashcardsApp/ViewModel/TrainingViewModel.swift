@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 
 class TrainingViewModel: ObservableObject {
     private var deck: Deck
@@ -35,7 +36,11 @@ class TrainingViewModel: ObservableObject {
         trainingCards.shuffle() // Перемешиваем для разнообразия
         // Логируем карточки
         for card in trainingCards {
-            print("Картинка есть? \(card.imageData != nil) для \(card.frontText)")
+            if let imagePath = card.imagePath, let image = LocalStorageService.loadImage(from: imagePath) {
+                print("Загружено изображение для карточки: \(card.frontText)")
+            } else {
+                print("Нет изображения для карточки: \(card.frontText)")
+            }
         }
     }
     
@@ -87,7 +92,7 @@ class TrainingViewModel: ObservableObject {
             lastUpdated: Date()
         )
 
-        saveChanges() // <-- Сохранение после обновления
+        saveChanges() //  Сохранение после обновления
     }
 
     

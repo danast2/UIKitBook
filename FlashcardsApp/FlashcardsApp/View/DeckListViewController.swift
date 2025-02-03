@@ -11,9 +11,17 @@ class DeckListViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let selectedTheme = UserDefaults.standard.integer(forKey: "selectedTheme")
+        overrideUserInterfaceStyle = selectedTheme == 0 ? .light : .dark
+    }
+
+    
     private func setupUI(){
         title = "Мои Колоды"
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDeck))
         

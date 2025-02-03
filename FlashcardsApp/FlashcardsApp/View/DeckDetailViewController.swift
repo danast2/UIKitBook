@@ -21,6 +21,14 @@ class DeckDetailViewController: UIViewController {
         setupUI()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let selectedTheme = UserDefaults.standard.integer(forKey: "selectedTheme")
+        overrideUserInterfaceStyle = selectedTheme == 0 ? .light : .dark
+    }
+
+    
     
     @objc private func startTraining() {
         let trainingVM = TrainingViewModel(deck: viewModel.deck)
@@ -41,7 +49,7 @@ class DeckDetailViewController: UIViewController {
     
     private func setupUI(){
         title = viewModel.deck.name
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
         
         //включаем стандартную кнопку "назад"
         navigationItem.hidesBackButton = false

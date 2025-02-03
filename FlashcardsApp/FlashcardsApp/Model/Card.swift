@@ -10,10 +10,10 @@ struct Card: Identifiable, Codable {
     var difficulty: Int // количество повторений (сложность)
     let createdAt: Date //дата создания
     var lastUpdated: Date //дата последнего обновления
-    var imageData: Data? // добавляем изображение (опционально)
+    var imagePath: String? //путь к файлу (картинке)
     
     
-    init(id: UUID = UUID(), frontText: String, backText: String, reviewDate: Date, difficulty: Int, createdAt: Date, lastUpdated: Date, imageData: Data? = nil) {
+    init(id: UUID = UUID(), frontText: String, backText: String, reviewDate: Date, difficulty: Int, createdAt: Date, lastUpdated: Date, imagePath: String? = nil) {
         self.id = id
         self.frontText = frontText
         self.backText = backText
@@ -21,7 +21,9 @@ struct Card: Identifiable, Codable {
         self.difficulty = difficulty
         self.createdAt = createdAt
         self.lastUpdated = lastUpdated
-        self.imageData = imageData
+        self.imagePath = imagePath
     }
+    
+    
 
 }

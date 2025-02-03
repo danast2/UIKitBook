@@ -31,6 +31,14 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
         loadCardData()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let selectedTheme = UserDefaults.standard.integer(forKey: "selectedTheme")
+        overrideUserInterfaceStyle = selectedTheme == 0 ? .light : .dark
+    }
+
+    
     private let deleteButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Удалить карточку", for: .normal)
@@ -42,7 +50,7 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
     }()
 
     private func setupUI() {
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.systemBackground
         title = "Редактировать карточку"
 
         frontTextField.borderStyle = .roundedRect
@@ -101,7 +109,8 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
     private func loadCardData() {
         frontTextField.text = card.frontText
         backTextField.text = card.backText
-        if let imageData = card.imageData, let image = UIImage(data: imageData) {
+        
+        if let imagePath = card.imagePath, let image = LocalStorageService().loadImage(from: imagePath) {
             imageView.image = image
             imageView.isHidden = false
             removeImageButton.isHidden = false
@@ -110,6 +119,7 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
             removeImageButton.isHidden = true
         }
     }
+
 
     @objc private func pickImage() {
         let picker = UIImagePickerController()
@@ -140,9 +150,9 @@ class EditCardViewController: UIViewController, UIImagePickerControllerDelegate,
             return
         }
 
-        let newImageData = imageView.image?.jpegData(compressionQuality: 0.8)
+        let newImage = imageView.image
+        viewModel.updateCard(at: cardIndex, front: newFront, back: newBack, image: newImage)
 
-        viewModel.updateCard(at: cardIndex, front: newFront, back: newBack, imageData: newImageData)
         onCardUpdated?()
         navigationController?.popViewController(animated: true)
     }
