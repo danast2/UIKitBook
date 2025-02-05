@@ -1,7 +1,6 @@
 
 import UIKit
-//import Charts
-//import DGCharts
+
 
 class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate, SubscriptionDetailDelegate {
     
@@ -10,13 +9,6 @@ class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate,
     
     //таблица для отображения подписок
     private let tableView = UITableView()
-    
-//    private let pieChartView: PieChartView = {
-//        let chart = PieChartView()
-//        chart.legend.enabled = false
-//        chart.translatesAutoresizingMaskIntoConstraints = false
-//        return chart
-//    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,35 +34,11 @@ class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate,
         tableView.rowHeight = UITableView.automaticDimension //(в случае чего, они сами адаптируются) - пока не работает
         view.addSubview(tableView)
         
-//        //добавляем график pie chart
-//        view.addSubview(pieChartView)
-//        NSLayoutConstraint.activate([
-//            pieChartView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-//            pieChartView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-//            pieChartView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-//            pieChartView.heightAnchor.constraint(equalToConstant: 250)
-//        ])
-        
         //добавляю кнопку Добавить (+)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addSubscriptionTapped))
         //добавляю кнопку "изменить порядок"
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Порядок", style: .plain, target: self, action: #selector(toggleEditingMode))
     }
-    
-//    private func updatePieChart() -> Void {
-//        var entries: [PieChartDataEntry] = []
-//        
-//        for subscription in viewModel.subscriptions {
-//            let entry = PieChartDataEntry(value: subscription.price, label: subscription.name)
-//            entries.append(entry)
-//        }
-//        
-//        let dataSet = PieChartDataSet(entries: entries)
-//        dataSet.colors = ChartColorTemplates.material() // красивые цвета
-//        let data = PieChartData(dataSet: dataSet)
-//        
-//        pieChartView.data = data
-//    }
     
     //MARK: - режим редактирование подписок на главной странице
     @objc private func toggleEditingMode() {
@@ -89,7 +57,6 @@ class SubscriptionListViewController: UIViewController, AddSubscriptionDelegate,
     private func loadSubscriptions(){
         viewModel.loadSubscription()
         tableView.reloadData()
-        //updatePieChart() // обновляем график
     }
     
 }

@@ -30,7 +30,7 @@ class SubscriptionViewModel {
 
     //тут происходит все равно удаление по id
     func removeSubscription(at index: Int) {
-        let subscription = subscriptions[index]
+        let subscription = subscriptions[index] //???
         removeSubscriptionByID(subscription.id) //  Теперь вызываем удаление по `UUID`
     }
 
