@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3063BA342D62F914002FBB60 /* CardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063BA332D62F914002FBB60 /* CardTests.swift */; };
 		30646D6B2D4E654300CD9D61 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D6A2D4E654300CD9D61 /* AppDelegate.swift */; };
 		30646D6D2D4E654300CD9D61 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646D6C2D4E654300CD9D61 /* SceneDelegate.swift */; };
 		30646D722D4E654300CD9D61 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 30646D712D4E654300CD9D61 /* Base */; };
@@ -33,7 +34,19 @@
 		30646DAA2D51199E00CD9D61 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30646DA92D51199E00CD9D61 /* Secrets.plist */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3063BA2C2D62F6C4002FBB60 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 30646D5F2D4E654200CD9D61 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 30646D662D4E654200CD9D61;
+			remoteInfo = FlashcardsApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		3063BA282D62F6C4002FBB60 /* FlashcardsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlashcardsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3063BA332D62F914002FBB60 /* CardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTests.swift; sourceTree = "<group>"; };
 		30646D672D4E654200CD9D61 /* FlashcardsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashcardsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30646D6A2D4E654300CD9D61 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30646D6C2D4E654300CD9D61 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +76,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3063BA252D62F6C4002FBB60 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30646D642D4E654200CD9D61 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -73,10 +93,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3063BA292D62F6C4002FBB60 /* FlashcardsAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				3063BA332D62F914002FBB60 /* CardTests.swift */,
+			);
+			path = FlashcardsAppTests;
+			sourceTree = "<group>";
+		};
 		30646D5E2D4E654200CD9D61 = {
 			isa = PBXGroup;
 			children = (
 				30646D692D4E654200CD9D61 /* FlashcardsApp */,
+				3063BA292D62F6C4002FBB60 /* FlashcardsAppTests */,
 				30646D682D4E654200CD9D61 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -85,6 +114,7 @@
 			isa = PBXGroup;
 			children = (
 				30646D672D4E654200CD9D61 /* FlashcardsApp.app */,
+				3063BA282D62F6C4002FBB60 /* FlashcardsAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -164,6 +194,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3063BA272D62F6C4002FBB60 /* FlashcardsAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3063BA302D62F6C4002FBB60 /* Build configuration list for PBXNativeTarget "FlashcardsAppTests" */;
+			buildPhases = (
+				3063BA242D62F6C4002FBB60 /* Sources */,
+				3063BA252D62F6C4002FBB60 /* Frameworks */,
+				3063BA262D62F6C4002FBB60 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3063BA2D2D62F6C4002FBB60 /* PBXTargetDependency */,
+			);
+			name = FlashcardsAppTests;
+			productName = FlashcardsAppTests;
+			productReference = 3063BA282D62F6C4002FBB60 /* FlashcardsAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		30646D662D4E654200CD9D61 /* FlashcardsApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 30646D7B2D4E654400CD9D61 /* Build configuration list for PBXNativeTarget "FlashcardsApp" */;
@@ -191,6 +239,11 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					3063BA272D62F6C4002FBB60 = {
+						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
+						TestTargetID = 30646D662D4E654200CD9D61;
+					};
 					30646D662D4E654200CD9D61 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -210,11 +263,19 @@
 			projectRoot = "";
 			targets = (
 				30646D662D4E654200CD9D61 /* FlashcardsApp */,
+				3063BA272D62F6C4002FBB60 /* FlashcardsAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3063BA262D62F6C4002FBB60 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30646D652D4E654200CD9D61 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -229,6 +290,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		3063BA242D62F6C4002FBB60 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3063BA342D62F914002FBB60 /* CardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		30646D632D4E654200CD9D61 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -258,6 +327,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3063BA2D2D62F6C4002FBB60 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 30646D662D4E654200CD9D61 /* FlashcardsApp */;
+			targetProxy = 3063BA2C2D62F6C4002FBB60 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		30646D702D4E654300CD9D61 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -278,6 +355,45 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3063BA2E2D62F6C4002FBB60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G9Q236HNN8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daniil.dementyev.FlashcardsAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlashcardsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FlashcardsApp";
+			};
+			name = Debug;
+		};
+		3063BA2F2D62F6C4002FBB60 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = G9Q236HNN8;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daniil.dementyev.FlashcardsAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FlashcardsApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/FlashcardsApp";
+			};
+			name = Release;
+		};
 		30646D792D4E654400CD9D61 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -456,6 +572,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3063BA302D62F6C4002FBB60 /* Build configuration list for PBXNativeTarget "FlashcardsAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3063BA2E2D62F6C4002FBB60 /* Debug */,
+				3063BA2F2D62F6C4002FBB60 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		30646D622D4E654200CD9D61 /* Build configuration list for PBXProject "FlashcardsApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
