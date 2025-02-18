@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		304E18EB2D651B23002BE0C8 /* DeckDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 304E18EA2D651B23002BE0C8 /* DeckDetailViewModelTests.swift */; };
 		3063BA342D62F914002FBB60 /* CardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063BA332D62F914002FBB60 /* CardTests.swift */; };
 		3063BA362D62F9DE002FBB60 /* ReviewSchedulerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063BA352D62F9DE002FBB60 /* ReviewSchedulerTests.swift */; };
 		3063BA382D62FAE3002FBB60 /* DeckTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3063BA372D62FAE3002FBB60 /* DeckTests.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		304E18EA2D651B23002BE0C8 /* DeckDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckDetailViewModelTests.swift; sourceTree = "<group>"; };
 		3063BA282D62F6C4002FBB60 /* FlashcardsAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlashcardsAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3063BA332D62F914002FBB60 /* CardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTests.swift; sourceTree = "<group>"; };
 		3063BA352D62F9DE002FBB60 /* ReviewSchedulerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSchedulerTests.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				3063BA372D62FAE3002FBB60 /* DeckTests.swift */,
 				3063BA392D62FB2A002FBB60 /* DeckListViewModelTests.swift */,
 				3063BA3B2D62FB93002FBB60 /* LocalStorageServiceTests.swift */,
+				304E18EA2D651B23002BE0C8 /* DeckDetailViewModelTests.swift */,
 			);
 			path = FlashcardsAppTests;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			files = (
 				3063BA382D62FAE3002FBB60 /* DeckTests.swift in Sources */,
 				3063BA3C2D62FB93002FBB60 /* LocalStorageServiceTests.swift in Sources */,
+				304E18EB2D651B23002BE0C8 /* DeckDetailViewModelTests.swift in Sources */,
 				3063BA3A2D62FB2A002FBB60 /* DeckListViewModelTests.swift in Sources */,
 				3063BA342D62F914002FBB60 /* CardTests.swift in Sources */,
 				3063BA362D62F9DE002FBB60 /* ReviewSchedulerTests.swift in Sources */,

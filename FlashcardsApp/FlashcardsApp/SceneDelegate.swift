@@ -1,9 +1,3 @@
-//
-//  SceneDelegate.swift
-//  FlashcardsApp
-//
-//  Created by Даниил Асташов on 01.02.2025.
-//
 
 import UIKit
 
