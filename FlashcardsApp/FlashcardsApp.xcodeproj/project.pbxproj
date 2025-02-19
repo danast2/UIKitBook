@@ -37,6 +37,7 @@
 		30646DA62D4FE22200CD9D61 /* AddCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA52D4FE22200CD9D61 /* AddCardViewModel.swift */; };
 		30646DA82D50FB2500CD9D61 /* UnsplashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30646DA72D50FB2500CD9D61 /* UnsplashService.swift */; };
 		30646DAA2D51199E00CD9D61 /* Secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30646DA92D51199E00CD9D61 /* Secrets.plist */; };
+		307C32222D666A1400B28049 /* TrainingViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307C32212D666A1400B28049 /* TrainingViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		30646DA52D4FE22200CD9D61 /* AddCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardViewModel.swift; sourceTree = "<group>"; };
 		30646DA72D50FB2500CD9D61 /* UnsplashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashService.swift; sourceTree = "<group>"; };
 		30646DA92D51199E00CD9D61 /* Secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Secrets.plist; sourceTree = "<group>"; };
+		307C32212D666A1400B28049 /* TrainingViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrainingViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +114,7 @@
 				3063BA392D62FB2A002FBB60 /* DeckListViewModelTests.swift */,
 				3063BA3B2D62FB93002FBB60 /* LocalStorageServiceTests.swift */,
 				304E18EA2D651B23002BE0C8 /* DeckDetailViewModelTests.swift */,
+				307C32212D666A1400B28049 /* TrainingViewModelTests.swift */,
 			);
 			path = FlashcardsAppTests;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				3063BA3A2D62FB2A002FBB60 /* DeckListViewModelTests.swift in Sources */,
 				3063BA342D62F914002FBB60 /* CardTests.swift in Sources */,
 				3063BA362D62F9DE002FBB60 /* ReviewSchedulerTests.swift in Sources */,
+				307C32222D666A1400B28049 /* TrainingViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
